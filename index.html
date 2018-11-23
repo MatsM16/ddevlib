@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DDevLib</title>
+
+        <link rel="stylesheet" href="/ddevlib/css/settings.css">
+
+        <style>
+            @import '/ddevlib/css/themes/lux.css';
+            @import '/ddevlib/css/packages/main.css';
+            @import '/ddevlib/css/packages/panels.css';
+            @import '/ddevlib/css/packages/tables.css';
+        </style>
+        <style>
+
+            ::-webkit-scrollbar {
+                width: 0px;
+            }
+            body {
+                display: flex;
+                flex-direction: column;
+                overflow-x: hidden;
+            }
+
+            #lander {
+                display: grid;
+                grid-template-columns: 300px 300px 300px;
+                grid-template-rows: 300px 160px;
+                grid-gap: 1em;
+            }
+
+            #lander > h1 {
+                grid-column: span 3;
+                width: 100%;
+                height: 100%;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #lander > div > img {
+                width: 70px;
+                height: 70px;
+                
+                object-fit: contain;
+
+                margin-left: calc(50% - 35px);
+            }
+
+            .title {
+                font-size: 16pt;
+                font-weight: bold;
+            }
+
+            .slide {
+                width: 100vw;
+                height: 100vh;
+            }
+
+            .space {
+                width: 100vw;
+                height: 20vh;
+            }
+
+            .center {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+
+            .marg {
+                margin: 2em;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="slide center">
+            <div id="lander">
+                <h1>DDevLib</h1>
+                <div class="panel">
+                    <p class="title">Lightweight</p>
+                    <p>Modulated mostly independent packages. You take what you need</p>
+                </div>
+                <div class="panel">
+                    <p class="title">Simple</p>
+                    <p>Easy to set up and easy to use. Let's you do the real job quicker</p>
+                </div>
+                <div class="panel">
+                    <p class="title">Accessible</p>
+                    <p>Functional components fully documented in both <b>TypeScript</b> and <b>JavaScript</b></p>
+                </div>
+            </div>
+        </div>
+        <div class="space"></div>
+        <div class="slide center">
+            <h1>Styles</h1>
+            <div class="panel marg">
+                <p>
+                    The CSS library is fully customizable through package modularity and a desegnated <i>settings.css</i>.<br>
+                    Some themes are also provded as extensions to the settings.
+                </p>
+            </div>
+        </div>
+        <div class="space"></div>
+        <div class="slide center">
+            <h1>TypeScript</h1>
+            <div class="panel marg">
+                <p>
+                    Fully documented promise-based library exporting namespaces, modules and classes to ease operating web-apps.
+                </p>
+            </div>
+        </div>
+        <div class="space"></div>
+        <div class="slide center">
+            <h1>JavaScript</h1>
+            <div class="panel marg">
+                <p>
+                    A precompiled version of the TypeScript library, also fully documented and typed.
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

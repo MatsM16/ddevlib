@@ -1,0 +1,29 @@
+:root {
+    --background:#fff;
+
+    /* Main colors */
+    --default-main: white;
+    --default-alt: #EDEDED;
+    --primary-main: #593196;
+    --primary-alt: #482879;
+    --text-main: #444;
+    --text-alt: white;
+    --text-highlight: dodgerblue;
+
+    /* Link colors */
+    --link-main: #919aa1;
+    --link-alt: #000000;
+
+    /* Informative colors */
+    --success-main: #13B955;
+    --success-alt: #0f9645;
+
+    --error-main: #FC3939;
+    --error-alt: #fb1313;
+
+    --warning-main: #EFA31D;
+    --warning-alt: #d78e0f;
+
+    --info-main: #009CDC;
+    --info-alt: #0081b6;
+}

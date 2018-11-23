@@ -1,0 +1,24 @@
+mark {
+    color: inherit;
+    background-color: var(--text-highlight);
+}
+mark.primary {
+    color: var(--text-alt);
+    background-color: var(--primary-main);
+}
+mark.info {
+    color: var(--text-alt);
+    background-color: var(--info-main);
+}
+mark.success {
+    color: var(--text-alt);
+    background-color: var(--success-main);
+}
+mark.warning {
+    color: var(--text-alt);
+    background-color: var(--warning-main);
+}
+mark.error {
+    color: var(--text-alt);
+    background-color: var(--error-main);
+}

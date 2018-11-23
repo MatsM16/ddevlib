@@ -1,0 +1,18 @@
+@import './links/animations.css';
+
+a:not(.btn) {
+    color: var(--link-main);
+    text-decoration: none;
+    transition: color var(--default-transition-time);
+    cursor: pointer;
+}
+
+a:not(.btn):hover:not(.disabled):not(:disabled) {
+    color: var(--link-alt, var(--link-main));
+}
+
+a:not(.btn).disabled,
+a:not(.btn):disabled {
+    opacity: var(--disabled-opacity);
+    cursor: default;
+}

@@ -1,0 +1,29 @@
+:root {
+    --background:#2B3E50;
+
+    /* Main colors */
+    --default-main: #4E5D6C;
+    --default-alt: #3e4a56;
+    --primary-main: #DF691A;
+    --primary-alt: #bd5916;
+    --text-main: #EBEBEB;
+    --text-alt: white;
+    --text-highlight: dodgerblue;
+
+    /* Link colors */
+    --link-main: #DF691A;
+    --link-alt: #9a4912;
+
+    /* Informative colors */
+    --success-main: #5cb85c;
+    --success-alt: #48a648;
+
+    --error-main: #d9534f;
+    --error-alt: #d23430;
+
+    --warning-main: #f0ad4e;
+    --warning-alt: #ed9d2b;
+
+    --info-main: #5bc0de;
+    --info-alt: #3bb4d8;
+}

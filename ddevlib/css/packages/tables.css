@@ -1,0 +1,73 @@
+table {
+    border-collapse: collapse;
+    border-radius: var(--default-radius);
+    overflow: hidden;
+}
+th, td { padding: 0.25em 0.5em; }
+
+/* Hide corner */
+table.no-corner tr:first-child th:first-child {
+    opacity: 0;
+}
+table.no-corner tr:first-child th:nth-child(2),
+table.no-corner tr:nth-child(2) th:first-child {
+    border-top-left-radius: var(--default-radius);
+}
+
+/* Highlight */
+
+table.highlight tr:hover td {
+    background-color: var(--default-alt);
+    cursor: pointer;
+}
+table.highlight tr:hover td:first-child {
+    border-top-left-radius: var(--default-radius);
+    border-bottom-left-radius: var(--default-radius);
+}
+table.highlight tr:hover td:last-child {
+    border-top-right-radius: var(--default-radius);
+    border-bottom-right-radius: var(--default-radius);
+}
+
+/* Alternate */
+table.alternate tr:nth-child(2n) td {
+    background-color: var(--default-alt);
+}
+table.alternate.highlight tr:hover td {
+    background-color: var(--text-main);
+    color: var(--background);
+}
+
+/* Default table colors */
+
+th {
+    background-color: var(--primary-main);
+    color: var(--text-alt);
+}
+
+th.info    { background-color: var(--info-main);    }
+th.success { background-color: var(--success-main); }
+th.warning { background-color: var(--warning-main); }
+th.error   { background-color: var(--error-main);   }
+
+td.info    { color: var(--info-main);    }
+td.success { color: var(--success-main); }
+td.warning { color: var(--warning-main); }
+td.error   { color: var(--error-main);   }
+
+/* Simple */
+table.simple tr { border-bottom: 1px solid var(--default-alt); }
+table.simple th { background-color: transparent !important; color: var(--text-main); }
+table.simple tr:first-child th { border-bottom: 2px solid var(--default-alt); }
+
+table.simple.primary th { color: var(--primary-main); }
+table.simple.info    th { color: var(--info-main);    }
+table.simple.success th { color: var(--success-main); }
+table.simple.warning th { color: var(--warning-main); }
+table.simple.error   th { color: var(--error-main);   }
+
+table.simple th.primary { color: var(--primary-main); }
+table.simple th.info    { color: var(--info-main);    }
+table.simple th.success { color: var(--success-main); }
+table.simple th.warning { color: var(--warning-main); }
+table.simple th.error   { color: var(--error-main);   }

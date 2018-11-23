@@ -1,0 +1,14 @@
+blockquote {
+    border-left: 3px solid var(--default-alt);
+    margin: var(--container-padding) 0;
+    padding: calc(var(--container-padding) / 2) var(--container-padding);
+    box-shadow: var(--container-shadow);
+}
+blockquote.no-shadow {
+    box-shadow: none;
+}
+blockquote.primary { border-color: var(--primary-main); }
+blockquote.info { border-color: var(--info-main); }
+blockquote.success { border-color: var(--success-main); }
+blockquote.warning { border-color: var(--warning-main); }
+blockquote.error { border-color: var(--error-main); }

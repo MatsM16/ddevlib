@@ -1,0 +1,116 @@
+input[type="file"] {
+    appearance: none;
+    font: inherit;
+    width: 180px;
+}
+::-webkit-file-upload-button {
+    display: none;
+}
+::-ms-browse {
+    display: none;
+}
+
+input[type="file"]::after {
+    width: calc(100% - 30px);
+    content: "Open File Browser";
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    text-decoration: none;
+    font-size: inherit;
+    padding: var(--button-padding) calc(2 * var(--button-padding));
+    font-family: inherit;
+    cursor: pointer;
+
+    transition: color, background-color;
+    transition-duration: var(--default-transition-time);
+    
+    background-color: transparent;
+    color: var(--primary-main);
+    border: var(--button-border) var(--primary-main);
+}
+
+input[type="file"]:hover::after {
+    background-color: var(--primary-main);
+    color: var(--text-alt);
+}
+
+input[type="file"].info::after {
+    color: var(--info-main);
+    border-color: var(--info-main);
+}
+input[type="file"].info:hover::after {
+    background-color: var(--info-main);
+    color: var(--text-alt);
+}
+
+input[type="file"].success::after {
+    color: var(--success-main);
+    border-color: var(--success-main);
+}
+input[type="file"].success:hover::after {
+    background-color: var(--success-main);
+    color: var(--text-alt);
+}
+
+input[type="file"].warning::after {
+    color: var(--warning-main);
+    border-color: var(--warning-main);
+}
+input[type="file"].warning:hover::after {
+    background-color: var(--warning-main);
+    color: var(--text-alt);
+}
+
+input[type="file"].error::after {
+    color: var(--error-main);
+    border-color: var(--error-main);
+}
+input[type="file"].error:hover::after {
+    background-color: var(--error-main);
+    color: var(--text-alt);
+}
+
+
+input[type="file"].filled::after {
+    background-color: var(--primary-main);
+    color: var(--text-alt);
+}
+input[type="file"].filled:hover::after {
+    background-color: var(--primary-alt);
+    border-color: var(--primary-alt);
+}
+
+input[type="file"].filled.info::after {
+    background-color: var(--info-main);
+}
+input[type="file"].filled.info:hover::after {
+    background-color: var(--info-alt);
+    border-color: var(--info-alt);
+}
+
+input[type="file"].filled.success::after {
+    background-color: var(--success-main);
+}
+input[type="file"].filled.success:hover::after {
+    background-color: var(--success-alt);
+    border-color: var(--success-alt);
+}
+
+input[type="file"].filled.warning::after {
+    background-color: var(--warning-main);
+}
+input[type="file"].filled.warning:hover::after {
+    background-color: var(--warning-alt);
+    border-color: var(--warning-alt);
+}
+
+input[type="file"].filled.error::after {
+    background-color: var(--error-main);
+}
+input[type="file"].filled.error:hover::after {
+    background-color: var(--error-alt);
+    border-color: var(--error-alt);
+}

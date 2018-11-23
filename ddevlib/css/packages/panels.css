@@ -1,0 +1,78 @@
+.panel {
+    background-color: var(--default-main);
+    border-radius: var(--default-radius);
+    overflow: hidden;
+    padding: var(--container-padding);
+
+    box-shadow: var(--container-shadow);
+}
+
+.panel > h1:first-child,
+.panel > h2:first-child,
+.panel > h3:first-child {
+    position: relative;
+    top: calc(var(--container-padding) * -1);
+    left: calc(var(--container-padding) * -1);
+    width: 100%;
+
+    padding: var(--container-padding);
+    margin: 0;
+
+    /* Same as filled */
+    background-color: var(--primary-main);
+    color: var(--text-alt);
+}
+
+.panel.default > h1:first-child,
+.panel.default > h2:first-child,
+.panel.default > h3:first-child {
+    background-color: var(--default-main);
+    color: var(--text-main);
+}
+
+.panel.default-alt > h1:first-child,
+.panel.default-alt > h2:first-child,
+.panel.default-alt > h3:first-child {
+    background-color: var(--default-alt);
+    color: var(--text-main);
+}
+
+.panel.info > h1:first-child,
+.panel.info > h2:first-child,
+.panel.info > h3:first-child {
+    background-color: var(--info-main);
+}
+
+.panel.success > h1:first-child,
+.panel.success > h2:first-child,
+.panel.success > h3:first-child {
+    background-color: var(--success-main);
+}
+
+.panel.warning > h1:first-child,
+.panel.warning > h2:first-child,
+.panel.warning > h3:first-child {
+    background-color: var(--warning-main);
+}
+
+.panel.error > h1:first-child,
+.panel.error > h2:first-child,
+.panel.error > h3:first-child {
+    background-color: var(--error-main);
+}
+
+.panel.border {
+    border: 2px solid var(--primary-main);
+}
+.panel.border.info {
+    border-color: var(--info-main);
+}
+.panel.border.success {
+    border-color: var(--success-main);
+}
+.panel.border.warning {
+    border-color: var(--warning-main);
+}
+.panel.border.error {
+    border-color: var(--error-main);
+}

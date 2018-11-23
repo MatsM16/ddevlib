@@ -1,0 +1,10 @@
+textarea,
+[contenteditable="true"] {
+    font-family: var(--font-main);
+    background-color: transparent;
+    color: var(--text-main);
+    border-radius: var(--default-radius);
+    padding: var(--container-padding);
+
+    border: 1px solid var(--primary-main);
+}
