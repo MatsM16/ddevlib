@@ -1,0 +1,702 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Test Page</title>
+
+        <link rel="stylesheet" type="text/css" href="/ddevlib/css/settings.css">
+        <link rel="stylesheet" type="text/css" href="/ddevlib/css/themes/flatly.css" id="theme-style">
+        
+        <style>
+            @import '/ddevlib/css/packages/main.css';
+            @import '/ddevlib/css/packages/links.css';
+            @import '/ddevlib/css/packages/buttons.css';
+            @import '/ddevlib/css/packages/input.css';
+            @import '/ddevlib/css/packages/panels.css';
+            @import '/ddevlib/css/packages/tables.css';
+            @import '/ddevlib/css/packages/header.css';
+            @import '/ddevlib/css/packages/text.css';
+        </style>
+
+        <style>
+            .panel {
+                margin: 4em auto;
+                width: 70vw;
+                max-width: 1000px;
+                min-width: 400px;
+            }
+
+            header {
+                margin-bottom: 3em;
+                margin-top: 3em;
+            }
+            header:first-of-type { 
+                margin-top: 0;
+            }
+            header:last-of-type {
+                margin-bottom: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="panel">
+            <h3>Meny</h3>
+            <ol>
+                <li>
+                    <a href="./loading.html">Loading</a>
+                </li>
+                <li>
+                    <a href="#text">Text</a>
+                </li>
+                <li>
+                    <a href="#buttons">Buttons</a>
+                </li>
+                <li>
+                    <a href="#links">Links</a>
+                </li>
+                <li>
+                    <a href="#inputs">Input</a>
+                </li>
+                <li>
+                    <a href="#tables">Tables</a>
+                </li>
+                <li>
+                    <a href="#headers">Headers</a>
+                </li>
+                <li>
+                    <a href="#panels">Panels</a>
+                </li>
+            </ol>
+        </div>
+
+        <h1 style="text-align: center;">CSS Styles</h1>
+
+        <div class="panel" id="text">
+            <h3>Text</h3>
+            <h4>Paragraphs</h4>
+            <select onchange="document.getElementById('text-paragraph').className = this.value">
+                <option value="">Normal</option>
+                <option value="primary">Primary</option>
+                <option value="info">Information</option>
+                <option value="success">Success</option>
+                <option value="warning">Warning</option>
+                <option value="error">Error</option>
+            </select>
+            <p id="text-paragraph">This seems to be just about the right length for a sample paragraph.</p>
+            <br>
+            <h4>Modifiers</h4>
+            <select onchange="for (const child of document.getElementById('text-modifiers').children) child.className = this.value">
+                <option value="">Normal</option>
+                <option value="primary">Primary</option>
+                <option value="info">Information</option>
+                <option value="success">Success</option>
+                <option value="warning">Warning</option>
+                <option value="error">Error</option>
+            </select>
+            <br><br>
+            <div id="text-modifiers" style="list-style: none;">
+                <b>Bold</b><br>
+                <strong>Strong</strong><br>
+                <br>
+                <i>Italic</i><br>
+                <em>Emphasized</em><br>
+                <br>
+                <small>Small</small><br>
+                <br>
+                <del>Deleted</del><br>
+                <ins>Inserted</ins><br>
+                <br>
+                Text, <sup>Superscript</sup><br>
+                Text, <sub>Subscript</sub><br>
+                <br>
+                <mark>Marked text</mark><br>
+                <br>
+                <q>A famous quote</q><br>
+                <br>
+                <pre>   Pre formatted
+
+                            text
+                </pre>
+            </div>
+            <br>
+            <h4>Blockquotes</h4>
+            <blockquote>
+                This is a blockquote. It can have many usecases, but mostly to make points about certain things. Striking things or important things that requires the users attention.
+            </blockquote>
+            <blockquote class="primary">
+                This is a blockquote. It can have many usecases, but mostly to make points about certain things. Striking things or important things that requires the users attention.
+            </blockquote>
+            <blockquote class="info">
+                This is a blockquote. It can have many usecases, but mostly to make points about certain things. Striking things or important things that requires the users attention.
+            </blockquote>
+            <blockquote class="success">
+                This is a blockquote. It can have many usecases, but mostly to make points about certain things. Striking things or important things that requires the users attention.
+            </blockquote>
+            <blockquote class="warning">
+                This is a blockquote. It can have many usecases, but mostly to make points about certain things. Striking things or important things that requires the users attention.
+            </blockquote>
+            <blockquote class="error">
+                This is a blockquote. It can have many usecases, but mostly to make points about certain things. Striking things or important things that requires the users attention.
+            </blockquote>
+            
+        </div>
+
+        <div class="panel" id="buttons">
+            <h3>Buttons</h3>
+            <b>Normal</b>
+            <table>
+                <tr>
+                    <td>Normal</td>
+                    <td><a href="#" class="btn">Button</a></td>
+                    <td><button>Button</button></td>
+                    <td><a href="#" class="btn disabled">Button</a></td>
+                    <td><button class="disabled">Button</button></td>
+                </tr>
+                <tr>
+                    <td>Info</td>
+                    <td><a href="#" class="btn info">Button</a></td>
+                    <td><button class="info">Button</button></td>
+                    <td><a href="#" class="btn info disabled">Button</a></td>
+                    <td><button class="info disabled">Button</button></td>
+                </tr>
+                <tr>
+                    <td>Success</td>
+                    <td><a href="#" class="btn success">Button</a></td>
+                    <td><button class="success">Button</button></td>
+                    <td><a href="#" class="btn success disabled">Button</a></td>
+                    <td><button class="success disabled">Button</button></td>
+                </tr>
+                <tr>
+                    <td>Warning</td>
+                    <td><a href="#" class="btn warning">Button</a></td>
+                    <td><button class="warning">Button</button></td>
+                    <td><a href="#" class="btn warning disabled">Button</a></td>
+                    <td><button class="warning disabled">Button</button></td>
+                </tr>
+                <tr>
+                    <td>Error</td>
+                    <td><a href="#" class="btn error">Button</a></td>
+                    <td><button class="error">Button</button></td>
+                    <td><a href="#" class="btn error disabled">Button</a></td>
+                    <td><button class="error disabled">Button</button></td>
+                </tr>
+            </table>
+            <br>
+            <b>Filled</b>
+            <table>
+                <tr>
+                    <td>Normal</td>
+                    <td><a href="#" class="btn filled">Button</a></td>
+                    <td><button class="filled">Button</button></td>
+                    <td><a href="#" class="btn filled disabled">Button</a></td>
+                    <td><button class="filled disabled">Button</button></td>
+                </tr>
+                <tr>
+                    <td>Info</td>
+                    <td><a href="#" class="btn info filled">Button</a></td>
+                    <td><button class="info filled">Button</button></td>
+                    <td><a href="#" class="btn info filled disabled">Button</a></td>
+                    <td><button class="info filled disabled">Button</button></td>
+                </tr>
+                <tr>
+                    <td>Success</td>
+                    <td><a href="#" class="btn success filled">Button</a></td>
+                    <td><button class="success filled">Button</button></td>
+                    <td><a href="#" class="btn success filled disabled">Button</a></td>
+                    <td><button class="success filled disabled">Button</button></td>
+                </tr>
+                <tr>
+                    <td>Warning</td>
+                    <td><a href="#" class="btn warning filled">Button</a></td>
+                    <td><button class="warning filled">Button</button></td>
+                    <td><a href="#" class="btn warning filled disabled">Button</a></td>
+                    <td><button class="warning filled disabled">Button</button></td>
+                </tr>
+                <tr>
+                    <td>Error</td>
+                    <td><a href="#" class="btn error filled">Button</a></td>
+                    <td><button class="error filled">Button</button></td>
+                    <td><a href="#" class="btn error filled disabled">Button</a></td>
+                    <td><button class="error filled disabled">Button</button></td>
+                </tr>
+            </table>
+            <br>
+            <h4>Buttons in text</h4>
+            <p>This text contains a <button>Button</button> and a .btn <a href="#" class="btn">Link</a> button</p>
+            <br>
+            <h4>Rounded buttons</h4>
+            <p><button class="round">Rounded</button> <button class="round filled">Rounded</button></p>
+            <br>
+            <h4>Icon buttons</h4>
+            <p>
+                <button class="animate icon-fly-in">
+                    <img src="/images/house.png">
+                    <span>Rounded</span>
+                </button>
+                <button class="round animate icon-fly-in">
+                    <img src="/images/house.png">
+                    <span>Rounded</span>
+                </button>
+                <button class="filled animate icon-fly-in">
+                    <img src="/images/house.png">
+                    <span>Rounded</span>
+                </button>
+                <button class="filled round animate icon-fly-in">
+                    <img src="/images/house.png">
+                    <span>Rounded</span>
+                </button>
+            </p>
+
+        </div>
+
+        <div class="panel" id="links">
+            <h3>Links</h3>
+            <a href="#links">Normal link</a><br>
+            <br>
+            <a href="#links" class="animate underline">Animated underline</a><br>
+            <a href="#links" class="animate underline left">Animated underline left</a><br>
+            <a href="#links" class="animate underline right">Animated underline right</a><br>
+        </div>
+
+        <div class="panel" id="inputs">
+            <h3>Input</h3>
+            <table>
+                <tr>
+                    <td>Text</td>
+                    <td><input type="text" placeholder="Placeholder" class="error"></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password"></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="email"></td>
+                </tr>
+                <tr>
+                    <td>Number</td>
+                    <td><input type="number"></td>
+                </tr>
+                <tr>
+                    <td>Date</td>
+                    <td><input type="date"></td>
+                </tr>
+                <tr>
+                    <td>Time</td>
+                    <td><input type="time"></td>
+                </tr>
+                <tr>
+                    <td>Files</td>
+                    <td><input class="" type="file" multiple><br><br><input class="filled" type="file" multiple></td>
+                </tr>
+                <tr>
+                    <td>Radio</td>
+                    <td data-style="font-size: 32pt">
+                        <input type="radio" name="r" checked> A<br>
+                        <input type="radio" name="r"> B<br>
+                        <input type="radio" name="r"> C
+                    </td>
+                </tr>
+                <tr>
+                    <td>Checkbox</td>
+                    <td>
+                        <input type="checkbox" class="" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Select</td>
+                    <td>
+                        <select class="">
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                            <option>Option 3</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Range</td>
+                    <td><input type="range" class="square"></td>
+                </tr>
+                <tr>
+                    <td>Textarea</td>
+                    <td><textarea class="underline"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Contenteditable</td>
+                    <td><div contenteditable="true">
+                        Hello world
+                    </div></td>
+                </tr>
+            </table>
+            <h4>Special types</h4>
+            <table>
+                <tr>
+                    <td>Info</td>
+                    <td>
+                        <input type="text" class="info">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Success</td>
+                    <td>
+                        <input type="text" class="success">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Warning</td>
+                    <td>
+                        <input type="text" class="warning">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Error</td>
+                    <td>
+                        <input type="text" class="error">
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="panel" id="tables">
+            <h3>Tables</h3>
+            <table class="highlight alternate">
+                <thead>
+                    <tr>
+                        <th>Header A</th>
+                        <th>Header B</th>
+                        <th>Header C</th>
+                        <th>Header D</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Data A</td>
+                        <td>Data B</td>
+                        <td>Data C</td>
+                        <td>Data D</td>
+                    </tr>
+                    <tr>
+                        <td>Data A</td>
+                        <td>Data B</td>
+                        <td>Data C</td>
+                        <td>Data D</td>
+                    </tr>
+                    <tr>
+                        <td>Data A</td>
+                        <td>Data B</td>
+                        <td>Data C</td>
+                        <td>Data D</td>
+                    </tr>
+                    <tr>
+                        <td>Data A</td>
+                        <td>Data B</td>
+                        <td>Data C</td>
+                        <td>Data D</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <br>
+            <br>
+
+            <table class="highlight">
+                <tr>
+                    <th></th>
+                    <th>Header A</th>
+                    <th>Header B</th>
+                    <th>Header C</th>
+                    <th>Header D</th>
+                </tr>
+                <tr>
+                    <th>Header 0</th>
+                    <td>Data A0</td>
+                    <td>Data B0</td>
+                    <td>Data C0</td>
+                    <td>Data D0</td>
+                </tr>
+                <tr>
+                    <th>Header 1</th>
+                    <td>Data A1</td>
+                    <td>Data B1</td>
+                    <td>Data C1</td>
+                    <td>Data D1</td>
+                </tr>
+                <tr>
+                    <th>Header 2</th>
+                    <td>Data A2</td>
+                    <td>Data B2</td>
+                    <td>Data C2</td>
+                    <td>Data D2</td>
+                </tr>
+                <tr>
+                    <th>Header 3</th>
+                    <td>Data A3</td>
+                    <td>Data B3</td>
+                    <td>Data C3</td>
+                    <td>Data D3</td>
+                </tr>
+            </table>
+
+            <br>
+            <br>
+            <table class="highlight simple">
+                <thead>
+                    <tr>
+                        <th>Header A</th>
+                        <th>Header B</th>
+                        <th>Header C</th>
+                        <th>Header D</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Data A</td>
+                        <td>Data B</td>
+                        <td>Data C</td>
+                        <td>Data D</td>
+                    </tr>
+                    <tr>
+                        <td>Data A</td>
+                        <td>Data B</td>
+                        <td>Data C</td>
+                        <td>Data D</td>
+                    </tr>
+                    <tr>
+                        <td>Data A</td>
+                        <td>Data B</td>
+                        <td>Data C</td>
+                        <td>Data D</td>
+                    </tr>
+                    <tr>
+                        <td>Data A</td>
+                        <td>Data B</td>
+                        <td>Data C</td>
+                        <td>Data D</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <br>
+            <br>
+
+            <table class="highlight simple primary">
+                <tr>
+                    <th></th>
+                    <th>Header A</th>
+                    <th>Header B</th>
+                    <th>Header C</th>
+                    <th>Header D</th>
+                </tr>
+                <tr>
+                    <th>Header 0</th>
+                    <td>Data A0</td>
+                    <td>Data B0</td>
+                    <td>Data C0</td>
+                    <td>Data D0</td>
+                </tr>
+                <tr>
+                    <th>Header 1</th>
+                    <td>Data A1</td>
+                    <td>Data B1</td>
+                    <td>Data C1</td>
+                    <td>Data D1</td>
+                </tr>
+                <tr>
+                    <th>Header 2</th>
+                    <td>Data A2</td>
+                    <td>Data B2</td>
+                    <td>Data C2</td>
+                    <td>Data D2</td>
+                </tr>
+                <tr>
+                    <th>Header 3</th>
+                    <td>Data A3</td>
+                    <td>Data B3</td>
+                    <td>Data C3</td>
+                    <td>Data D3</td>
+                </tr>
+            </table>
+
+            <br>
+            <br>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Normal</th>
+                        <th class="info">Information</th>
+                        <th class="success">Success</th>
+                        <th class="warning">Warning</th>
+                        <th class="error">Error</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Value</td>
+                        <td class="info">Value</td>
+                        <td class="success">Value</td>
+                        <td class="warning">Value</td>
+                        <td class="error">Value</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="panel" id="headers">
+            <h3>Headers</h3>
+            <h4>Normal</h4>
+            <header>
+                <a href="#">Title</a>
+                <nav>
+                    <a href="#" class="active">Home</a>
+                    <a href="#">Features</a>
+                    <a href="#">Docs</a>
+                    <a href="#">About</a>
+                </nav>
+                <input placeholder="Search...">
+            </header>
+            <h4>Style variations</h4>
+            <header class="center">
+                <a href="#">Title</a>
+                <nav>
+                    <a href="#" class="active">Home</a>
+                    <a href="#">Features</a>
+                    <a href="#">Docs</a>
+                    <a href="#">About</a>
+                </nav>
+                <input placeholder="Search...">
+            </header>
+            <header class="no-search">
+                <a href="#">Title</a>
+                <nav>
+                    <a href="#" class="active">Home</a>
+                    <a href="#">Features</a>
+                    <a href="#">Docs</a>
+                    <a href="#">About</a>
+                </nav>
+                <input placeholder="Search...">
+            </header>
+            <header class="stretch">
+                <a href="#">Title</a>
+                <nav>
+                    <a href="#" class="active">Home</a>
+                    <a href="#">Features</a>
+                    <a href="#">Docs</a>
+                    <a href="#">About</a>
+                </nav>
+                <input placeholder="Search...">
+            </header>
+            <header class="slider">
+                <a href="#">Title</a>
+                <nav>
+                    <a href="#" class="active">Home</a>
+                    <a href="#">Features</a>
+                    <a href="#">Docs</a>
+                    <a href="#">About</a>
+                </nav>
+                <input placeholder="Search...">
+            </header>
+            <h4>Color Variations</h4>
+            <header class="default">
+                <a href="#">Title</a>
+                <nav>
+                    <a href="#" class="active">Home</a>
+                    <a href="#">Features</a>
+                    <a href="#">Docs</a>
+                    <a href="#">About</a>
+                </nav>
+                <input placeholder="Search...">
+            </header>
+            <header class="default-alt">
+                <a href="#">Title</a>
+                <nav>
+                    <a href="#" class="active">Home</a>
+                    <a href="#">Features</a>
+                    <a href="#">Docs</a>
+                    <a href="#">About</a>
+                </nav>
+                <input placeholder="Search...">
+            </header>
+            <header class="info">
+                <a href="#">Title</a>
+                <nav>
+                    <a href="#" class="active">Home</a>
+                    <a href="#">Features</a>
+                    <a href="#">Docs</a>
+                    <a href="#">About</a>
+                </nav>
+                <input placeholder="Search...">
+            </header>
+            <header class="success">
+                <a href="#">Title</a>
+                <nav>
+                    <a href="#" class="active">Home</a>
+                    <a href="#">Features</a>
+                    <a href="#">Docs</a>
+                    <a href="#">About</a>
+                </nav>
+                <input placeholder="Search...">
+            </header>
+            <header class="warning">
+                <a href="#">Title</a>
+                <nav>
+                    <a href="#" class="active">Home</a>
+                    <a href="#">Features</a>
+                    <a href="#">Docs</a>
+                    <a href="#">About</a>
+                </nav>
+                <input placeholder="Search...">
+            </header>
+            <header class="error">
+                <a href="#">Title</a>
+                <nav>
+                    <a href="#" class="active">Home</a>
+                    <a href="#">Features</a>
+                    <a href="#">Docs</a>
+                    <a href="#">About</a>
+                </nav>
+                <input placeholder="Search...">
+            </header>
+        </div>
+
+        <h2 style="text-align: center;" id="panels">Panels</h2>
+
+        <div class="panel">
+            <h3>Normal</h3>
+            Text
+        </div>
+
+        <div class="panel default">
+            <h3>Default</h3>
+            Text
+        </div>
+
+        <div class="panel default-alt">
+            <h3>Default-Alt</h3>
+            Text
+        </div>
+
+        <div class="panel info">
+            <h3>Information</h3>
+            Text
+        </div>
+
+        <div class="panel success">
+            <h3>Success</h3>
+            Text
+        </div>
+
+        <div class="panel warning">
+            <h3>Warning</h3>
+            Text
+        </div>
+
+        <div class="panel error">
+            <h3>Error</h3>
+            Text
+        </div>
+
+        <script src="/js/css.js" type="module"></script>
+    </body>
+</html>
