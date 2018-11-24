@@ -9,6 +9,7 @@
         <link rel="stylesheet" type="text/css" href="/ddevlib/css/themes/darkly.css">
         <style>
             @import '/ddevlib/css/packages/main.css';
+            @import '/ddevlib/css/packages/input.css';
         </style>
         <style>
 
@@ -24,35 +25,24 @@
                 align-items: center;
             }
             
-            label.input {
-                display: flex;
-                justify-content: flex-start;
-                align-items: center;
+            input + label {
+                position: relative;
+                left: calc(-1 * var(--input-default-width) - 1em);
+                top: 0;
+
+                transition: left var(--default-transition-time), top var(--default-transition-time);
             }
 
-            label.input::after {
-                content: attr(title);
-                position: absolute;
-                transform: translateY(0px) translateX(calc(var(--button-padding) * 2));
-                transition: transform var(--default-transition-time);
-            }
-
-            label.input input {
-                border: 0;
-                background-color: transparent;
-                outline: 0;
-                color: var(--text-alt);
-                padding: calc(var(--button-padding) * 2);
-                border: 2px solid var(--primary-main);
-                font: inherit;
-            }
-
-            label.input:hover::after {
-                transform: translateY(-200%) translateX(0px);
+            input:hover + label,
+            input:focus + label {
+                left: calc(-1 * var(--input-default-width) - 1.5em);
+                top: calc(-1.5em)
             }
         </style>
     </head>
     <body>
-        <label class="input" title="Username"><input type="Text"></label>
+        <div class="panel">
+            <input class="box" type="text"><label>Username</label>
+        </div>
     </body>
 </html>

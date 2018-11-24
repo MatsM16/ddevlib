@@ -1,6 +1,6 @@
 import { ContextMenu } from "/ddevlib/js/contextmenu.js";
 ContextMenu.loadCSS();
-//@ts-ignore
+
 const create = () => ContextMenu.create(document.body, [
     {
         text: "Flatly",
@@ -43,6 +43,7 @@ const create = () => ContextMenu.create(document.body, [
         description: "Set the theme to cyborg"
     }
 ]);
+
 create();
 const setTheme = (name) => {
     console.log(`Changing theme to "${name}"`);
@@ -54,5 +55,4 @@ const setTheme = (name) => {
     else {
         console.log("Failed to find style tag");
     }
-}; /**/
-//# sourceMappingURL=css.js.map
+};
