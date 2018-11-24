@@ -1,6 +1,6 @@
 export namespace Web {
-    export function send (method: "GET" | "POST" | "PUT" | "DELETE", url: string, responseType?: "JSON" | "TEXT" | "BINARY", data?: any, dataType?: "JSON" | "TEXT" | "BINARY", headers?: Map<string, string>) {
-        method = method.toUpperCase() as ("GET" | "POST" | "PUT" | "DELETE");
+    export function send (method: RequestType, url: string, responseType?: DataType, data?: any, dataType?: DataType, headers?: Map<string, string>) {
+        method = method.toUpperCase() as RequestType;
 
         return new Promise<any>((resolve, reject) => {
             const request = new XMLHttpRequest();
@@ -32,15 +32,15 @@ export namespace Web {
         });
     }
 
-    export function get (url: string, responseType?: "JSON" | "TEXT" | "BINARY", headers?: Map<string, string>) {
+    export function get (url: string, responseType?: DataType, headers?: Map<string, string>) {
         return send("GET", url, responseType, undefined, undefined, headers);
     }
 
-    export function post (url: string, data?: any, dataType?: "JSON" | "TEXT" | "BINARY", headers?: Map<string, string>) {
+    export function post (url: string, data?: any, dataType?: DataType, headers?: Map<string, string>) {
         return send("POST", url, undefined, data, dataType, headers);
     }
 
-    export function put (url: string, data?: any, dataType?: "JSON" | "TEXT" | "BINARY", headers?: Map<string, string>) {
+    export function put (url: string, data?: any, dataType?: DataType, headers?: Map<string, string>) {
         return send("PUT", url, undefined, data, dataType, headers);
     }
 
@@ -49,6 +49,9 @@ export namespace Web {
     }
 
     export const globalHeaders = new Map<string, string>();
+
+    export type DataType = "JSON" | "TEXT" | "BINARY" | "FILE";
+    export type RequestType = "GET" | "POST" | "PUT" | "DELETE";
 }
 
 export namespace Web._Helpers {
@@ -56,8 +59,8 @@ export namespace Web._Helpers {
         return (status >= 200 && status < 300) || status === 304;
     }
 
-    export function serialize(data: any, type: "JSON" | "TEXT" | "BINARY") {
-        type = type.toUpperCase() as "JSON" | "TEXT" | "BINARY";
+    export function serialize(data: any, type: DataType) {
+        type = type.toUpperCase() as DataType;
 
         if (type === "TEXT")
             return "" + data;
@@ -65,11 +68,17 @@ export namespace Web._Helpers {
         if (type === "JSON")
             return JSON.stringify(data);
 
+        if (type === "BINARY")
+            return data;
+
+        if (type === "FILE")
+            return data;
+
         throw new Error("Unsupported type");
     }
 
-    export function deserialize(data: any, type: "JSON" | "TEXT" | "BINARY") {
-        type = type.toUpperCase() as "JSON" | "TEXT" | "BINARY";
+    export function deserialize(data: any, type: DataType) {
+        type = type.toUpperCase() as DataType;
 
         if (type === "TEXT")
             return "" + data;
@@ -78,12 +87,16 @@ export namespace Web._Helpers {
             return JSON.parse(data);
 
         if (type === "BINARY")
-            return data;
+            return new Blob(data);
+
+        if (type === "FILE")
+            return new File(data, "file");
+            
 
         throw new Error("Unsupported type");
     }
 
-    export function applyHeaders (request: XMLHttpRequest, headers?: Map<string, string>, type?: "JSON" | "TEXT" | "BINARY") {
+    export function applyHeaders (request: XMLHttpRequest, headers?: Map<string, string>, type?: DataType) {
         //
         // Global headers
         //
@@ -104,7 +117,7 @@ export namespace Web._Helpers {
         if (!type)
             return;
 
-        type = type.toUpperCase() as "JSON" | "TEXT" | "BINARY";
+        type = type.toUpperCase() as DataType;
 
         if (type === "JSON")
             request.setRequestHeader("content-type", "application/json");
@@ -112,7 +125,7 @@ export namespace Web._Helpers {
         if (type === "TEXT")
             request.setRequestHeader("content-type", "text/plain");
 
-        if (type === "BINARY")
+        if (type === "BINARY" || type === "FILE")
             request.setRequestHeader("content-type", "application/octet-stream");
     }
 }
@@ -196,9 +209,9 @@ export interface WebApiFunction {
     name: string,
     url: string,
 
-    method: "GET" | "POST" | "PUT" | "DELETE";
-    dataType?: "TEXT" | "JSON" | "BINARY";
-    responseType?: "TEXT" | "JSON" | "BINARY";
+    method: Web.RequestType;
+    dataType?: Web.DataType;
+    responseType?: Web.DataType;
 
     urlParameterNames?: string[];
 }
