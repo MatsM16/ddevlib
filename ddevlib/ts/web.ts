@@ -32,6 +32,22 @@ export namespace Web {
         });
     }
 
+    export function get (url: string, responseType?: "JSON" | "TEXT" | "BINARY", headers?: Map<string, string>) {
+        return send("GET", url, responseType, undefined, undefined, headers);
+    }
+
+    export function post (url: string, data?: any, dataType?: "JSON" | "TEXT" | "BINARY", headers?: Map<string, string>) {
+        return send("POST", url, undefined, data, dataType, headers);
+    }
+
+    export function put (url: string, data?: any, dataType?: "JSON" | "TEXT" | "BINARY", headers?: Map<string, string>) {
+        return send("PUT", url, undefined, data, dataType, headers);
+    }
+
+    export function del (url: string, headers?: Map<string, string>) {
+        return send("DELETE", url, undefined, undefined, undefined, headers);
+    }
+
     export const globalHeaders = new Map<string, string>();
 }
 
