@@ -1,6 +1,6 @@
 table {
     border-collapse: collapse;
-    border-radius: var(--default-radius);
+    border-radius: var(--container-radius);
     overflow: hidden;
 }
 th, td { padding: 0.25em 0.5em; }
@@ -11,7 +11,7 @@ table.no-corner tr:first-child th:first-child {
 }
 table.no-corner tr:first-child th:nth-child(2),
 table.no-corner tr:nth-child(2) th:first-child {
-    border-top-left-radius: var(--default-radius);
+    border-top-left-radius: var(--container-radius);
 }
 
 /* Highlight */
@@ -21,12 +21,12 @@ table.highlight tr:hover td {
     cursor: pointer;
 }
 table.highlight tr:hover td:first-child {
-    border-top-left-radius: var(--default-radius);
-    border-bottom-left-radius: var(--default-radius);
+    border-top-left-radius: var(--container-radius);
+    border-bottom-left-radius: var(--container-radius);
 }
 table.highlight tr:hover td:last-child {
-    border-top-right-radius: var(--default-radius);
-    border-bottom-right-radius: var(--default-radius);
+    border-top-right-radius: var(--container-radius);
+    border-bottom-right-radius: var(--container-radius);
 }
 
 /* Alternate */
@@ -34,40 +34,40 @@ table.alternate tr:nth-child(2n) td {
     background-color: var(--default-alt);
 }
 table.alternate.highlight tr:hover td {
-    background-color: var(--text-main);
+    background-color: var(--text);
     color: var(--background);
 }
 
 /* Default table colors */
 
 th {
-    background-color: var(--primary-main);
+    background-color: var(--primary);
     color: var(--text-alt);
 }
 
-th.info    { background-color: var(--info-main);    }
-th.success { background-color: var(--success-main); }
-th.warning { background-color: var(--warning-main); }
-th.error   { background-color: var(--error-main);   }
+th.info    { background-color: var(--info);    }
+th.success { background-color: var(--success); }
+th.warning { background-color: var(--warning); }
+th.error   { background-color: var(--error);   }
 
-td.info    { color: var(--info-main);    }
-td.success { color: var(--success-main); }
-td.warning { color: var(--warning-main); }
-td.error   { color: var(--error-main);   }
+td.info    { color: var(--info);    }
+td.success { color: var(--success); }
+td.warning { color: var(--warning); }
+td.error   { color: var(--error);   }
 
 /* Simple */
 table.simple tr { border-bottom: 1px solid var(--default-alt); }
-table.simple th { background-color: transparent !important; color: var(--text-main); }
+table.simple th { background-color: transparent !important; color: var(--text); }
 table.simple tr:first-child th { border-bottom: 2px solid var(--default-alt); }
 
-table.simple.primary th { color: var(--primary-main); }
-table.simple.info    th { color: var(--info-main);    }
-table.simple.success th { color: var(--success-main); }
-table.simple.warning th { color: var(--warning-main); }
-table.simple.error   th { color: var(--error-main);   }
+table.simple.primary th { color: var(--primary); }
+table.simple.info    th { color: var(--info);    }
+table.simple.success th { color: var(--success); }
+table.simple.warning th { color: var(--warning); }
+table.simple.error   th { color: var(--error);   }
 
-table.simple th.primary { color: var(--primary-main); }
-table.simple th.info    { color: var(--info-main);    }
-table.simple th.success { color: var(--success-main); }
-table.simple th.warning { color: var(--warning-main); }
-table.simple th.error   { color: var(--error-main);   }
+table.simple th.primary { color: var(--primary); }
+table.simple th.info    { color: var(--info);    }
+table.simple th.success { color: var(--success); }
+table.simple th.warning { color: var(--warning); }
+table.simple th.error   { color: var(--error);   }

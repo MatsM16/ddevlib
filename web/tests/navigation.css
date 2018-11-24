@@ -2,7 +2,7 @@
 @import './navigation/side/overlapp.css';
 
 nav {
-    background-color: var(--primary-main);
+    background-color: var(--primary);
     color: var(--text-alt);
 }
 nav a {

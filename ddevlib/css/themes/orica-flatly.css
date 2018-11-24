@@ -1,7 +1,7 @@
 :root {
     --background:#e7ecf2;
-    --primary-main: #0193CF; /*Oricablue: #0193CF*/
+    --primary: #0193CF; /*Oricablue: #0193CF*/
     --primary-alt: rgb(0, 115, 160);
-    --default-main: white;
+    --default: white;
     --default-alt: #EEE;
 }

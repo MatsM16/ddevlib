@@ -4,19 +4,19 @@ input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="
     border-radius: 0;
     padding: 0.5em 1em;
     width: var(--input-default-width);
-    font-family: var(--font-main);
+    font-family: var(--font);
     outline: none;
 
-    color: var(--text-main);
+    color: var(--text);
     background-color: transparent;
 
-    border: 1px solid var(--primary-main);
+    border: 1px solid var(--primary);
     background-color: transparent;
 }
 
 input::placeholder {
     font-style: italic;
-    color: var(--text-main);
+    color: var(--text);
 }
 input[type="date"],
 input[type="time"] {
@@ -30,33 +30,33 @@ input.secret {
 input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]).info,
 textarea.info,
 [contenteditable="true"].info {
-    border-color: var(--info-main);
+    border-color: var(--info);
 }
 input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]).success,
 textarea.success,
 [contenteditable="true"].success {
-    border-color: var(--success-main);
+    border-color: var(--success);
 }
 input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]).warning,
 textarea.warning,
 [contenteditable="true"].warning {
-    border-color: var(--warning-main);
+    border-color: var(--warning);
 }
 input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]).error,
 textarea.error,
 [contenteditable="true"].error {
-    border-color: var(--error-main);
+    border-color: var(--error);
 }
 
 textarea,
 [contenteditable="true"] {
-    font-family: var(--font-main);
+    font-family: var(--font);
     background-color: transparent;
-    color: var(--text-main);
-    border-radius: var(--default-radius);
+    color: var(--text);
+    border-radius: var(--container-radius);
     padding: var(--container-padding);
 
-    border: 1px solid var(--primary-main);
+    border: 1px solid var(--primary);
 }
 
 input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]).underline,

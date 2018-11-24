@@ -3,21 +3,21 @@ select {
     border-radius: 0;
     padding: 0.5em 1em;
     width: calc(var(--input-default-width) + 30px);
-    font-family: var(--font-main);
+    font-family: var(--font);
     outline: none;
 
-    color: var(--text-main);
+    color: var(--text);
     background-color: transparent;
 
-    border-bottom: 2px solid var(--primary-main);
+    border-bottom: 2px solid var(--primary);
 }
 
 select option {
-    background-color: var(--default-main);
+    background-color: var(--default);
 }
 
 /* Text field variants */
-select.info    { border-color: var(--info-main); }
-select.success { border-color: var(--success-main); }
-select.warning { border-color: var(--warning-main); }
-select.error   { border-color: var(--error-main); }
+select.info    { border-color: var(--info); }
+select.success { border-color: var(--success); }
+select.warning { border-color: var(--warning); }
+select.error   { border-color: var(--error); }

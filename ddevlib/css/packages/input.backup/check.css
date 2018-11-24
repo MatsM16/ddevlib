@@ -59,53 +59,53 @@ input[type="radio"]::after { border-radius: 50%; }
 
 input[type="radio"]::before, 
 input[type="checkbox"]::before {
-    border-color: var(--primary-main);
+    border-color: var(--primary);
 }
 input[type="radio"]::after,
 input[type="checkbox"]::after {
-    background-color: var(--primary-main);
+    background-color: var(--primary);
 }
 
 /* Info */
 
 input[type="radio"].info::before, 
 input[type="checkbox"].info::before {
-    border-color: var(--info-main);
+    border-color: var(--info);
 }
 input[type="radio"].info::after,
 input[type="checkbox"].info::after {
-    background-color: var(--info-main);
+    background-color: var(--info);
 }
 
 /* Success */
 
 input[type="radio"].success::before, 
 input[type="checkbox"].success::before {
-    border-color: var(--success-main);
+    border-color: var(--success);
 }
 input[type="radio"].success::after,
 input[type="checkbox"].success::after {
-    background-color: var(--success-main);
+    background-color: var(--success);
 }
 
 /* Warning */
 
 input[type="radio"].warning::before, 
 input[type="checkbox"].warning::before {
-    border-color: var(--warning-main);
+    border-color: var(--warning);
 }
 input[type="radio"].warning::after,
 input[type="checkbox"].warning::after {
-    background-color: var(--warning-main);
+    background-color: var(--warning);
 }
 
 /* Error */
 
 input[type="radio"].error::before, 
 input[type="checkbox"].error::before {
-    border-color: var(--error-main);
+    border-color: var(--error);
 }
 input[type="radio"].error::after,
 input[type="checkbox"].error::after {
-    background-color: var(--error-main);
+    background-color: var(--error);
 }

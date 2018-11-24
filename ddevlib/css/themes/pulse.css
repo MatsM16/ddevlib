@@ -2,28 +2,28 @@
     --background:#fff;
 
     /* Main colors */
-    --default-main: white;
+    --default: white;
     --default-alt: #EDEDED;
-    --primary-main: #593196;
+    --primary: #593196;
     --primary-alt: #482879;
-    --text-main: #444;
+    --text: #444;
     --text-alt: white;
     --text-highlight: dodgerblue;
 
     /* Link colors */
-    --link-main: #919aa1;
+    --link: #919aa1;
     --link-alt: #000000;
 
     /* Informative colors */
-    --success-main: #13B955;
+    --success: #13B955;
     --success-alt: #0f9645;
 
-    --error-main: #FC3939;
+    --error: #FC3939;
     --error-alt: #fb1313;
 
-    --warning-main: #EFA31D;
+    --warning: #EFA31D;
     --warning-alt: #d78e0f;
 
-    --info-main: #009CDC;
+    --info: #009CDC;
     --info-alt: #0081b6;
 }

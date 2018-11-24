@@ -21,7 +21,7 @@ a:not(.btn).animate.underline::after {
     height: 1px;
 
     width: 0%;
-    background-color: var(--link-main);
+    background-color: var(--link);
 
     transition: width, background-color;
     transition-duration: var(--default-transition-time);

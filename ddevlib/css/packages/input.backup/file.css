@@ -28,54 +28,54 @@ input[type="file"]::after {
     transition-duration: var(--default-transition-time);
     
     background-color: transparent;
-    color: var(--primary-main);
-    border: var(--button-border) var(--primary-main);
+    color: var(--primary);
+    border: var(--button-border) var(--primary);
 }
 
 input[type="file"]:hover::after {
-    background-color: var(--primary-main);
+    background-color: var(--primary);
     color: var(--text-alt);
 }
 
 input[type="file"].info::after {
-    color: var(--info-main);
-    border-color: var(--info-main);
+    color: var(--info);
+    border-color: var(--info);
 }
 input[type="file"].info:hover::after {
-    background-color: var(--info-main);
+    background-color: var(--info);
     color: var(--text-alt);
 }
 
 input[type="file"].success::after {
-    color: var(--success-main);
-    border-color: var(--success-main);
+    color: var(--success);
+    border-color: var(--success);
 }
 input[type="file"].success:hover::after {
-    background-color: var(--success-main);
+    background-color: var(--success);
     color: var(--text-alt);
 }
 
 input[type="file"].warning::after {
-    color: var(--warning-main);
-    border-color: var(--warning-main);
+    color: var(--warning);
+    border-color: var(--warning);
 }
 input[type="file"].warning:hover::after {
-    background-color: var(--warning-main);
+    background-color: var(--warning);
     color: var(--text-alt);
 }
 
 input[type="file"].error::after {
-    color: var(--error-main);
-    border-color: var(--error-main);
+    color: var(--error);
+    border-color: var(--error);
 }
 input[type="file"].error:hover::after {
-    background-color: var(--error-main);
+    background-color: var(--error);
     color: var(--text-alt);
 }
 
 
 input[type="file"].filled::after {
-    background-color: var(--primary-main);
+    background-color: var(--primary);
     color: var(--text-alt);
 }
 input[type="file"].filled:hover::after {
@@ -84,7 +84,7 @@ input[type="file"].filled:hover::after {
 }
 
 input[type="file"].filled.info::after {
-    background-color: var(--info-main);
+    background-color: var(--info);
 }
 input[type="file"].filled.info:hover::after {
     background-color: var(--info-alt);
@@ -92,7 +92,7 @@ input[type="file"].filled.info:hover::after {
 }
 
 input[type="file"].filled.success::after {
-    background-color: var(--success-main);
+    background-color: var(--success);
 }
 input[type="file"].filled.success:hover::after {
     background-color: var(--success-alt);
@@ -100,7 +100,7 @@ input[type="file"].filled.success:hover::after {
 }
 
 input[type="file"].filled.warning::after {
-    background-color: var(--warning-main);
+    background-color: var(--warning);
 }
 input[type="file"].filled.warning:hover::after {
     background-color: var(--warning-alt);
@@ -108,7 +108,7 @@ input[type="file"].filled.warning:hover::after {
 }
 
 input[type="file"].filled.error::after {
-    background-color: var(--error-main);
+    background-color: var(--error);
 }
 input[type="file"].filled.error:hover::after {
     background-color: var(--error-alt);

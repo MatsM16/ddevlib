@@ -227,10 +227,10 @@ export class ContextMenu {
     --contextmenu-border: 1px solid var(--default-alt, #ddd);
     --contextmenu-radius: 0px;
     --contextmenu-shadow: var(--default-alt, #888);
-    --contextmenu-action-back: var(--default-main, white);
-    --contextmenu-action-text: var(--text-main, black);
+    --contextmenu-action-back: var(--default, white);
+    --contextmenu-action-text: var(--text, black);
     --contextmenu-action-hover-back: var(--default-alt, rgba(0, 0, 0, 0.05));
-    --contextmenu-action-hover-text: var(--primary-main, black);
+    --contextmenu-action-hover-text: var(--primary, black);
 }
 
 .contextmenu {

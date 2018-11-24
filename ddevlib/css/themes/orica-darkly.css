@@ -2,11 +2,11 @@
     --background:#222;
 
     /* Main colors */
-    --default-main: rgb(68, 68, 68);
+    --default: rgb(68, 68, 68);
     --default-alt: rgb(49, 49, 49);
-    --primary-main: #0193CF; /*Oricablue: #0193CF*/
+    --primary: #0193CF; /*Oricablue: #0193CF*/
     --primary-alt: rgb(0, 115, 160);
-    --text-main: lightgray;
+    --text: lightgray;
     --text-alt: white;
 
     /* Container */

@@ -10,15 +10,15 @@ input[type="time"] {
     padding: 0.5em 1em;
     
     width: var(--input-default-width);
-    font-family: var(--font-main);
+    font-family: var(--font);
 
-    border: 2px solid var(--primary-main);
+    border: 2px solid var(--primary);
     border-left-width: 0;
     border-right-width: 0;
     border-top-width: 0;
 
     background-color: transparent;
-    color: var(--text-main);
+    color: var(--text);
 }
 
 /* --- Box --- */
@@ -43,7 +43,7 @@ input[type="number"].info,
 textarea.info,
 [contenteditable="true"].info
 
-{ border-color: var(--info-main); }
+{ border-color: var(--info); }
 
 
 input[type="text"].success,
@@ -53,7 +53,7 @@ input[type="number"].success,
 textarea.success,
 [contenteditable="true"].success
 
-{ border-color: var(--success-main); }
+{ border-color: var(--success); }
 
 
 input[type="text"].warning,
@@ -63,7 +63,7 @@ input[type="number"].warning,
 textarea.warning,
 [contenteditable="true"].warning
 
-{ border-color: var(--warning-main); }
+{ border-color: var(--warning); }
 
 
 input[type="text"].error,
@@ -73,4 +73,4 @@ input[type="number"].error,
 textarea.error,
 [contenteditable="true"].error
 
-{ border-color: var(--error-main); }
+{ border-color: var(--error); }

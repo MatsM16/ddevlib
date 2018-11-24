@@ -2,7 +2,7 @@
 
 input::placeholder {
     font-style: italic;
-    color: var(--text-main);
+    color: var(--text);
 }
 
 input.secret 

@@ -1,6 +1,6 @@
 .panel {
-    background-color: var(--default-main);
-    border-radius: var(--default-radius);
+    background-color: var(--default);
+    border-radius: var(--container-radius);
     overflow: hidden;
     padding: var(--container-padding);
 
@@ -19,60 +19,60 @@
     margin: 0;
 
     /* Same as filled */
-    background-color: var(--primary-main);
+    background-color: var(--primary);
     color: var(--text-alt);
 }
 
 .panel.default > h1:first-child,
 .panel.default > h2:first-child,
 .panel.default > h3:first-child {
-    background-color: var(--default-main);
-    color: var(--text-main);
+    background-color: var(--default);
+    color: var(--text);
 }
 
 .panel.default-alt > h1:first-child,
 .panel.default-alt > h2:first-child,
 .panel.default-alt > h3:first-child {
     background-color: var(--default-alt);
-    color: var(--text-main);
+    color: var(--text);
 }
 
 .panel.info > h1:first-child,
 .panel.info > h2:first-child,
 .panel.info > h3:first-child {
-    background-color: var(--info-main);
+    background-color: var(--info);
 }
 
 .panel.success > h1:first-child,
 .panel.success > h2:first-child,
 .panel.success > h3:first-child {
-    background-color: var(--success-main);
+    background-color: var(--success);
 }
 
 .panel.warning > h1:first-child,
 .panel.warning > h2:first-child,
 .panel.warning > h3:first-child {
-    background-color: var(--warning-main);
+    background-color: var(--warning);
 }
 
 .panel.error > h1:first-child,
 .panel.error > h2:first-child,
 .panel.error > h3:first-child {
-    background-color: var(--error-main);
+    background-color: var(--error);
 }
 
 .panel.border {
-    border: 2px solid var(--primary-main);
+    border: 2px solid var(--primary);
 }
 .panel.border.info {
-    border-color: var(--info-main);
+    border-color: var(--info);
 }
 .panel.border.success {
-    border-color: var(--success-main);
+    border-color: var(--success);
 }
 .panel.border.warning {
-    border-color: var(--warning-main);
+    border-color: var(--warning);
 }
 .panel.border.error {
-    border-color: var(--error-main);
+    border-color: var(--error);
 }

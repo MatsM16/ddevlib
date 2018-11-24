@@ -9,7 +9,7 @@ del.primary,
 ins.primary,
 pre.primary,
 small.primary,
-strong.primary{ color: var(--primary-main) }
+strong.primary{ color: var(--primary) }
 
 p.info,
 b.info,
@@ -22,7 +22,7 @@ sub.info,
 sup.info,
 del.info,
 pre.info,
-ins.info { color: var(--info-main) }
+ins.info { color: var(--info) }
 
 p.success,
 b.success,
@@ -35,7 +35,7 @@ sub.success,
 sup.success,
 del.success,
 pre.success,
-ins.success { color: var(--success-main) }
+ins.success { color: var(--success) }
 
 p.warning,
 b.warning,
@@ -48,7 +48,7 @@ sub.warning,
 sup.warning,
 del.warning,
 pre.warning,
-ins.warning { color: var(--warning-main) }
+ins.warning { color: var(--warning) }
 
 p.error,
 b.error,
@@ -61,7 +61,7 @@ sub.error,
 sup.error,
 del.error,
 pre.error,
-ins.error { color: var(--error-main) }
+ins.error { color: var(--error) }
 
 q::before { content: "“ "; }
 q::after  { content: " ”"; }

@@ -6,7 +6,7 @@ input[type="range"] {
     -moz-appearance: none;
     margin: 18px 0;
     width: calc(var(--input-default-width) + 30px);
-    background: var(--primary-main);
+    background: var(--primary);
 
     --track-cursor: pointer;
     --thumb-offset: calc(var(--input-range-thumb-heigth) / -4 - var(--input-range-track-height) / 2);
@@ -35,7 +35,7 @@ input[type="range"]::-webkit-slider-thumb {
     width: var(--input-range-thumb-width);
     border: var(--input-range-thumb-border);
     border-radius: var(--input-range-thumb-radius);
-    background: var(--primary-main);
+    background: var(--primary);
     cursor: var(--track-cursor);
     margin-top: var(--thumb-offset);
     
@@ -46,7 +46,7 @@ input[type="range"]::-moz-range-thumb {
     width: var(--input-range-thumb-width);
     border: var(--input-range-thumb-border);
     border-radius: var(--input-range-thumb-radius);
-    background: var(--primary-main);
+    background: var(--primary);
     cursor: var(--track-cursor);
     margin-top: var(--thumb-offset);
 }
@@ -55,37 +55,37 @@ input[type="range"]::-ms-thumb {
     width: var(--input-range-thumb-width);
     border: var(--input-range-thumb-border);
     border-radius: var(--input-range-thumb-radius);
-    background: var(--primary-main);
+    background: var(--primary);
     cursor: var(--track-cursor);
     margin-top: var(--thumb-offset);
 }
 
 /* Range alternatives */
 input[type="range"].info {
-    background: var(--info-main);
+    background: var(--info);
 }
 input[type="range"].success {
-    background: var(--success-main);
+    background: var(--success);
 }
 input[type="range"].warning {
-    background: var(--warning-main);
+    background: var(--warning);
 }
 input[type="range"].error {
-    background: var(--error-main);
+    background: var(--error);
 }
 
-input[type="range"].info::-webkit-slider-thumb { background: var(--info-main); }
-input[type="range"].info::-moz-range-thumb     { background: var(--info-main); }
-input[type="range"].info::-ms-thumb            { background: var(--info-main); }
+input[type="range"].info::-webkit-slider-thumb { background: var(--info); }
+input[type="range"].info::-moz-range-thumb     { background: var(--info); }
+input[type="range"].info::-ms-thumb            { background: var(--info); }
 
-input[type="range"].success::-webkit-slider-thumb { background: var(--success-main); }
-input[type="range"].success::-moz-range-thumb     { background: var(--success-main); }
-input[type="range"].success::-ms-thumb            { background: var(--success-main); }
+input[type="range"].success::-webkit-slider-thumb { background: var(--success); }
+input[type="range"].success::-moz-range-thumb     { background: var(--success); }
+input[type="range"].success::-ms-thumb            { background: var(--success); }
 
-input[type="range"].warning::-webkit-slider-thumb { background: var(--warning-main); }
-input[type="range"].warning::-moz-range-thumb     { background: var(--warning-main); }
-input[type="range"].warning::-ms-thumb            { background: var(--warning-main); }
+input[type="range"].warning::-webkit-slider-thumb { background: var(--warning); }
+input[type="range"].warning::-moz-range-thumb     { background: var(--warning); }
+input[type="range"].warning::-ms-thumb            { background: var(--warning); }
 
-input[type="range"].error::-webkit-slider-thumb { background: var(--error-main); }
-input[type="range"].error::-moz-range-thumb     { background: var(--error-main); }
-input[type="range"].error::-ms-thumb            { background: var(--error-main); }
+input[type="range"].error::-webkit-slider-thumb { background: var(--error); }
+input[type="range"].error::-moz-range-thumb     { background: var(--error); }
+input[type="range"].error::-ms-thumb            { background: var(--error); }

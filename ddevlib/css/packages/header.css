@@ -1,6 +1,6 @@
 /* --- Default --- */
 header {
-    background-color: var(--primary-main);
+    background-color: var(--primary);
     height: 75px;
     display: flex;
     justify-content: flex-start;
@@ -46,9 +46,9 @@ header nav a.active {
 /* --- Search --- */
 
 header input {
-    background-color: var(--default-main) !important;
+    background-color: var(--default) !important;
     padding: var(--container-padding) !important;
-    border-radius: var(--default-radius) !important;
+    border-radius: var(--container-radius) !important;
     border: none !important;
 }
 
@@ -66,19 +66,19 @@ header.stretch nav {
 }
 
 /* --- Color variants --- */
-header.info { background-color: var(--info-main) }
-header.success { background-color: var(--success-main) }
-header.warning { background-color: var(--warning-main) }
-header.error { background-color: var(--error-main) }
+header.info { background-color: var(--info) }
+header.success { background-color: var(--success) }
+header.warning { background-color: var(--warning) }
+header.error { background-color: var(--error) }
 
-header.default { background-color: var(--default-main); }
-header.default a { color: var(--text-main) !important }
+header.default { background-color: var(--default); }
+header.default a { color: var(--text) !important }
 header.default input {
     border: 1px solid var(--default-alt) !important;
 }
 
 header.default-alt { background-color: var(--default-alt); }
-header.default-alt a { color: var(--text-main) !important }
+header.default-alt a { color: var(--text) !important }
 header.default-alt input {
     border: 1px solid var(--default-alt) !important;
 }

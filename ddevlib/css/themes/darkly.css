@@ -2,11 +2,11 @@
     --background:#222;
 
     /* Main colors */
-    --default-main: rgb(68, 68, 68);
+    --default: rgb(68, 68, 68);
     --default-alt: rgb(49, 49, 49);
-    --primary-main: #375a7f;
+    --primary: #375a7f;
     --primary-alt: #2b4764;
-    --text-main: lightgray;
+    --text: lightgray;
     --text-alt: white;
 
     /* Container */

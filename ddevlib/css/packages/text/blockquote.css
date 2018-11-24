@@ -7,8 +7,8 @@ blockquote {
 blockquote.no-shadow {
     box-shadow: none;
 }
-blockquote.primary { border-color: var(--primary-main); }
-blockquote.info { border-color: var(--info-main); }
-blockquote.success { border-color: var(--success-main); }
-blockquote.warning { border-color: var(--warning-main); }
-blockquote.error { border-color: var(--error-main); }
+blockquote.primary { border-color: var(--primary); }
+blockquote.info { border-color: var(--info); }
+blockquote.success { border-color: var(--success); }
+blockquote.warning { border-color: var(--warning); }
+blockquote.error { border-color: var(--error); }

@@ -1,5 +1,5 @@
 select option {
-    background-color: var(--default-main);
+    background-color: var(--default);
 }
 
 select {

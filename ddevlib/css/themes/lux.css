@@ -2,31 +2,31 @@
     --background:#fff;
 
     /* Main colors */
-    --default-main: white;
+    --default: white;
     --default-alt: #ececec;
-    --primary-main: #343a40;
+    --primary: #343a40;
     --primary-alt: #23272b;
-    --text-main: #919aa1;
+    --text: #919aa1;
     --text-alt: white;
     --text-highlight: dodgerblue;
 
     /* Link colors */
-    --link-main: #919aa1;
+    --link: #919aa1;
     --link-alt: #000000;
 
     /* Informative colors */
-    --success-main: #4BBF73;
+    --success: #4BBF73;
     --success-alt: #3ca861;
 
-    --error-main: #d9534f;
+    --error: #d9534f;
     --error-alt: #d23430;
 
-    --warning-main: #f0ad4e;
+    --warning: #f0ad4e;
     --warning-alt: #ed9d2b;
 
-    --info-main: #1F9BCF;
+    --info: #1F9BCF;
     --info-alt: #1a82ae;
 
     
-    --default-radius: 2px;
+    --container-radius: 2px;
 }

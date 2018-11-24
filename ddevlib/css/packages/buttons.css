@@ -44,50 +44,50 @@ a.btn {
     transition-duration: var(--default-transition-time);
     
     background-color: transparent;
-    color: var(--primary-main);
-    border: var(--button-border) var(--primary-main);
+    color: var(--primary);
+    border: var(--button-border) var(--primary);
 }
 
 button:hover,
 a.btn:hover {
-    background-color: var(--primary-main);
+    background-color: var(--primary);
     color: var(--text-alt);
 }
 
 /* --- BASIC | Color Variants --- */
 button.info, a.btn.info {
-    color: var(--info-main);
-    border-color: var(--info-main);
+    color: var(--info);
+    border-color: var(--info);
 }
 button.info:hover, a.btn.info:hover {
-    background-color: var(--info-main);
+    background-color: var(--info);
     color: var(--text-alt);
 }
 
 button.success, a.btn.success {
-    color: var(--success-main);
-    border-color: var(--success-main);
+    color: var(--success);
+    border-color: var(--success);
 }
 button.success:hover, a.btn.success:hover {
-    background-color: var(--success-main);
+    background-color: var(--success);
     color: var(--text-alt);
 }
 
 button.warning, a.btn.warning {
-    color: var(--warning-main);
-    border-color: var(--warning-main);
+    color: var(--warning);
+    border-color: var(--warning);
 }
 button.warning:hover, a.btn.warning:hover {
-    background-color: var(--warning-main);
+    background-color: var(--warning);
     color: var(--text-alt);
 }
 
 button.error, a.btn.error {
-    color: var(--error-main);
-    border-color: var(--error-main);
+    color: var(--error);
+    border-color: var(--error);
 }
 button.error:hover, a.btn.error:hover {
-    background-color: var(--error-main);
+    background-color: var(--error);
     color: var(--text-alt);
 }
 
@@ -95,7 +95,7 @@ button.error:hover, a.btn.error:hover {
 button.filled,
 a.btn.filled {
     border: 0;
-    background-color: var(--primary-main);
+    background-color: var(--primary);
     color: var(--text-alt);
 }
 
@@ -108,28 +108,28 @@ a.btn.filled:hover {
 
 /* --- FILLED | Color Variants --- */
 button.filled.info, a.btn.filled.info {
-    background-color: var(--info-main);
+    background-color: var(--info);
 }
 button.filled.info:hover, a.btn.filled.info:hover {
     background-color: var(--info-alt);
 }
 
 button.filled.success, a.btn.filled.success {
-    background-color: var(--success-main);
+    background-color: var(--success);
 }
 button.filled.success:hover, a.btn.filled.success:hover {
     background-color: var(--success-alt);
 }
 
 button.filled.warning, a.btn.filled.warning {
-    background-color: var(--warning-main);
+    background-color: var(--warning);
 }
 button.filled.warning:hover, a.btn.filled.warning:hover {
     background-color: var(--warning-alt);
 }
 
 button.filled.error, a.btn.filled.error {
-    background-color: var(--error-main);
+    background-color: var(--error);
 }
 button.filled.error:hover, a.btn.filled.error:hover {
     background-color: var(--error-alt);

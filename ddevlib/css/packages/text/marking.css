@@ -4,21 +4,21 @@ mark {
 }
 mark.primary {
     color: var(--text-alt);
-    background-color: var(--primary-main);
+    background-color: var(--primary);
 }
 mark.info {
     color: var(--text-alt);
-    background-color: var(--info-main);
+    background-color: var(--info);
 }
 mark.success {
     color: var(--text-alt);
-    background-color: var(--success-main);
+    background-color: var(--success);
 }
 mark.warning {
     color: var(--text-alt);
-    background-color: var(--warning-main);
+    background-color: var(--warning);
 }
 mark.error {
     color: var(--text-alt);
-    background-color: var(--error-main);
+    background-color: var(--error);
 }
