@@ -1,0 +1,14 @@
+:root {
+    --background:#222;
+
+    /* Main colors */
+    --default: rgb(68, 68, 68);
+    --default-alt: rgb(49, 49, 49);
+    --primary: #375a7f;
+    --primary-alt: #2b4764;
+    --text: lightgray;
+    --text-alt: white;
+
+    /* Container */
+    --container-shadow: 0;
+}

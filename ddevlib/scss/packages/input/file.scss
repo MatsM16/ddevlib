@@ -1,0 +1,151 @@
+::-webkit-file-upload-button {
+    appearance: none;
+    display: none;
+}
+::-ms-browse {
+    appearance: none;
+    display: none;
+}
+
+input[type="file"] {
+    appearance: none;
+    font: inherit;
+    width: 180px;
+
+    /* --- Button --- */
+
+    &::after {
+        width: calc(100% - 30px);
+        content: "Open File Browser";
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+    
+        text-align: center;
+        text-decoration: none;
+        font-size: inherit;
+        padding: var(--button-padding) calc(2 * var(--button-padding));
+        font-family: inherit;
+        cursor: pointer;
+    
+        transition: color, background-color;
+        transition-duration: var(--default-transition-time);
+        
+        background-color: transparent;
+        color: var(--primary);
+        border: var(--button-border) var(--primary);
+    }
+
+    &:hover:after {
+        background-color: var(--primary);
+        color: var(--text-alt);
+    }
+
+    /* --- Default fill style --- */
+
+    &.filled {
+        &::after {
+            background-color: var(--primary);
+            color: var(--text-alt);
+        }
+
+        &:hover::after {
+            background-color: var(--primary-alt);
+            border-color: var(--primary-alt);
+        }
+    }
+
+    /* --- Color variants --- */
+
+    &.info {
+        &::after {
+            color: var(--info);
+            border-color: var(--info);
+        }
+        &:hover::after {
+            background-color: var(--info);
+            color: var(--text-alt);
+        }
+
+        &.filled {
+            &::after {
+                background-color: var(--info);
+                color: var(--text-alt);
+            }
+
+            &:hover::after {
+                background-color: var(--info-alt);
+                border-color: var(--info-alt);
+            }
+        }
+    }
+
+    &.success {
+        &::after {
+            color: var(--success);
+            border-color: var(--success);
+        }
+        &:hover::after {
+            background-color: var(--success);
+            color: var(--text-alt);
+        }
+
+        &.filled {
+            &::after {
+                background-color: var(--success);
+                color: var(--text-alt);
+            }
+
+            &:hover::after {
+                background-color: var(--success-alt);
+                border-color: var(--success-alt);
+            }
+        }
+    }
+
+    &.warning {
+        &::after {
+            color: var(--warning);
+            border-color: var(--warning);
+        }
+        &:hover::after {
+            background-color: var(--warning);
+            color: var(--text-alt);
+        }
+
+        &.filled {
+            &::after {
+                background-color: var(--warning);
+                color: var(--text-alt);
+            }
+
+            &:hover::after {
+                background-color: var(--warning-alt);
+                border-color: var(--warning-alt);
+            }
+        }
+    }
+
+    &.error {
+        &::after {
+            color: var(--error);
+            border-color: var(--error);
+        }
+        &:hover::after {
+            background-color: var(--error);
+            color: var(--text-alt);
+        }
+
+        &.filled {
+            &::after {
+                background-color: var(--error);
+                color: var(--text-alt);
+            }
+
+            &:hover::after {
+                background-color: var(--error-alt);
+                border-color: var(--error-alt);
+            }
+        }
+    }
+}

@@ -1,0 +1,136 @@
+@import './buttons/animations.css';
+
+/* --- UNIVERSAL | Modifiers --- */
+
+button.disabled,
+button:disabled,
+a.btn.disabled,
+a.btn:disabled {
+    opacity: var(--disabled-opacity);
+    cursor: not-allowed;
+}
+
+button.round,
+a.btn.round {
+    border-radius: var(--button-radius);
+}
+button>img,
+a.btn>img {
+    display: inline-block;
+    width: var(--button-icon-size);
+    height: var(--button-icon-size);
+    margin-right: var(--button-icon-margin);
+
+    object-fit: contain;
+}
+
+
+/* --- BASIC | Base --- */
+button,
+a.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    outline: 0;
+
+    text-align: center;
+    text-decoration: none;
+    font-size: inherit;
+    padding: var(--button-padding) calc(2 * var(--button-padding));
+    font-family: inherit;
+    cursor: pointer;
+
+    transition: color, background-color;
+    transition-duration: var(--default-transition-time);
+    
+    background-color: transparent;
+    color: var(--primary);
+    border: var(--button-border) var(--primary);
+}
+
+button:hover,
+a.btn:hover {
+    background-color: var(--primary);
+    color: var(--text-alt);
+}
+
+/* --- BASIC | Color Variants --- */
+button.info, a.btn.info {
+    color: var(--info);
+    border-color: var(--info);
+}
+button.info:hover, a.btn.info:hover {
+    background-color: var(--info);
+    color: var(--text-alt);
+}
+
+button.success, a.btn.success {
+    color: var(--success);
+    border-color: var(--success);
+}
+button.success:hover, a.btn.success:hover {
+    background-color: var(--success);
+    color: var(--text-alt);
+}
+
+button.warning, a.btn.warning {
+    color: var(--warning);
+    border-color: var(--warning);
+}
+button.warning:hover, a.btn.warning:hover {
+    background-color: var(--warning);
+    color: var(--text-alt);
+}
+
+button.error, a.btn.error {
+    color: var(--error);
+    border-color: var(--error);
+}
+button.error:hover, a.btn.error:hover {
+    background-color: var(--error);
+    color: var(--text-alt);
+}
+
+/* --- FILLED | Base --- */
+button.filled,
+a.btn.filled {
+    border: 0;
+    background-color: var(--primary);
+    color: var(--text-alt);
+}
+
+button.filled:hover,
+a.btn.filled:hover {
+    border: 0;
+    background-color: var(--primary-alt);
+    color: var(--text-alt);
+}
+
+/* --- FILLED | Color Variants --- */
+button.filled.info, a.btn.filled.info {
+    background-color: var(--info);
+}
+button.filled.info:hover, a.btn.filled.info:hover {
+    background-color: var(--info-alt);
+}
+
+button.filled.success, a.btn.filled.success {
+    background-color: var(--success);
+}
+button.filled.success:hover, a.btn.filled.success:hover {
+    background-color: var(--success-alt);
+}
+
+button.filled.warning, a.btn.filled.warning {
+    background-color: var(--warning);
+}
+button.filled.warning:hover, a.btn.filled.warning:hover {
+    background-color: var(--warning-alt);
+}
+
+button.filled.error, a.btn.filled.error {
+    background-color: var(--error);
+}
+button.filled.error:hover, a.btn.filled.error:hover {
+    background-color: var(--error-alt);
+}

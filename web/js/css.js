@@ -47,12 +47,5 @@ const create = () => ContextMenu.create(document.body, [
 create();
 const setTheme = (name) => {
     console.log(`Changing theme to "${name}"`);
-    const path = `/ddevlib/css/themes/${name}.css`;
-    const link = document.getElementById("theme-style");
-    if (link) {
-        link.href = path;
-    }
-    else {
-        console.log("Failed to find style tag");
-    }
+    document.body.parentElement.setAttribute("data-theme", name);
 };

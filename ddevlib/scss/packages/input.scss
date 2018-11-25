@@ -1,0 +1,16 @@
+@import './input/common.scss';
+@import './input/text.scss';
+@import './input/bigtext.scss';
+@import './input/range.scss';
+@import './input/check.scss';
+@import './input/file.scss';
+@import './input/select.scss';
+@import './input/time.scss';
+@import './input/bigtext.scss';
+
+select:focus,
+input:focus,
+textarea:focus,
+[contenteditable="true"]:focus {
+    outline: none; 
+}

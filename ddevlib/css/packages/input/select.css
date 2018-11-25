@@ -1,7 +1,0 @@
-select option {
-    background-color: var(--default);
-}
-
-select {
-    width: calc(var(--input-default-width) + 30px);
-}

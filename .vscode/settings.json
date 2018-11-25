@@ -1,0 +1,24 @@
+{
+    "scss.lint.important": "warning",
+    "scss.lint.universalSelector": "warning",
+    "scss.lint.idSelector": "warning",
+    "scss.lint.zeroUnits": "warning",
+    "scss.lint.duplicateProperties": "warning",
+    "liveSassCompile.settings.formats": [
+        {
+            "format": "expanded",
+            "extensionName": ".css",
+            "savePath": "/ddevlib/css/"
+        }
+    ],
+    "liveSassCompile.settings.excludeList": [
+        "**/node_modules/**",
+        ".vscode/**",
+
+        "ddevlib/scss/packages/buttons/**",
+        "ddevlib/scss/packages/input/**",
+        "ddevlib/scss/packages/links/**",
+        "ddevlib/scss/packages/text/**",
+        "ddevlib/scss/themes/**"
+    ]
+}

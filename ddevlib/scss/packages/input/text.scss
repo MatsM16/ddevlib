@@ -1,0 +1,11 @@
+/* --- Text fields --- */
+
+input::placeholder {
+    font-style: italic;
+    color: var(--text);
+}
+
+input.secret 
+{ -webkit-text-security: disc; }
+
+/* --- Animations --- */

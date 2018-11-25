@@ -1,0 +1,106 @@
+/* --- Checkbox ---*/
+
+/* --- Base --- */
+input[type="radio"],
+input[type="checkbox"] {
+    margin: 0;
+    padding: 0;
+
+    width: var(--default-icon-size);
+    height: var(--default-icon-size);
+    position: relative;
+
+    appearance: none;
+    
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    /* --- Background --- */
+
+    &::before {
+        content: "";
+        display: block;
+        border: var(--input-check-border-width) solid;
+        opacity: 1;
+        
+        width: 100%;
+        height: 100%;
+    
+        position: absolute;
+    }
+
+    /* --- Checkmark --- */
+
+    &::after {
+        content: "";
+        display: block;
+    
+        width: calc(100% * var(--input-check-size));
+        height: calc(100% * var(--input-check-size));
+    
+        opacity: 0;
+        transition: opacity var(--default-transition-time);
+    
+        position: absolute;
+    }
+
+    &:checked::after {
+        opacity: 1;
+    }
+
+    /* --- Color variants --- */
+
+    &::before {
+        border-color: var(--primary);
+    }
+    &::after {
+        background-color: var(--primary);
+    }
+
+    &.info {
+        &::before
+        { border-color: var(--info); }
+
+        &::after
+        { background-color: var(--info); }
+    }
+
+    &.success {
+        &::before
+        { border-color: var(--success); }
+
+        &::after
+        { background-color: var(--success); }
+    }
+
+    &.warning {
+        &::before
+        { border-color: var(--warning); }
+
+        &::after
+        { background-color: var(--warning); }
+    }
+
+    &.error {
+        &::before
+        { border-color: var(--error); }
+
+        &::after
+        { background-color: var(--error); }
+    }
+}
+
+input[type="checkbox"] {
+    &::before
+    { border-radius: var(--input-check-radius) }
+
+    &::after
+    { border-radius: calc(var(--input-check-radius) * 0.5) }
+}
+
+input[type="radio"] {
+    &::before,
+    &::after
+    { border-radius: 50% }
+}

@@ -1,0 +1,70 @@
+/* --- Text fields --- */
+input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
+    border: none;
+    border-radius: 0;
+    padding: 0.5em 1em;
+    width: var(--input-default-width);
+    font-family: var(--font);
+    outline: none;
+
+    color: var(--text);
+    background-color: transparent;
+
+    border: 1px solid var(--primary);
+    background-color: transparent;
+}
+
+input::placeholder {
+    font-style: italic;
+    color: var(--text);
+}
+input[type="date"],
+input[type="time"] {
+    text-align: center;
+}
+input.secret {
+    -webkit-text-security: disc;
+}
+
+/* Text field variants */
+input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]).info,
+textarea.info,
+[contenteditable="true"].info {
+    border-color: var(--info);
+}
+input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]).success,
+textarea.success,
+[contenteditable="true"].success {
+    border-color: var(--success);
+}
+input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]).warning,
+textarea.warning,
+[contenteditable="true"].warning {
+    border-color: var(--warning);
+}
+input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]).error,
+textarea.error,
+[contenteditable="true"].error {
+    border-color: var(--error);
+}
+
+textarea,
+[contenteditable="true"] {
+    font-family: var(--font);
+    background-color: transparent;
+    color: var(--text);
+    border-radius: var(--container-radius);
+    padding: var(--container-padding);
+
+    border: 1px solid var(--primary);
+}
+
+input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]).underline,
+textarea.underline,
+[contenteditable="true"].underline {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom-width: 2px;
+    border-radius: 0;
+}

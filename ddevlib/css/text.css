@@ -1,0 +1,152 @@
+@charset "UTF-8";
+p.primary,
+b.primary,
+i.primary,
+q.primary,
+em.primary,
+sub.primary,
+sup.primary,
+del.primary,
+ins.primary,
+pre.primary,
+small.primary,
+strong.primary {
+  color: var(--primary);
+}
+
+p.info,
+b.info,
+i.info,
+q.info,
+strong.info,
+small.info,
+em.info,
+sub.info,
+sup.info,
+del.info,
+pre.info,
+ins.info {
+  color: var(--info);
+}
+
+p.success,
+b.success,
+i.success,
+q.success,
+strong.success,
+small.success,
+em.success,
+sub.success,
+sup.success,
+del.success,
+pre.success,
+ins.success {
+  color: var(--success);
+}
+
+p.warning,
+b.warning,
+i.warning,
+q.warning,
+strong.warning,
+small.warning,
+em.warning,
+sub.warning,
+sup.warning,
+del.warning,
+pre.warning,
+ins.warning {
+  color: var(--warning);
+}
+
+p.error,
+b.error,
+i.error,
+q.error,
+strong.error,
+small.error,
+em.error,
+sub.error,
+sup.error,
+del.error,
+pre.error,
+ins.error {
+  color: var(--error);
+}
+
+q::before {
+  content: "“ ";
+}
+
+q::after {
+  content: " ”";
+}
+
+pre {
+  font: inherit;
+  font-family: var(--font-code);
+}
+
+mark {
+  color: inherit;
+  background-color: var(--text-highlight);
+}
+
+mark.primary {
+  color: var(--text-alt);
+  background-color: var(--primary);
+}
+
+mark.info {
+  color: var(--text-alt);
+  background-color: var(--info);
+}
+
+mark.success {
+  color: var(--text-alt);
+  background-color: var(--success);
+}
+
+mark.warning {
+  color: var(--text-alt);
+  background-color: var(--warning);
+}
+
+mark.error {
+  color: var(--text-alt);
+  background-color: var(--error);
+}
+
+blockquote {
+  border-left: 3px solid var(--default-alt);
+  margin: var(--container-padding) 0;
+  padding: calc(var(--container-padding) / 2) var(--container-padding);
+  -webkit-box-shadow: var(--container-shadow);
+          box-shadow: var(--container-shadow);
+}
+
+blockquote.no-shadow {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+blockquote.primary {
+  border-color: var(--primary);
+}
+
+blockquote.info {
+  border-color: var(--info);
+}
+
+blockquote.success {
+  border-color: var(--success);
+}
+
+blockquote.warning {
+  border-color: var(--warning);
+}
+
+blockquote.error {
+  border-color: var(--error);
+}
+/*# sourceMappingURL=text.css.map */

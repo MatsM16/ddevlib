@@ -1,0 +1,29 @@
+:root[data-theme="superhero"] {
+    --background:#2B3E50;
+
+    /* Main colors */
+    --default: #4E5D6C;
+    --default-alt: #3e4a56;
+    --primary: #DF691A;
+    --primary-alt: #bd5916;
+    --text: #EBEBEB;
+    --text-alt: white;
+    --text-highlight: dodgerblue;
+
+    /* Link colors */
+    --link: #DF691A;
+    --link-alt: #9a4912;
+
+    /* Informative colors */
+    --success: #5cb85c;
+    --success-alt: #48a648;
+
+    --error: #d9534f;
+    --error-alt: #d23430;
+
+    --warning: #f0ad4e;
+    --warning-alt: #ed9d2b;
+
+    --info: #5bc0de;
+    --info-alt: #3bb4d8;
+}

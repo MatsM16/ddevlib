@@ -1,0 +1,32 @@
+:root[data-theme="lux"] {
+    --background:#fff;
+
+    /* Main colors */
+    --default: white;
+    --default-alt: #ececec;
+    --primary: #343a40;
+    --primary-alt: #23272b;
+    --text: #919aa1;
+    --text-alt: white;
+    --text-highlight: dodgerblue;
+
+    /* Link colors */
+    --link: #919aa1;
+    --link-alt: #000000;
+
+    /* Informative colors */
+    --success: #4BBF73;
+    --success-alt: #3ca861;
+
+    --error: #d9534f;
+    --error-alt: #d23430;
+
+    --warning: #f0ad4e;
+    --warning-alt: #ed9d2b;
+
+    --info: #1F9BCF;
+    --info-alt: #1a82ae;
+
+    
+    --container-radius: 2px;
+}

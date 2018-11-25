@@ -1,71 +1,195 @@
-:root {
-    --background:#fff;
-    --font: Verdana, Arial, sans-serif;
-    --font-code: "Lucida Console", Monaco, monospace;
-    --font-size: 12pt;
-
-    /* Main colors */
-
-    --text: grey;
-    --text-alt: white;
-    --text-highlight: rgba(255, 145, 0, 0.3);
-
-    /* Link colors */
-    --link: #00bc8c;
-    --link-alt: #007053;
-
-    /* Informative colors (Default is flatly) */
-    --default: #f3f3f3;
-    --default-alt: #d6d6d6;
-
-    --primary: #2C3E50;
-    --primary-alt: #1e2b37;
-
-    --success: #00bc8c;
-    --success-alt: #009670;
-
-    --error: #E74C3C;
-    --error-alt: #e12e1c;
-
-    --warning: #F39C12;
-    --warning-alt: #d4860b;
-
-    --info: #3498DB;
-    --info-alt: #2384c6;
-
-    /* Containers */
-    --container-padding: 1em;
-    --container-shadow: 1px 1px 3px 1px rgba(0 , 0, 0, 0.1);
-    --container-radius: 5px;
-
-    /* Defaults for standardization */
-    --default-transition-time: 0.25s;
-    --default-icon-size: 1em;
-
-    /* Common style */
-    --disabled-opacity: 0.65;
-
-    /* Input */
-    --input-default-width: 150px;
-    --input-range-thumb-border: 2px solid var(--default);
-    --input-range-thumb-radius: 50%;
-    --input-range-thumb-width: 1.4em;
-    --input-range-thumb-heigth: 1.4em;
-    --input-range-track-height: 3px;
-
-    --input-check-inner-width: 0.6;
-    --input-check-inner-height: 0.6;
-    --input-check-border-width: 2px;
-    --input-check-radius: 4px;
-
-    /* Buttons */
-    --button-padding: 7px;
-    --button-radius: 50px;      /* Only applies to round buttons */
-    --button-border: 1px solid; /* Color applied per type        */
-    --button-icon-size: 1.5ch;
-    --button-icon-margin: 1ch;
-
-    /* Loading */
-    --loading-animation-time: 1.2s;
-    --loading-color: var(--info);
+:root[data-theme="cyborg"] {
+  --background:#060606;
+  /* Main colors */
+  --default: #555;
+  --default-alt: #424242;
+  --primary: #2A9FD6;
+  --primary-alt: #2387b7;
+  --text: #888;
+  --text-alt: white;
+  --text-highlight: dodgerblue;
+  /* Link colors */
+  --link: #2A9FD6;
+  --link-alt: #1d7097;
+  /* Informative colors */
+  --success: #77B300;
+  --success-alt: #5e8d00;
+  --error: #CC0000;
+  --error-alt: #a60000;
+  --warning: #FF8800;
+  --warning-alt: #d97400;
+  --info: #9933CC;
+  --info-alt: #822bad;
 }
+
+:root[data-theme="darkly"] {
+  --background:#222;
+  /* Main colors */
+  --default: rgb(68, 68, 68);
+  --default-alt: rgb(49, 49, 49);
+  --primary: #375a7f;
+  --primary-alt: #2b4764;
+  --text: lightgray;
+  --text-alt: white;
+  /* Container */
+  --container-shadow: 0;
+}
+
+/*
+    This is the default theme.
+
+    Including/Importing this is unnessecary
+*/
+:root[data-theme="lux"] {
+  --background:#fff;
+  /* Main colors */
+  --default: white;
+  --default-alt: #ececec;
+  --primary: #343a40;
+  --primary-alt: #23272b;
+  --text: #919aa1;
+  --text-alt: white;
+  --text-highlight: dodgerblue;
+  /* Link colors */
+  --link: #919aa1;
+  --link-alt: #000000;
+  /* Informative colors */
+  --success: #4BBF73;
+  --success-alt: #3ca861;
+  --error: #d9534f;
+  --error-alt: #d23430;
+  --warning: #f0ad4e;
+  --warning-alt: #ed9d2b;
+  --info: #1F9BCF;
+  --info-alt: #1a82ae;
+  --container-radius: 2px;
+}
+
+:root[data-theme="orica-darkly"] {
+  --background:#222;
+  /* Main colors */
+  --default: rgb(68, 68, 68);
+  --default-alt: rgb(49, 49, 49);
+  --primary: #0193CF;
+  /*Oricablue: #0193CF*/
+  --primary-alt: rgb(0, 115, 160);
+  --text: lightgray;
+  --text-alt: white;
+  /* Container */
+  --container-shadow: 0;
+}
+
+:root[data-theme="orica-flatly"] {
+  --background:#e7ecf2;
+  --primary: #0193CF;
+  /*Oricablue: #0193CF*/
+  --primary-alt: rgb(0, 115, 160);
+  --default: white;
+  --default-alt: #EEE;
+}
+
+:root[data-theme="pulse"] {
+  --background:#fff;
+  /* Main colors */
+  --default: white;
+  --default-alt: #EDEDED;
+  --primary: #593196;
+  --primary-alt: #482879;
+  --text: #444;
+  --text-alt: white;
+  --text-highlight: dodgerblue;
+  /* Link colors */
+  --link: #919aa1;
+  --link-alt: #000000;
+  /* Informative colors */
+  --success: #13B955;
+  --success-alt: #0f9645;
+  --error: #FC3939;
+  --error-alt: #fb1313;
+  --warning: #EFA31D;
+  --warning-alt: #d78e0f;
+  --info: #009CDC;
+  --info-alt: #0081b6;
+}
+
+:root[data-theme="superhero"] {
+  --background:#2B3E50;
+  /* Main colors */
+  --default: #4E5D6C;
+  --default-alt: #3e4a56;
+  --primary: #DF691A;
+  --primary-alt: #bd5916;
+  --text: #EBEBEB;
+  --text-alt: white;
+  --text-highlight: dodgerblue;
+  /* Link colors */
+  --link: #DF691A;
+  --link-alt: #9a4912;
+  /* Informative colors */
+  --success: #5cb85c;
+  --success-alt: #48a648;
+  --error: #d9534f;
+  --error-alt: #d23430;
+  --warning: #f0ad4e;
+  --warning-alt: #ed9d2b;
+  --info: #5bc0de;
+  --info-alt: #3bb4d8;
+}
+
+:root {
+  --background:#fff;
+  --font: Verdana, Arial, sans-serif;
+  --font-code: "Lucida Console", Monaco, monospace;
+  --font-size: 12pt;
+  /* Main colors */
+  --text: grey;
+  --text-alt: white;
+  --text-highlight: rgba(255, 145, 0, 0.3);
+  /* Link colors */
+  --link: #00bc8c;
+  --link-alt: #007053;
+  /* Informative colors (Default is flatly) */
+  --default: #f3f3f3;
+  --default-alt: #d6d6d6;
+  --primary: #2C3E50;
+  --primary-alt: #1e2b37;
+  --success: #00bc8c;
+  --success-alt: #009670;
+  --error: #E74C3C;
+  --error-alt: #e12e1c;
+  --warning: #F39C12;
+  --warning-alt: #d4860b;
+  --info: #3498DB;
+  --info-alt: #2384c6;
+  /* Containers */
+  --container-padding: 1em;
+  --container-shadow: 1px 1px 3px 1px rgba(0 , 0, 0, 0.1);
+  --container-radius: 5px;
+  /* Defaults for standardization */
+  --default-transition-time: 0.25s;
+  --default-icon-size: 1em;
+  /* Common style */
+  --disabled-opacity: 0.65;
+  /* Input */
+  --input-default-width: 150px;
+  --input-range-thumb-border: 2px solid var(--default);
+  --input-range-thumb-radius: 50%;
+  --input-range-thumb-width: 1.4em;
+  --input-range-thumb-heigth: 1.4em;
+  --input-range-track-height: 3px;
+  --input-check-size: 0.6;
+  --input-check-border-width: 2px;
+  --input-check-radius: 4px;
+  /* Buttons */
+  --button-padding: 7px;
+  --button-radius: 50px;
+  /* Only applies to round buttons */
+  --button-border: 1px solid;
+  /* Color applied per type        */
+  --button-icon-size: 1.5ch;
+  --button-icon-margin: 1ch;
+  /* Loading */
+  --loading-animation-time: 1.2s;
+  --loading-color: var(--info);
+}
+/*# sourceMappingURL=settings.css.map */

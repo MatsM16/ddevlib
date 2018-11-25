@@ -1,0 +1,116 @@
+/* --- Checkbox ---*/
+/* --- Base --- */
+input[type="radio"],
+input[type="checkbox"] {
+  margin: 0;
+  padding: 0;
+  width: var(--default-icon-size);
+  height: var(--default-icon-size);
+  position: relative;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  /* --- Background --- */
+  /* --- Checkmark --- */
+  /* --- Color variants --- */
+}
+
+input[type="radio"]::before,
+input[type="checkbox"]::before {
+  content: "";
+  display: block;
+  border: var(--input-check-border-width) solid;
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+input[type="radio"]::after,
+input[type="checkbox"]::after {
+  content: "";
+  display: block;
+  width: calc(100% * var(--input-check-size));
+  height: calc(100% * var(--input-check-size));
+  opacity: 0;
+  -webkit-transition: opacity var(--default-transition-time);
+  transition: opacity var(--default-transition-time);
+  position: absolute;
+}
+
+input[type="radio"]:checked::after,
+input[type="checkbox"]:checked::after {
+  opacity: 1;
+}
+
+input[type="radio"]::before,
+input[type="checkbox"]::before {
+  border-color: var(--primary);
+}
+
+input[type="radio"]::after,
+input[type="checkbox"]::after {
+  background-color: var(--primary);
+}
+
+input[type="radio"].info::before,
+input[type="checkbox"].info::before {
+  border-color: var(--info);
+}
+
+input[type="radio"].info::after,
+input[type="checkbox"].info::after {
+  background-color: var(--info);
+}
+
+input[type="radio"].success::before,
+input[type="checkbox"].success::before {
+  border-color: var(--success);
+}
+
+input[type="radio"].success::after,
+input[type="checkbox"].success::after {
+  background-color: var(--success);
+}
+
+input[type="radio"].warning::before,
+input[type="checkbox"].warning::before {
+  border-color: var(--warning);
+}
+
+input[type="radio"].warning::after,
+input[type="checkbox"].warning::after {
+  background-color: var(--warning);
+}
+
+input[type="radio"].error::before,
+input[type="checkbox"].error::before {
+  border-color: var(--error);
+}
+
+input[type="radio"].error::after,
+input[type="checkbox"].error::after {
+  background-color: var(--error);
+}
+
+input[type="checkbox"]::before {
+  border-radius: var(--input-check-radius);
+}
+
+input[type="checkbox"]::after {
+  border-radius: calc(var(--input-check-radius) * 0.5);
+}
+
+input[type="radio"]::before, input[type="radio"]::after {
+  border-radius: 50%;
+}
+/*# sourceMappingURL=check.css.map */
