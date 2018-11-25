@@ -13,12 +13,6 @@
     ],
     "liveSassCompile.settings.excludeList": [
         "**/node_modules/**",
-        ".vscode/**",
-
-        "ddevlib/scss/packages/buttons/**",
-        "ddevlib/scss/packages/input/**",
-        "ddevlib/scss/packages/links/**",
-        "ddevlib/scss/packages/text/**",
-        "ddevlib/scss/themes/**"
+        ".vscode/**"
     ]
 }

@@ -1,12 +1,12 @@
-@import './input/common.scss';
-@import './input/text.scss';
-@import './input/bigtext.scss';
-@import './input/range.scss';
-@import './input/check.scss';
-@import './input/file.scss';
-@import './input/select.scss';
-@import './input/time.scss';
-@import './input/bigtext.scss';
+@import './input/_common.scss';
+@import './input/_text.scss';
+@import './input/_bigtext.scss';
+@import './input/_range.scss';
+@import './input/_check.scss';
+@import './input/_file.scss';
+@import './input/_select.scss';
+@import './input/_time.scss';
+@import './input/_bigtext.scss';
 
 select:focus,
 input:focus,
