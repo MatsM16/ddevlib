@@ -54,13 +54,12 @@ a:not(.btn) {
   cursor: pointer;
 }
 
-a:not(.btn):hover:not(.disabled):not(:disabled) {
-  color: var(--link-alt, var(--link));
-}
-
-a:not(.btn).disabled,
-a:not(.btn):disabled {
+a:not(.btn).disabled, a:not(.btn):disabled {
   opacity: var(--disabled-opacity);
   cursor: default;
+}
+
+a:not(.btn):not(.disabled):not(:disabled):hover {
+  color: var(--link-alt, var(--link));
 }
 /*# sourceMappingURL=links.css.map */

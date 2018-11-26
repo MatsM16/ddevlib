@@ -5,14 +5,14 @@ a:not(.btn) {
     text-decoration: none;
     transition: color var(--default-transition-time);
     cursor: pointer;
-}
 
-a:not(.btn):hover:not(.disabled):not(:disabled) {
-    color: var(--link-alt, var(--link));
-}
+    &.disabled,
+    &:disabled {
+        opacity: var(--disabled-opacity);
+        cursor: default;
+    }
 
-a:not(.btn).disabled,
-a:not(.btn):disabled {
-    opacity: var(--disabled-opacity);
-    cursor: default;
+    &:not(.disabled):not(:disabled):hover {
+        color: var(--link-alt, var(--link));
+    }
 }
