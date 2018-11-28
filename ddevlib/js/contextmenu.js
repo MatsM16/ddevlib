@@ -301,4 +301,4 @@ export var ContextMenuTheme;
     }
     ContextMenuTheme.setTheme = setTheme;
 })(ContextMenuTheme || (ContextMenuTheme = {}));
-//# sourceMappingURL=contextmenu.js.map
+//# sourceMappingURL=ContextMenu.js.map
