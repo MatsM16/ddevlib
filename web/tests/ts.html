@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Test Page</title>
+        
+        <style>
+
+            body {
+                padding: 0;
+                margin: 0;
+
+                width: 100vw;
+                height: 100vh;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                font-family: 'Courier New', Courier, monospace;
+            }
+
+            .token.tag,
+            .token.object
+            {
+                color: red;
+            }
+
+            .token.string
+            {
+                color: orange;
+            }
+
+            .token.property
+            {
+                color: green;
+            }
+
+            .token.keyword
+            {
+                color: blue;
+            }
+        </style>
+    </head>
+    <body>
+        <script type="module">
+            import { MarkupCompiler } from "/ddevlib/js/MarkupCompiler.js";
+        </script>
+    </body>
+</html>
