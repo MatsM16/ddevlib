@@ -1,77 +1,73 @@
-export namespace MarkupCompiler
+
+export class MarkupCompiler
 {
-    export class Job
+    symbols: MarkupCompiling.Symbol[];
+
+    constructor ()
     {
-        symbols: Symbol[];
-        source?: string;
-
-        constructor (source?: string)
-        {
-            this.symbols = [];
-            this.source = source;
-        }
-
-        buildSymbols(): Helpers.SymbolCollectionBuilder
-        {
-            return new Helpers.SymbolCollectionBuilder(this);
-        }
-
-        run(source?: string)
-        {
-            if (source === undefined)
-                source = this.source;
-
-            if (source === undefined)
-                throw new Error("No source provided");
-
-            let tokens;
-            tokens = Helpers.findAllSymbols(this.symbols, source);
-            tokens = Helpers.removeOverlappingTokens(tokens);
-            tokens = Helpers.sortTokens(tokens);
-            
-            tokens.push(...Helpers.findTextAsTokens("text", tokens, source));
-            
-            tokens = Helpers.sortTokens(tokens);
-
-            return Helpers.markup(tokens)
-        }
-
-        async runAsync(source?: string)
-        {
-            const ref = this;
-            return new Promise<string>((resolve, reject) => {
-                try {
-                    const markup = ref.run(source);
-                    resolve(markup);
-                } catch (error) {
-                    reject(error);
-                }
-            });
-        }
+        this.symbols = [];
     }
 
-    export function compile (lang: "XML" | "JS", source: string)
+    buildSymbols(): MarkupCompiling.SymbolBuilder
     {
-        const job = new Job(source);
+        return new MarkupCompiling.SymbolBuilder(this);
+    }
+
+    compile(source: string)
+    {
+        if (source === undefined || source === null)
+            throw new Error("No source provided");
+
+        let tokens;
+        tokens = MarkupCompiling.Helpers.findAllSymbols(this.symbols, source);
+        tokens = MarkupCompiling.Helpers.removeOverlappingTokens(tokens);
+        tokens = MarkupCompiling.Helpers.sortTokens(tokens);
+        
+        tokens.push(...MarkupCompiling.Helpers.findTextAsTokens("text", tokens, source));
+        
+        tokens = MarkupCompiling.Helpers.sortTokens(tokens);
+
+        return MarkupCompiling.Helpers.markup(tokens)
+    }
+
+    async compileAsync(source: string)
+    {
+        const ref = this;
+        return new Promise<string>((resolve, reject) => {
+            try {
+                const markup = ref.compile(source);
+                resolve(markup);
+            } catch (error) {
+                reject(error);
+            }
+        });
+    }
+
+    static compiler(lang: CompilerLanguage)
+    {
+        const compiler = new MarkupCompiler();
 
         if (lang === "XML")
         {
-            job.buildSymbols()
+            compiler.buildSymbols()
                 .symbol("tag open", /(?<=\<)\w.*?(?=(\>|\s.*?\>))/g)
                 .symbol("tag close", /(?<=\<\/)\w.*?(?=>)/g)
-                .symbol("property", /(?<=\s)\w.*?(?==)/g)
-                .symbol("string", /(?<==).*?"(?=(\>|\s))/g);
+                .symbol("property", /(?<=\s)\w(\w|\d|-|_)*?(?==)/g)
+                .symbol("string", /(?<==)".*?"(?=(\>|\s))/g);
         }
 
         if (lang == "JS")
         {
-            job.buildSymbols()
+            compiler.buildSymbols()
                 .word("boolean", "true")
                 .word("boolean", "false")
+                .word("null", "null")
+                .word("null", "undefined")
 
                 .key("in")
                 .key("of")
                 .key("do")
+                .key("if")
                 .key("let")
                 .key("var")
                 .key("for")
@@ -84,11 +80,16 @@ export namespace MarkupCompiler
                 .key("await")
                 .key("async")
                 .key("while")
+                .key("super")
                 .key("return")
                 .key("static")
                 .key("export")
                 .key("import")
+                .key("typeof")
+                .key("extends")
+                .key("includes")
                 .key("function")
+                .key("instanceof")
                 .key("constructor")
 
                 .symbol("function", /(?<=\W)\w[^\W(]*?\s*?(?=\()/g)
@@ -99,9 +100,29 @@ export namespace MarkupCompiler
                 .symbol("string", /'.*?[^(\\')]'/g);
         }
 
-        return job.run();
+        if (lang === "TEXT")
+        {
+
+        }
+
+        return compiler;
     }
 
+    static compile(lang: CompilerLanguage, source: string)
+    {
+        return MarkupCompiler.compiler(lang).compile(source);
+    }
+
+    static compileAsync(lang: CompilerLanguage, source: string)
+    {
+        return MarkupCompiler.compiler(lang).compileAsync(source);
+    }
+}
+
+export type CompilerLanguage = "XML" | "JS" | "TEXT" | "CS" | "C++" | "TS" | "CSS" | "HTML"
+
+export namespace MarkupCompiling
+{
     export interface Token
     {
         index: number,
@@ -116,47 +137,55 @@ export namespace MarkupCompiler
         importance: number,
     }
 
-    export namespace Helpers
+    export class SymbolBuilder
     {
-        export class SymbolCollectionBuilder
-        {
-            job: Job;
-    
-            constructor(job: Job)
-            {
-                this.job = job;
-            }
-    
-            public symbol(name: string, pattern: RegExp): SymbolCollectionBuilder
-            {
-                this.job.symbols.push({
-                    name: name,
-                    pattern: pattern,
-                    importance: this.job.symbols.length
-                });
-    
-                return this;
-            }
-    
-            public word(name: string, value: string): SymbolCollectionBuilder
-            {
-                const wordStart = /((?<=^)|(?<=\W))/g;
-                const wordEnd = /(?=(\W|$))/g;
-    
-                const pattern = new RegExp(wordStart.source + value + wordEnd.source, "g");
-                
-                return this.symbol(name, pattern);
-            }
+        compiler: MarkupCompiler;
 
-            public key (value: string): SymbolCollectionBuilder
-            {
-                return this.word("keyword", value);
-            }
+        constructor(job: MarkupCompiler)
+        {
+            this.compiler = job;
         }
 
+        public symbol(name: string, pattern: RegExp): SymbolBuilder
+        {
+            this.compiler.symbols.push({
+                name: name,
+                pattern: pattern,
+                importance: this.compiler.symbols.length
+            });
+
+            return this;
+        }
+
+        public word(name: string, value: string): SymbolBuilder
+        {
+            const wordStart = /((?<=^)|(?<=\W))/g;
+            const wordEnd = /(?=(\W|$))/g;
+
+            const pattern = new RegExp(wordStart.source + value + wordEnd.source, "g");
+            
+            return this.symbol(name, pattern);
+        }
+
+        public key (value: string | RegExp): SymbolBuilder
+        {
+            if (typeof value === "string")
+                return this.word("keyword", value);
+            else
+                return this.symbol("keyword", value);
+        }
+    }
+
+    export namespace Helpers
+    {
         export function escape (value: string)
         {
-            return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\s/, "&nbsp;");
+            return value
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/\n/g, "<br>")
+            .replace(/\s/g, "&nbsp;");
         }
 
         export function findSymbol (symbol: Symbol, source: string): Token[]
@@ -178,7 +207,7 @@ export namespace MarkupCompiler
                 
                 tokens.push({
                     index: match.index,
-                    value: escape(match[0]),
+                    value: (match[0]),
                     symbol: symbol
                 });
             }
@@ -278,7 +307,7 @@ export namespace MarkupCompiler
                 importance: 999999
             }
 
-            const addToken = (value: string) => leftovers.push({ index: lastEnd, value: escape(value), symbol: symbol });
+            const addToken = (value: string) => leftovers.push({ index: lastEnd, value: (value), symbol: symbol });
 
             const leftovers: Token[] = [];
             while(tokenExists())
@@ -293,7 +322,7 @@ export namespace MarkupCompiler
 
         export function tokenMarkup(token: Token)
         {
-            return `<span class="token ${token.symbol.name}">${token.value}</span>`;
+            return `<span class="token ${token.symbol.name}">${escape(token.value)}</span>`;
         }
 
         export function markup(sortedTokens: Token[])
@@ -305,5 +334,3 @@ export namespace MarkupCompiler
         }
     }
 }
-
-document.body.innerHTML = (MarkupCompiler.compile("JS", 'constructor(job) { this.job = job }'));

@@ -1,56 +1,52 @@
-export var MarkupCompiler;
-(function (MarkupCompiler) {
-    class Job {
-        constructor(source) {
-            this.symbols = [];
-            this.source = source;
-        }
-        buildSymbols() {
-            return new Helpers.SymbolCollectionBuilder(this);
-        }
-        run(source) {
-            if (source === undefined)
-                source = this.source;
-            if (source === undefined)
-                throw new Error("No source provided");
-            let tokens;
-            tokens = Helpers.findAllSymbols(this.symbols, source);
-            tokens = Helpers.removeOverlappingTokens(tokens);
-            tokens = Helpers.sortTokens(tokens);
-            tokens.push(...Helpers.findTextAsTokens("text", tokens, source));
-            tokens = Helpers.sortTokens(tokens);
-            return Helpers.markup(tokens);
-        }
-        async runAsync(source) {
-            const ref = this;
-            return new Promise((resolve, reject) => {
-                try {
-                    const markup = ref.run(source);
-                    resolve(markup);
-                }
-                catch (error) {
-                    reject(error);
-                }
-            });
-        }
+export class MarkupCompiler {
+    constructor() {
+        this.symbols = [];
     }
-    MarkupCompiler.Job = Job;
-    function compile(lang, source) {
-        const job = new Job(source);
+    buildSymbols() {
+        return new MarkupCompiling.SymbolBuilder(this);
+    }
+    compile(source) {
+        if (source === undefined || source === null)
+            throw new Error("No source provided");
+        let tokens;
+        tokens = MarkupCompiling.Helpers.findAllSymbols(this.symbols, source);
+        tokens = MarkupCompiling.Helpers.removeOverlappingTokens(tokens);
+        tokens = MarkupCompiling.Helpers.sortTokens(tokens);
+        tokens.push(...MarkupCompiling.Helpers.findTextAsTokens("text", tokens, source));
+        tokens = MarkupCompiling.Helpers.sortTokens(tokens);
+        return MarkupCompiling.Helpers.markup(tokens);
+    }
+    async compileAsync(source) {
+        const ref = this;
+        return new Promise((resolve, reject) => {
+            try {
+                const markup = ref.compile(source);
+                resolve(markup);
+            }
+            catch (error) {
+                reject(error);
+            }
+        });
+    }
+    static compiler(lang) {
+        const compiler = new MarkupCompiler();
         if (lang === "XML") {
-            job.buildSymbols()
+            compiler.buildSymbols()
                 .symbol("tag open", /(?<=\<)\w.*?(?=(\>|\s.*?\>))/g)
                 .symbol("tag close", /(?<=\<\/)\w.*?(?=>)/g)
-                .symbol("property", /(?<=\s)\w.*?(?==)/g)
-                .symbol("string", /(?<==).*?"(?=(\>|\s))/g);
+                .symbol("property", /(?<=\s)\w(\w|\d|-|_)*?(?==)/g)
+                .symbol("string", /(?<==)".*?"(?=(\>|\s))/g);
         }
         if (lang == "JS") {
-            job.buildSymbols()
+            compiler.buildSymbols()
                 .word("boolean", "true")
                 .word("boolean", "false")
+                .word("null", "null")
+                .word("null", "undefined")
                 .key("in")
                 .key("of")
                 .key("do")
+                .key("if")
                 .key("let")
                 .key("var")
                 .key("for")
@@ -63,11 +59,16 @@ export var MarkupCompiler;
                 .key("await")
                 .key("async")
                 .key("while")
+                .key("super")
                 .key("return")
                 .key("static")
                 .key("export")
                 .key("import")
+                .key("typeof")
+                .key("extends")
+                .key("includes")
                 .key("function")
+                .key("instanceof")
                 .key("constructor")
                 .symbol("function", /(?<=\W)\w[^\W(]*?\s*?(?=\()/g)
                 .symbol("property", /(?<=\.)\w[^\W(]*?(?!\()(?=\W)/g)
@@ -76,36 +77,54 @@ export var MarkupCompiler;
                 .symbol("string", /".*?[^(\\")]"/g)
                 .symbol("string", /'.*?[^(\\')]'/g);
         }
-        return job.run();
+        if (lang === "TEXT") {
+        }
+        return compiler;
     }
-    MarkupCompiler.compile = compile;
+    static compile(lang, source) {
+        return MarkupCompiler.compiler(lang).compile(source);
+    }
+    static compileAsync(lang, source) {
+        return MarkupCompiler.compiler(lang).compileAsync(source);
+    }
+}
+export var MarkupCompiling;
+(function (MarkupCompiling) {
+    class SymbolBuilder {
+        constructor(job) {
+            this.compiler = job;
+        }
+        symbol(name, pattern) {
+            this.compiler.symbols.push({
+                name: name,
+                pattern: pattern,
+                importance: this.compiler.symbols.length
+            });
+            return this;
+        }
+        word(name, value) {
+            const wordStart = /((?<=^)|(?<=\W))/g;
+            const wordEnd = /(?=(\W|$))/g;
+            const pattern = new RegExp(wordStart.source + value + wordEnd.source, "g");
+            return this.symbol(name, pattern);
+        }
+        key(value) {
+            if (typeof value === "string")
+                return this.word("keyword", value);
+            else
+                return this.symbol("keyword", value);
+        }
+    }
+    MarkupCompiling.SymbolBuilder = SymbolBuilder;
     let Helpers;
     (function (Helpers) {
-        class SymbolCollectionBuilder {
-            constructor(job) {
-                this.job = job;
-            }
-            symbol(name, pattern) {
-                this.job.symbols.push({
-                    name: name,
-                    pattern: pattern,
-                    importance: this.job.symbols.length
-                });
-                return this;
-            }
-            word(name, value) {
-                const wordStart = /((?<=^)|(?<=\W))/g;
-                const wordEnd = /(?=(\W|$))/g;
-                const pattern = new RegExp(wordStart.source + value + wordEnd.source, "g");
-                return this.symbol(name, pattern);
-            }
-            key(value) {
-                return this.word("keyword", value);
-            }
-        }
-        Helpers.SymbolCollectionBuilder = SymbolCollectionBuilder;
         function escape(value) {
-            return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\s/, "&nbsp;");
+            return value
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/\n/g, "<br>")
+                .replace(/\s/g, "&nbsp;");
         }
         Helpers.escape = escape;
         function findSymbol(symbol, source) {
@@ -121,7 +140,7 @@ export var MarkupCompiler;
                     lastIndex = pattern.lastIndex;
                 tokens.push({
                     index: match.index,
-                    value: escape(match[0]),
+                    value: (match[0]),
                     symbol: symbol
                 });
             }
@@ -193,7 +212,7 @@ export var MarkupCompiler;
                 pattern: /THIS_IS_NOT_A_USED_PATTERN/g,
                 importance: 999999
             };
-            const addToken = (value) => leftovers.push({ index: lastEnd, value: escape(value), symbol: symbol });
+            const addToken = (value) => leftovers.push({ index: lastEnd, value: (value), symbol: symbol });
             const leftovers = [];
             while (tokenExists()) {
                 addToken(textBeforeToken());
@@ -204,7 +223,7 @@ export var MarkupCompiler;
         }
         Helpers.findTextAsTokens = findTextAsTokens;
         function tokenMarkup(token) {
-            return `<span class="token ${token.symbol.name}">${token.value}</span>`;
+            return `<span class="token ${token.symbol.name}">${escape(token.value)}</span>`;
         }
         Helpers.tokenMarkup = tokenMarkup;
         function markup(sortedTokens) {
@@ -214,7 +233,6 @@ export var MarkupCompiler;
             return html;
         }
         Helpers.markup = markup;
-    })(Helpers = MarkupCompiler.Helpers || (MarkupCompiler.Helpers = {}));
-})(MarkupCompiler || (MarkupCompiler = {}));
-document.body.innerHTML = (MarkupCompiler.compile("JS", 'constructor(job) { this.job = job }'));
+    })(Helpers = MarkupCompiling.Helpers || (MarkupCompiling.Helpers = {}));
+})(MarkupCompiling || (MarkupCompiling = {}));
 //# sourceMappingURL=MarkupCompiler.js.map

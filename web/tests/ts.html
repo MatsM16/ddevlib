@@ -21,6 +21,52 @@
                 font-family: 'Courier New', Courier, monospace;
             }
 
+            dd-editor
+            {
+                display: block;
+                width: 500px;
+                height: 500px;
+
+                padding: 2em;
+                border: 1px solid gray;
+
+                position: relative;
+
+                overflow: auto;
+            }
+            dd-editor::-webkit-scrollbar {
+                width: 5px;
+                height: 5px;
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+            dd-editor::-webkit-scrollbar-thumb {
+                background-color: rgba(255, 255, 255, 0.5)
+            }
+            dd-editor .output,
+            dd-editor .input{
+                display: block;
+                position: absolute;
+                
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+
+                padding: inherit;
+
+                outline: none;
+
+                overflow: visible; 
+                text-overflow: clip;
+                white-space: nowrap;
+            }
+
+            dd-editor .input 
+            {
+                caret-color: black;
+                color: transparent;
+            }
+
             .token.tag,
             .token.object
             {
@@ -41,11 +87,16 @@
             {
                 color: blue;
             }
+            .token.function
+            {
+                color: lime;
+            }
         </style>
     </head>
     <body>
+        <dd-editor lang="js"></dd-editor>
         <script type="module">
-            import { MarkupCompiler } from "/ddevlib/js/MarkupCompiler.js";
+            import { Editor } from "/ddevlib/js/dd/editor.js";
         </script>
     </body>
 </html>
