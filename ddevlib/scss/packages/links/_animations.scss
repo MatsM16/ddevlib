@@ -1,5 +1,76 @@
 
 /* --- Underline --- */
+a:not(.btn).animate
+{
+    &.underline
+    {
+        &.left  { align-items: flex-start; }
+        &.right { align-items: flex-end;   }
+
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        overflow: hidden;
+
+        &::after
+        {
+            content: "";
+    
+            position: relative;
+            display: block;
+            height: 1px;
+        
+            width: 0%;
+            background-color: var(--link);
+        
+            transition: width, background-color;
+            transition-duration: var(--default-transition-time);
+        }
+
+        &:hover::after
+        {
+            width: 100%;
+            background-color: var(--link-alt);
+        }
+    }
+
+    &.double
+    {
+        &.left  { align-items: flex-start; }
+        &.right { align-items: flex-end;   }
+        
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+
+        &::before,
+        &::after
+        {
+            position: absolute;
+            content: "";
+
+            width: 0;
+            height: 1px;
+
+            background: var(--link);
+
+            transition: width var(--default-transition-time);
+        }
+
+        &::before { top: 2px; }
+        &::after { bottom: 0; }
+
+        &:hover::before,
+        &:hover::after
+        {
+            width: 100%;
+        }
+    }
+}
+/*
 a:not(.btn).animate.underline.left 
 { align-items: flex-start; }
 
@@ -29,4 +100,4 @@ a:not(.btn).animate.underline::after {
 a:not(.btn).animate.underline:hover::after {
     width: 100%;
     background-color: var(--link-alt);
-}
+}*/

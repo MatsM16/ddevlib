@@ -1,16 +1,4 @@
 /* --- Underline --- */
-a:not(.btn).animate.underline.left {
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-}
-
-a:not(.btn).animate.underline.right {
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
-}
-
 a:not(.btn).animate.underline {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -26,6 +14,18 @@ a:not(.btn).animate.underline {
       -ms-flex-direction: column;
           flex-direction: column;
   overflow: hidden;
+}
+
+a:not(.btn).animate.underline.left {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+a:not(.btn).animate.underline.right {
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
 a:not(.btn).animate.underline::after {
@@ -46,6 +46,88 @@ a:not(.btn).animate.underline:hover::after {
   background-color: var(--link-alt);
 }
 
+a:not(.btn).animate.double {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+}
+
+a:not(.btn).animate.double.left {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+a:not(.btn).animate.double.right {
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+a:not(.btn).animate.double::before, a:not(.btn).animate.double::after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 1px;
+  background: var(--link);
+  -webkit-transition: width var(--default-transition-time);
+  transition: width var(--default-transition-time);
+}
+
+a:not(.btn).animate.double::before {
+  top: 2px;
+}
+
+a:not(.btn).animate.double::after {
+  bottom: 0;
+}
+
+a:not(.btn).animate.double:hover::before, a:not(.btn).animate.double:hover::after {
+  width: 100%;
+}
+
+/*
+a:not(.btn).animate.underline.left 
+{ align-items: flex-start; }
+
+a:not(.btn).animate.underline.right 
+{ align-items: flex-end; }
+
+a:not(.btn).animate.underline {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+a:not(.btn).animate.underline::after {
+    content: "";
+    
+    position: relative;
+    display: block;
+    height: 1px;
+
+    width: 0%;
+    background-color: var(--link);
+
+    transition: width, background-color;
+    transition-duration: var(--default-transition-time);
+}
+a:not(.btn).animate.underline:hover::after {
+    width: 100%;
+    background-color: var(--link-alt);
+}*/
 a:not(.btn) {
   color: var(--link);
   text-decoration: none;

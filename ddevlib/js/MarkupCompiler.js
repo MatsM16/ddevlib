@@ -32,13 +32,27 @@ export class MarkupCompiler {
         const compiler = new MarkupCompiler();
         if (lang === "XML") {
             compiler.buildSymbols()
-                .symbol("tag open", /(?<=\<)\w.*?(?=(\>|\s.*?\>))/g)
-                .symbol("tag close", /(?<=\<\/)\w.*?(?=>)/g)
-                .symbol("property", /(?<=\s)\w(\w|\d|-|_)*?(?==)/g)
-                .symbol("string", /(?<==)".*?"(?=(\>|\s))/g);
+                .symbol("comment", /<!--.*?-->/gs)
+                .symbol("doctype", /<!DOCTYPE\s.+?>/gi)
+                .symbol("tag open", /(?<=<)[-\w]+/g)
+                .symbol("tag close", /(?<=<\/)[-\w]+/g)
+                .symbol("string", /(?<==)"(.|\n)*?(?<!\\)"(?=[^<]*>)/g)
+                .symbol("string", /(?<==)'(.|\n)*?(?<!\\)'(?=[^<]*>)/g)
+                .symbol("property", /(?<=\s)[\w-]*(?=[^<]*>)/g)
+                .symbol("keyword", /&(#|\w)(\w|\d|_)*?;/g);
         }
         if (lang == "JS") {
             compiler.buildSymbols()
+                .symbol("comment", /\/\/.*?(?=\n|$)/g)
+                .symbol("comment", /\/\*.*?\*\//gs)
+                .symbol("string", /"(.|\n)*?(?<!\\)"/g)
+                .symbol("string", /'(.|\n)*?(?<!\\)'/g)
+                .symbol("string", /`(.|\n)*?(?<!\\)`/g)
+                .symbol("object", /(?<=(class|new)\s*?)[a-zA-Z_]\w*/g)
+                .symbol("object", /(?<!(\w|\.))[a-zA-Z_]+?(?<!this)(?=\s*?\.)/g)
+                .symbol("property", /(?<=\.)[a-zA-Z_][^\W(]*?(?!\()(?=\W)/g)
+                .symbol("number", /(?<=(\W|$))\d+\.?\d*([eE](\+|\-))?\d*(?=\W|$)/g)
+                .symbol("number", /(?<=\W|$)0x[a-fA-F0-9]+(?=\W|$)/g)
                 .word("boolean", "true")
                 .word("boolean", "false")
                 .word("null", "null")
@@ -54,6 +68,8 @@ export class MarkupCompiler {
                 .key("get")
                 .key("set")
                 .key("this")
+                .key("with")
+                .key("else")
                 .key("class")
                 .key("const")
                 .key("await")
@@ -70,14 +86,34 @@ export class MarkupCompiler {
                 .key("function")
                 .key("instanceof")
                 .key("constructor")
-                .symbol("function", /(?<=\W)\w[^\W(]*?\s*?(?=\()/g)
-                .symbol("property", /(?<=\.)\w[^\W(]*?(?!\()(?=\W)/g)
-                .symbol("object", /(?<=class\s).*?(?=\s)/g)
-                .symbol("object", /(?<!(\w|\.))\w*?(?<!this)(?=\s*?\.)/g)
-                .symbol("string", /".*?[^(\\")]"/g)
-                .symbol("string", /'.*?[^(\\')]'/g);
+                .symbol("function", /(?<=\W)[a-zA-Z_][^\W(]*?\s*?(?=\()/g);
+        }
+        if (lang === "JSON") {
+            compiler.buildSymbols()
+                .symbol("property", /(?<=[,{[]\s*?)"(.|\n)*?(?<!\\)"(?=\s*?:)/gs)
+                .symbol("string", /"(.|\n)*?(?<!\\)"/g)
+                .symbol("number", /(?<=(\W|$))\d+\.?\d*([eE](\+|\-))?\d*(?=\W|$)/g)
+                .word("boolean", "true")
+                .word("boolean", "false")
+                .word("null", "null");
         }
         if (lang === "TEXT") {
+            const composeColor = (token) => `<span class="token color" style="background-color: ${token.value};">${token.value}</span>`;
+            compiler.buildSymbols()
+                .symbol("color", /\#[a-fA-F0-9]{8}/g, composeColor)
+                .symbol("color", /\#[a-fA-F0-9]{6}/g, composeColor)
+                .symbol("color", /\#[a-fA-F0-9]{3}/g, composeColor);
+        }
+        if (lang === "CSS") {
+            compiler.buildSymbols()
+                .symbol("comment", /\/\*.*?\*\//gs)
+                .symbol("object id", /#[\w-]+(?=[^\};]*{)/gm)
+                .symbol("object class", /\.[\w-]+(?=[^\};]*{)/gm)
+                .symbol("object element", /(?<=[\s\n$])[\w-]+(?=[^\}]*{)/gm)
+                .symbol("keyword", /[\w-]+(?=\s*:\s*[^{]*})/gm)
+                .symbol("function", /(?<=\W)[a-zA-Z_][^\W(]*?\s*?(?=\()/g)
+                .symbol("number", /(?<=(\W|$))\d+\.?\d*\w*(?=\W|$)/g)
+                .symbol("string", /--[\w-]*(?=\s*[\),])/gm);
         }
         return compiler;
     }
@@ -94,16 +130,17 @@ export var MarkupCompiling;
         constructor(job) {
             this.compiler = job;
         }
-        symbol(name, pattern) {
+        symbol(name, pattern, composer) {
             this.compiler.symbols.push({
                 name: name,
                 pattern: pattern,
-                importance: this.compiler.symbols.length
+                importance: this.compiler.symbols.length,
+                compose: composer ? composer : MarkupCompiling.Composers.composeToken // custom or default composer
             });
             return this;
         }
         word(name, value) {
-            const wordStart = /((?<=^)|(?<=\W))/g;
+            const wordStart = /((?<=^)|(?<=\W)|(?<=\n))/gs;
             const wordEnd = /(?=(\W|$))/g;
             const pattern = new RegExp(wordStart.source + value + wordEnd.source, "g");
             return this.symbol(name, pattern);
@@ -116,6 +153,19 @@ export var MarkupCompiling;
         }
     }
     MarkupCompiling.SymbolBuilder = SymbolBuilder;
+    let Composers;
+    (function (Composers) {
+        function composeToken(token) {
+            return `<span class="token ${token.symbol.name}">${MarkupCompiling.Helpers.escape(token.value)}</span>`;
+        }
+        Composers.composeToken = composeToken;
+        Composers.textSymbol = {
+            name: "text",
+            pattern: /THIS_IS_NOT_A_USED_PATTERN/g,
+            importance: 999999,
+            compose: composeToken
+        };
+    })(Composers = MarkupCompiling.Composers || (MarkupCompiling.Composers = {}));
     let Helpers;
     (function (Helpers) {
         function escape(value) {
@@ -124,7 +174,8 @@ export var MarkupCompiling;
                 .replace(/</g, "&lt;")
                 .replace(/>/g, "&gt;")
                 .replace(/\n/g, "<br>")
-                .replace(/\s/g, "&nbsp;");
+                .replace(/\s/g, "&nbsp;")
+                .replace(/\t/g, "TAB");
         }
         Helpers.escape = escape;
         function findSymbol(symbol, source) {
@@ -207,12 +258,11 @@ export var MarkupCompiling;
                 tokenIndex++;
             };
             const tokenExists = () => tokenIndex >= 0 && tokenIndex < sortedTokens.length;
-            const symbol = {
-                name: name,
-                pattern: /THIS_IS_NOT_A_USED_PATTERN/g,
-                importance: 999999
-            };
-            const addToken = (value) => leftovers.push({ index: lastEnd, value: (value), symbol: symbol });
+            const addToken = (value) => leftovers.push({
+                index: lastEnd,
+                value: value,
+                symbol: MarkupCompiling.Composers.textSymbol
+            });
             const leftovers = [];
             while (tokenExists()) {
                 addToken(textBeforeToken());
@@ -222,14 +272,10 @@ export var MarkupCompiling;
             return leftovers;
         }
         Helpers.findTextAsTokens = findTextAsTokens;
-        function tokenMarkup(token) {
-            return `<span class="token ${token.symbol.name}">${escape(token.value)}</span>`;
-        }
-        Helpers.tokenMarkup = tokenMarkup;
         function markup(sortedTokens) {
             let html = "";
             for (const token of sortedTokens)
-                html += tokenMarkup(token);
+                html += token.symbol.compose(token);
             return html;
         }
         Helpers.markup = markup;

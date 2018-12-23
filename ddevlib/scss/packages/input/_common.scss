@@ -11,17 +11,21 @@ input[type="time"] {
     width: var(--input-default-width);
     font-family: var(--font);
 
-    border: 2px solid var(--primary);
-    border-left-width: 0;
-    border-right-width: 0;
-    border-top-width: 0;
+    border: 1px solid var(--primary);
 
     background-color: transparent;
     color: var(--text);
 
-    &.box {
-        border-width: 1px;
+    &.open {
+        border-width: 0;
+
+        border-bottom-width: 2px;
+
         border-radius: 0;
+    }
+
+    &.round {
+        border-radius: var(--button-radius);
     }
 }
 

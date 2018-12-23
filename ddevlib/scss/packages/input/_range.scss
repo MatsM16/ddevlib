@@ -26,7 +26,13 @@ input[type="range"] {
         margin-top: var(--thumb-offset);
         
         transform: translateY(calc(-50% + 2px));
+        transition: transform calc(var(--default-transition-time) * 0.5);
+
         box-shadow: none;
+    }
+
+    @mixin slider-thumb-hover {
+        transform: translateY(calc(-50% * 1.1 + 2px)) scale(1.1);
     }
 
     &::-webkit-slider-runnable-track
@@ -42,6 +48,17 @@ input[type="range"] {
     { @include slider-thumb; }
     &::-ms-thumb
     { @include slider-thumb; }
+
+    &:active,
+    &:hover
+    {
+        &::-webkit-slider-thumb
+        { @include slider-thumb-hover; }
+        &::-moz-range-thumb
+        { @include slider-thumb-hover; }
+        &::-ms-thumb
+        { @include slider-thumb-hover; }
+    }
 
     &.square {
         &::-webkit-slider-thumb

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html data-theme="">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Demos > TS > Live Canvas</title>
+        
+        <link rel="stylesheet" href="/ddevlib/css/settings.css">
+        <link rel="stylesheet" href="/ddevlib/css/main.css">
+
+        <style>
+
+            body {
+                padding: 0;
+                margin: 0;
+
+                width: 100vw;
+                height: 100vh;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            dd-livecanvas
+            {
+                width: 500px;
+                height: 500px;
+            }
+        </style>
+    </head>
+    <body>
+
+        <!-- START: Important stuff -->
+        <dd-livecanvas id="can"></dd-livecanvas>
+        <script type="module">
+            import { HTMLLiveCanvasElement } from "/ddevlib/js/dd/livecanvas.js";
+            
+            let [ox, oy] = [0, 50];
+            let [x, y] = [0, 50];
+            let [vx, vy] = [negRan(-1), negRan(-1)];
+            function drawBall (update)
+            {
+                const p = update.painter;
+                x += vx * update.deltaTime;
+                y += vy * update.deltaTime;
+                vy += Math.sin(update.time ** 2);
+                vx += Math.cos(update.time ** 2);
+                
+                p.line(ox, oy, x, y);
+
+                if (x < 0)
+                {
+                    x = 0;
+                    vx = negRan(vx);
+                }
+                if (x > p.width)
+                {
+                    x = p.width;
+                    vx = negRan(vx);
+                }
+
+                if (y < 0)
+                {
+                    y = 0;
+                    vy = negRan(vy);
+                }
+                if (y > p.height)
+                {
+                    y = p.height;
+                    vy = negRan(vy);
+                }
+
+                [ox, oy] = [x, y];
+            }
+
+            function negRan (old)
+            {
+                return (Math.random() * 400 + 500) * -Math.sign(old);
+            }
+
+            document.getElementById("can").onUpdate(drawBall);
+            document.getElementById("can").clearOnUpdate = false;
+
+        </script>
+        <!-- END: Important stuff-->
+
+        <script type="module" src="/web/js/css.js"></script>
+    </body>
+</html>

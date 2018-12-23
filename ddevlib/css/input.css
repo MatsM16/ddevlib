@@ -9,23 +9,31 @@ input[type="time"] {
   padding: 0.5em 1em;
   width: var(--input-default-width);
   font-family: var(--font);
-  border: 2px solid var(--primary);
-  border-left-width: 0;
-  border-right-width: 0;
-  border-top-width: 0;
+  border: 1px solid var(--primary);
   background-color: transparent;
   color: var(--text);
 }
 
-select.box,
-input[type="text"].box,
-input[type="password"].box,
-input[type="email"].box,
-input[type="number"].box,
-input[type="date"].box,
-input[type="time"].box {
-  border-width: 1px;
+select.open,
+input[type="text"].open,
+input[type="password"].open,
+input[type="email"].open,
+input[type="number"].open,
+input[type="date"].open,
+input[type="time"].open {
+  border-width: 0;
+  border-bottom-width: 2px;
   border-radius: 0;
+}
+
+select.round,
+input[type="text"].round,
+input[type="password"].round,
+input[type="email"].round,
+input[type="number"].round,
+input[type="date"].round,
+input[type="time"].round {
+  border-radius: var(--button-radius);
 }
 
 /* --- Color variants --- */
@@ -143,6 +151,10 @@ input[type="range"]::-webkit-slider-thumb {
   margin-top: var(--thumb-offset);
   -webkit-transform: translateY(calc(-50% + 2px));
           transform: translateY(calc(-50% + 2px));
+  -webkit-transition: -webkit-transform calc(var(--default-transition-time) * 0.5);
+  transition: -webkit-transform calc(var(--default-transition-time) * 0.5);
+  transition: transform calc(var(--default-transition-time) * 0.5);
+  transition: transform calc(var(--default-transition-time) * 0.5), -webkit-transform calc(var(--default-transition-time) * 0.5);
   -webkit-box-shadow: none;
           box-shadow: none;
 }
@@ -158,6 +170,10 @@ input[type="range"]::-moz-range-thumb {
   cursor: pointer;
   margin-top: var(--thumb-offset);
   transform: translateY(calc(-50% + 2px));
+  -webkit-transition: -webkit-transform calc(var(--default-transition-time) * 0.5);
+  transition: -webkit-transform calc(var(--default-transition-time) * 0.5);
+  transition: transform calc(var(--default-transition-time) * 0.5);
+  transition: transform calc(var(--default-transition-time) * 0.5), -webkit-transform calc(var(--default-transition-time) * 0.5);
   box-shadow: none;
 }
 
@@ -171,7 +187,24 @@ input[type="range"]::-ms-thumb {
   cursor: pointer;
   margin-top: var(--thumb-offset);
   transform: translateY(calc(-50% + 2px));
+  -webkit-transition: -webkit-transform calc(var(--default-transition-time) * 0.5);
+  transition: -webkit-transform calc(var(--default-transition-time) * 0.5);
+  transition: transform calc(var(--default-transition-time) * 0.5);
+  transition: transform calc(var(--default-transition-time) * 0.5), -webkit-transform calc(var(--default-transition-time) * 0.5);
   box-shadow: none;
+}
+
+input[type="range"]:active::-webkit-slider-thumb, input[type="range"]:hover::-webkit-slider-thumb {
+  -webkit-transform: translateY(calc(-50% * 1.1 + 2px)) scale(1.1);
+          transform: translateY(calc(-50% * 1.1 + 2px)) scale(1.1);
+}
+
+input[type="range"]:active::-moz-range-thumb, input[type="range"]:hover::-moz-range-thumb {
+  transform: translateY(calc(-50% * 1.1 + 2px)) scale(1.1);
+}
+
+input[type="range"]:active::-ms-thumb, input[type="range"]:hover::-ms-thumb {
+  transform: translateY(calc(-50% * 1.1 + 2px)) scale(1.1);
 }
 
 input[type="range"].square::-webkit-slider-thumb {
@@ -272,7 +305,7 @@ input[type="checkbox"] {
       -ms-flex-align: center;
           align-items: center;
   /* --- Background --- */
-  /* --- Checkmark --- */
+  /* --- Mark --- */
   /* --- Color variants --- */
 }
 
@@ -294,14 +327,20 @@ input[type="checkbox"]::after {
   width: calc(100% * var(--input-check-size));
   height: calc(100% * var(--input-check-size));
   opacity: 0;
-  -webkit-transition: opacity var(--default-transition-time);
-  transition: opacity var(--default-transition-time);
+  -webkit-transition: opacity var(--default-transition-time), -webkit-transform var(--default-transition-time);
+  transition: opacity var(--default-transition-time), -webkit-transform var(--default-transition-time);
+  transition: opacity var(--default-transition-time), transform var(--default-transition-time);
+  transition: opacity var(--default-transition-time), transform var(--default-transition-time), -webkit-transform var(--default-transition-time);
+  -webkit-transform: scale(0.5);
+          transform: scale(0.5);
   position: absolute;
 }
 
 input[type="radio"]:checked::after,
 input[type="checkbox"]:checked::after {
   opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }
 
 input[type="radio"]::before,

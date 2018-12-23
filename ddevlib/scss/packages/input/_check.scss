@@ -30,7 +30,7 @@ input[type="checkbox"] {
         position: absolute;
     }
 
-    /* --- Checkmark --- */
+    /* --- Mark --- */
 
     &::after {
         content: "";
@@ -40,13 +40,18 @@ input[type="checkbox"] {
         height: calc(100% * var(--input-check-size));
     
         opacity: 0;
-        transition: opacity var(--default-transition-time);
+        transition: 
+            opacity var(--default-transition-time),
+            transform var(--default-transition-time);
+
+        transform: scale(0.5);
     
         position: absolute;
     }
 
     &:checked::after {
         opacity: 1;
+        transform: scale(1);
     }
 
     /* --- Color variants --- */

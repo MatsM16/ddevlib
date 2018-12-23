@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html class="darkly">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Demos > TS > Cookies</title>
+
+        <link rel="stylesheet" type="text/css" href="/ddevlib/css/settings.css">
+        <link rel="stylesheet" type="text/css" href="/ddevlib/css/main.css">
+        <link rel="stylesheet" type="text/css" href="/ddevlib/css/buttons.css">
+        <link rel="stylesheet" type="text/css" href="/ddevlib/css/input.css">
+        
+        <style>
+
+            body {
+                padding: 0;
+                margin: 0;
+
+                width: 100vw;
+                height: 100vh;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+
+        </style>
+    </head>
+    <body>
+        
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        Cookie 1
+                    </td>
+                    <td>
+                        <input type="text" class="box" id="cookie1">
+                    </td>
+                    <td>
+                        <button class="round" onclick="getCookie('1')">GET</button>
+                    </td>
+                    <td>
+                        <button class="round" onclick="setCookie('1')">SET</button>
+                    </td>
+                    <td>
+                        <button class="round" onclick="clearCookie('1')">CLEAR</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Cookie 2
+                    </td>
+                    <td>
+                        <input type="text" class="box" id="cookie2">
+                    </td>
+                    <td>
+                        <button class="round" onclick="getCookie('2')">GET</button>
+                    </td>
+                    <td>
+                        <button class="round" onclick="setCookie('2')">SET</button>
+                    </td>
+                    <td>
+                        <button class="round" onclick="clearCookie('2')">CLEAR</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Cookie 3
+                    </td>
+                    <td>
+                        <input type="text" class="box" id="cookie3">
+                    </td>
+                    <td>
+                        <button class="round" onclick="getCookie('3')">GET</button>
+                    </td>
+                    <td>
+                        <button class="round" onclick="setCookie('3')">SET</button>
+                    </td>
+                    <td>
+                        <button class="round" onclick="clearCookie('3')">CLEAR</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- DEMO -->
+
+        <script type="module">
+            import { Cookies } from "/ddevlib/js/cookies.js";
+            
+            window.getCookie = function (id)
+            {
+                alert(`Cookie ${id} : ${Cookies.get(`Cookie ${id}`)}`);
+            }
+
+            window.setCookie = function (id)
+            {
+                const inp = document.getElementById("cookie" + id);
+                
+                Cookies.set(`Cookie ${id}`, inp.value);
+            }
+
+            window.clearCookie = function (id)
+            {
+                Cookies.remove(`Cookie ${id}`);
+            }
+
+        </script>
+
+        <!-- END OF DEMO -->
+
+        <script type="module" src="/web/js/css.js"></script>
+    </body>
+</html>
