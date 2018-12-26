@@ -12,7 +12,7 @@ a:not(.btn) {
         cursor: default;
     }
 
-    &:not(.disabled):not(:disabled):hover {
+    &:hover {
         color: var(--link-alt, var(--link));
     }
 }

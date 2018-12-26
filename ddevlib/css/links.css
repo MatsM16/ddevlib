@@ -141,7 +141,7 @@ a:not(.btn).disabled, a:not(.btn):disabled {
   cursor: default;
 }
 
-a:not(.btn):not(.disabled):not(:disabled):hover {
+a:not(.btn):hover {
   color: var(--link-alt, var(--link));
 }
 /*# sourceMappingURL=links.css.map */
