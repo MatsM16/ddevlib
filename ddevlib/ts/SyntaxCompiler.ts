@@ -39,10 +39,17 @@ export class SyntaxCompiler
         language = language.toUpperCase() as Syntax;
 
         const compiler = new SyntaxCompiler();
+        const builder = compiler.createSymbolBuilder();
+
+        if (language === "HTML")
+        {
+            builder
+                .symbol("comment", /<!--.*?-->/gs)
+        }
 
         if (language === "XML")
         {
-            compiler.createSymbolBuilder()
+            builder
                 .symbol("comment", /<!--.*?-->/gs)
                 .symbol("doctype", /<!DOCTYPE\s.+?>/gi)
                 .symbol("tag open", /(?<=<)[-\w]+/g)
@@ -55,7 +62,7 @@ export class SyntaxCompiler
 
         if (language == "JS")
         {
-            compiler.createSymbolBuilder()
+            builder
                 .symbol("comment", /\/\/.*?(?=\n|$)/g)
                 .symbol("comment", /\/\*.*?\*\//gs)
 
@@ -111,7 +118,7 @@ export class SyntaxCompiler
 
         if (language === "JSON")
         {
-            compiler.createSymbolBuilder()
+            builder
                 .symbol("property", /(?<=[,{[]\s*?)"(.|\n)*?(?<!\\)"(?=\s*?:)/gs)
                 .symbol("string", /"(.|\n)*?(?<!\\)"/g)
 
@@ -125,7 +132,7 @@ export class SyntaxCompiler
 
         if (language === "CSS")
         {
-            compiler.createSymbolBuilder()
+            builder
                 .symbol("comment", /\/\*.*?\*\//gs)
 
                 .symbol("object id", /#[\w-]+(?=[^\};]*{)/gm)
@@ -372,4 +379,4 @@ export interface Symbol
     compose: (token: Token) => string
 }
 
-export type Syntax = "XML" | "JSON" | "JS" | "CSS";
+export type Syntax = "XML" | "HTML" | "JSON" | "JS" | "CSS" | "TXT";
