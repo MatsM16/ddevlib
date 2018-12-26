@@ -23,11 +23,13 @@ export class SyntaxCompiler {
             }
         });
     }
-    static compiler(language) {
-        language = language.toUpperCase();
+    static compiler(syntax) {
+        syntax = syntax.toUpperCase();
         const compiler = new SyntaxCompiler();
-        if (language === "XML") {
-            compiler.createSymbolBuilder()
+        const builder = compiler.createSymbolBuilder();
+        if (syntax === "XML" || syntax === "HTML") {
+            builder
+                .symbol("comment", /<!--.*?-->/gs)
                 .symbol("comment", /<!--.*?-->/gs)
                 .symbol("doctype", /<!DOCTYPE\s.+?>/gi)
                 .symbol("tag open", /(?<=<)[-\w]+/g)
@@ -37,8 +39,8 @@ export class SyntaxCompiler {
                 .symbol("property", /(?<=\s)[\w-]*(?=[^<]*>)/g)
                 .symbol("keyword", /&(#|\w)(\w|\d|_)*?;/g);
         }
-        if (language == "JS") {
-            compiler.createSymbolBuilder()
+        if (syntax == "JS") {
+            builder
                 .symbol("comment", /\/\/.*?(?=\n|$)/g)
                 .symbol("comment", /\/\*.*?\*\//gs)
                 .symbol("string", /"(.|\n)*?(?<!\\)"/g)
@@ -85,8 +87,8 @@ export class SyntaxCompiler {
                 .symbol("function", /[a-zA-Z_][^\W(]*?\s*?(?=\()/g)
                 .symbol("function", /[a-zA-Z_][^\W(]*?(?=\W*=\s*[(\w])/gm);
         }
-        if (language === "JSON") {
-            compiler.createSymbolBuilder()
+        if (syntax === "JSON") {
+            builder
                 .symbol("property", /(?<=[,{[]\s*?)"(.|\n)*?(?<!\\)"(?=\s*?:)/gs)
                 .symbol("string", /"(.|\n)*?(?<!\\)"/g)
                 .symbol("number", /(?<=(\W|$))\d+\.?\d*([eE](\+|\-))?\d*(?=\W|$)/g)
@@ -94,8 +96,8 @@ export class SyntaxCompiler {
                 .word("boolean", "false")
                 .word("null", "null");
         }
-        if (language === "CSS") {
-            compiler.createSymbolBuilder()
+        if (syntax === "CSS") {
+            builder
                 .symbol("comment", /\/\*.*?\*\//gs)
                 .symbol("object id", /#[\w-]+(?=[^\};]*{)/gm)
                 .symbol("object class", /\.[\w-]+(?=[^\};]*{)/gm)

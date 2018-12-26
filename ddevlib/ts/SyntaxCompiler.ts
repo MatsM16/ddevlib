@@ -34,22 +34,17 @@ export class SyntaxCompiler
         });
     }
 
-    static compiler (language: Syntax)
+    static compiler (syntax: Syntax)
     {
-        language = language.toUpperCase() as Syntax;
+        syntax = syntax.toUpperCase() as Syntax;
 
         const compiler = new SyntaxCompiler();
         const builder = compiler.createSymbolBuilder();
 
-        if (language === "HTML")
+        if (syntax === "XML" || syntax === "HTML")
         {
             builder
                 .symbol("comment", /<!--.*?-->/gs)
-        }
-
-        if (language === "XML")
-        {
-            builder
                 .symbol("comment", /<!--.*?-->/gs)
                 .symbol("doctype", /<!DOCTYPE\s.+?>/gi)
                 .symbol("tag open", /(?<=<)[-\w]+/g)
@@ -60,7 +55,7 @@ export class SyntaxCompiler
                 .symbol("keyword", /&(#|\w)(\w|\d|_)*?;/g)
         }
 
-        if (language == "JS")
+        if (syntax == "JS")
         {
             builder
                 .symbol("comment", /\/\/.*?(?=\n|$)/g)
@@ -116,7 +111,7 @@ export class SyntaxCompiler
                 .symbol("function", /[a-zA-Z_][^\W(]*?(?=\W*=\s*[(\w])/gm)
         }
 
-        if (language === "JSON")
+        if (syntax === "JSON")
         {
             builder
                 .symbol("property", /(?<=[,{[]\s*?)"(.|\n)*?(?<!\\)"(?=\s*?:)/gs)
@@ -130,7 +125,7 @@ export class SyntaxCompiler
                 
         }
 
-        if (language === "CSS")
+        if (syntax === "CSS")
         {
             builder
                 .symbol("comment", /\/\*.*?\*\//gs)
