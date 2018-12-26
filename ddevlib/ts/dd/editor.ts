@@ -1,5 +1,7 @@
-import { SyntaxCompiler } from "../SyntaxCompiler.js";
+import { SyntaxCompiler, Syntax } from "../SyntaxCompiler.js";
 import { define } from "./CustomElements.js";
+import { Web } from "../Web.js";
+import { ContextMenu } from "../ContextMenu.js";
 
 export class HTMLCodeEditorElement extends HTMLElement
 {
@@ -10,7 +12,9 @@ export class HTMLCodeEditorElement extends HTMLElement
     {
         super();
         
-        const initialCode = this.innerText;
+        //
+        // Create and configure elements
+        //
         this.innerHTML = "";
 
         this.inputElement = document.createElement("div");
@@ -21,18 +25,28 @@ export class HTMLCodeEditorElement extends HTMLElement
         this.inputElement.classList.add("input");
         this.outputElement.classList.add("output");
 
+        //
+        // Add elements to document
+        //
         this.appendChild(this.outputElement);
         this.appendChild(this.inputElement);
 
-        this.inputElement.oninput = () => {
-            //@ts-ignore
-            const compiler = SyntaxCompiler.compiler(this.language);
-            const html = compiler(this.value);
-            this.setOutput(html);
+        //
+        // Setup events
+        //
+        this.inputElement.oninput = () => { this.compile(); }
+
+        this.onpaste = e =>
+        {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const data = e.clipboardData.getData("text");
+            this.insert(data);
         }
 
         this.inputElement.onkeydown = evt => {
-            if (evt.key === "Tab")
+            if (!this.readonly && evt.key === "Tab")
             {
                 evt.preventDefault();
 
@@ -40,7 +54,26 @@ export class HTMLCodeEditorElement extends HTMLElement
             }
         }
 
-        this.value = initialCode;
+        //
+        // Configure edior
+        //
+        this.readonly = this.hasAttribute("readonly");
+
+        if (this.src) this.setSource(this.src);
+
+        const ctx = new ContextMenu(this, [
+            {
+                text: "Download",
+                func: () => undefined,
+                border: true,
+                description: "Download the code to a local file"
+            },
+            {
+                text: "Copy",
+                func: () => this.copy(),
+                description: "Copy all the present code"
+            }
+        ]);
     }
 
     insert(text: string)
@@ -49,9 +82,41 @@ export class HTMLCodeEditorElement extends HTMLElement
         document.execCommand("insertText", false, text);
     }
 
-    setOutput (html: string)
+    compile()
     {
+        //@ts-ignore
+        const compiler = SyntaxCompiler.compiler(this.language);
+
+        const html = compiler(this.value);
+
         this.outputElement.innerHTML = html;
+    }
+
+    copy()
+    {
+        const copyElementContent = (element: HTMLElement) => 
+        {
+            this.inputElement.focus();
+
+            const toCopy = document.createRange();
+            toCopy.selectNodeContents(this.inputElement);
+    
+            const selection = window.getSelection();
+            
+            const old = [];
+            for (let i = 0; i < selection.rangeCount; i++)
+                old.push(selection.getRangeAt(i));
+
+            selection.removeAllRanges();
+            selection.addRange(toCopy);
+            document.execCommand("copy");
+
+            selection.removeRange(toCopy);
+            for (const range of old)
+                selection.addRange(range);
+        }
+
+        copyElementContent(this.inputElement);
     }
 
     get value ()
@@ -61,8 +126,25 @@ export class HTMLCodeEditorElement extends HTMLElement
     set value(code)
     {
         this.inputElement.innerText = code;
-        //@ts-ignore
-        this.inputElement.oninput();
+        this.compile();
+    }
+
+    get readonly ()
+    {
+        return this.hasAttribute("readonly");
+    }
+    set readonly (readonly: boolean)
+    {
+        if (readonly)
+        {
+            this.setAttribute("readonly", "");
+            this.inputElement.setAttribute("contenteditable", "false");
+        }
+        else
+        {
+            this.removeAttribute("readonly");
+            this.inputElement.setAttribute("contenteditable", "true");
+        }
     }
 
     get language ()
@@ -70,32 +152,58 @@ export class HTMLCodeEditorElement extends HTMLElement
         const lang = this.getAttribute("lang");
 
         if (lang === null || lang === undefined)
-            return "TEXT";
+            return "NO SYNTAX" as Syntax;
 
-        return lang.toUpperCase();
+        return lang.toUpperCase() as Syntax;
+    }
+    set language (lang: Syntax)
+    {
+        if (lang === null || lang === undefined)
+            lang = "" as Syntax;
+        
+        this.setAttribute("lang", lang.toUpperCase());
     }
 
-    get defaultStyle ()
+    get src ()
     {
-        return `
-dd-editor
-{
-    display: block;
-    width: 500px;
-    height: 500px;
-}
+        return this.getAttribute("src");
+    }
+    async setSource(src: string)
+    {
+        const message_loading = 
+        `<p class="message info">Loading resource...</p>`;
 
-dd-editor .output,
-dd-editor .input {
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-}
+        const message_failed = 
+        `<p class="message error">Failed to load resource!</p>`;
+        
+        this.outputElement.innerHTML = message_loading;
+        
 
-`
+
+        try
+        {
+            const data = await Web.get(src, "TEXT");
+
+            if (data === null || data === undefined)
+            {
+                this.outputElement.innerHTML = message_failed;
+                return;
+            }
+            
+            if (typeof data !== "string")
+            {
+                this.outputElement.innerHTML = message_failed;
+                return;
+            }
+
+            this.value = data;
+            this.setAttribute("src", src);
+                
+        }
+        catch
+        {
+            this.outputElement.innerHTML = message_failed;
+        }
     }
 }
 
@@ -113,7 +221,7 @@ dd-editor
 
     overflow: auto;
 
-    font-family: var(--font-code) !important;
+    font-family: var(--font-code, monospace) !important;
     
     white-space: pre;
 }
@@ -149,6 +257,29 @@ dd-editor .input
     caret-color: var(--text);
     color: transparent;
     background-color: transparent;
+
+    white-space: pre;
+    unicode-bidi: embed;
+}
+
+dd-editor .output .message
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+dd-editor .output .message.error {
+    background: var(--error);
+    color: var(--text-alt);
+}
+
+dd-editor .output .message.info {
+    background: var(--info);
+    color: var(--text-alt);
 }
 
 .token.object,

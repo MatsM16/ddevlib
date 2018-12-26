@@ -21,14 +21,21 @@
                 justify-content: center;
                 align-items: center;
             }
+
+            dd-editor
+            {
+                width: 50vw;
+                height: 80vh;
+                border: none;
+            }
         </style>
     </head>
     <body>
 
         <!-- START: Important stuff -->
-        <dd-editor lang="js" id="code"></dd-editor>
+        <dd-editor readonly lang="js" id="code" src="/web/js/css.js"></dd-editor>
         <script type="module"> import { HTMLCodeEditorElement } from "/ddevlib/js/dd/editor.js"; </script>
-        <!-- END: Important stuff-->
+        <!-- END: Important stuff -->
 
         <script type="module" src="/web/js/css.js"></script>
     </body>
