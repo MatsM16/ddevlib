@@ -18,7 +18,7 @@ export function define (proto: Function, name?: string, style?: string)
         {
             customElementStyleElement = document.createElement("style");
             customElementStyleElement.id = "dd-custom-element-style";
-            head.appendChild(customElementStyleElement);
+            head.insertAdjacentElement("afterbegin", customElementStyleElement);
         }
 
         customElementStyleElement.innerHTML += `

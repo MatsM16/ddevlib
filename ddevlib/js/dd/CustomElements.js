@@ -11,7 +11,7 @@ export function define(proto, name, style) {
         if (!customElementStyleElement) {
             customElementStyleElement = document.createElement("style");
             customElementStyleElement.id = "dd-custom-element-style";
-            head.appendChild(customElementStyleElement);
+            head.insertAdjacentElement("afterbegin", customElementStyleElement);
         }
         customElementStyleElement.innerHTML += `
 
