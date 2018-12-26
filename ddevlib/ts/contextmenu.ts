@@ -17,32 +17,32 @@ export class ContextMenu {
     /**
      * Menu items
      */
-    items: {
-        text: string, 
-        func: Function
-        disabled?: boolean;
-        border?: boolean;
-        description?: string;
-    }[];
+    items: ContextMenuItem[];
 
     /**
      * Creates an instance of ContextMenu.
      * @param {HTMLElement} element Element that can create this context menu
-     * @param {{ text: string, func: Function, disabled?: boolean, border?: boolean, description?: string }[]} [items] Menu items
+     * @param {ContextMenuItem[]} [items] Menu items
      * @param {string} [menuId] The ID for this menu, given to menu HTMLElement
      * @memberof ContextMenu
      */
-    constructor(element: HTMLElement, items?: { text: string, func: Function, disabled?: boolean, border?: boolean, description?: string }[], menuId?: string) {
+    constructor(element: HTMLElement, items?: ContextMenuItem[], menuId?: string) {
         this.element = element;
         this.menuElement = null;
         this.items = items ? items : [];
         this.menuId = menuId;
 
         //
-        // Setup
+        // Setup menu events
         //
         document.addEventListener("contextmenu", this._onOpenMenu.bind(this));
         document.addEventListener("click", this._onCloseMenu.bind(this));
+
+        //
+        // Bind element
+        //
+        //@ts-ignore
+        this.element[ContextMenu.ctxPropertyName] = this;
     }
 
     /**
@@ -62,7 +62,7 @@ export class ContextMenu {
         return -1;
     }
 
-    private _drawMenuItemElement(item: { text: string, func: Function, disabled?: boolean, border?: boolean, description?: string }) {
+    private _drawMenuItemElement(item: ContextMenuItem) {
         if (!this.menuElement) {
             return;
         }
@@ -145,22 +145,41 @@ export class ContextMenu {
     }
 
     private _canOpenThisMenu(element: Element | null):boolean {
+        /*
         const doesTreeContain = (root: Element, find: Element) => {
 
             if (root === this.element)
                 return true;
+
+            //
+            // Check if 
             
             for (const child of root.children)
                 if (doesTreeContain(child, find))
                     return true;
             
             return false;
+        }*/
+
+        const canOpenMenu = (el: Element | null, menu: ContextMenu) =>
+        {
+            if (el === null)
+                return false;
+
+            if (menu.element === el)
+                return true;
+
+            //@ts-ignore
+            if (el[ContextMenu.ctxPropertyName])
+                return false;
+            
+            if (canOpenMenu(el.parentElement, menu))
+                return true;
+            
+            return false;
         }
 
-        if (element === null)
-            return false;
-        
-        return doesTreeContain(this.element, element);
+        return canOpenMenu(element, this);
     }
 
     private _onOpenMenu(contextMenuEvent: PointerEvent) {
@@ -185,10 +204,10 @@ export class ContextMenu {
     /**
      * Adds a new item to menu item list. If the menu is open, the item will be drawn.
      *
-     * @param {{ text: string, func: Function, disabled?: boolean, border?: boolean, description?: string }} item Item to add
+     * @param {ContextMenuItem} item Item to add
      * @memberof ContextMenu
      */
-    add(item: { text: string, func: Function, disabled?: boolean, border?: boolean, description?: string }) {
+    add(item: ContextMenuItem) {
         this.items.push(item);
 
         if (this.isOpen) {
@@ -255,12 +274,12 @@ export class ContextMenu {
      *
      * @static
      * @param {(HTMLElement | string)} element Element that can create this context menu
-     * @param {{ text: string, func: Function, disabled?: boolean, border?: boolean, description?: string }[]} items Menu items
+     * @param {ContextMenuItem[]} items Menu items
      * @param {string} [menuId] The ID for this menu, given to menu HTMLElement
      * @returns {ContextMenu} A refrence to the created context menu
      * @memberof ContextMenu
      */
-    static create(element: HTMLElement | string, items: { text: string, func: Function, disabled?: boolean, border?: boolean, description?: string }[], menuId?: string): ContextMenu {
+    static create(element: HTMLElement | string, items: ContextMenuItem[], menuId?: string): ContextMenu {
         if (typeof element === "string") {
             let tryElement = document.getElementById(element);
 
@@ -272,6 +291,8 @@ export class ContextMenu {
 
         return new ContextMenu(element, items, menuId);
     }
+
+    static get ctxPropertyName() { return "contextmenu" }
 
     /**
      * Loads the default CSS styling for context menues
@@ -329,6 +350,33 @@ export class ContextMenu {
         else
             console.warn("Cannot load css due to the inexistance of the head tag. Yup, that's gonna be a problem...");
     }
+}
+
+export type ContextMenuItem = {
+    /**
+     * Text displayed in item
+     */
+    text: string;
+
+    /**
+     * Function called when item is selected
+     */
+    func: Function;
+
+    /**
+     * Wether this item is disabled or not
+     */
+    disabled?: boolean;
+
+    /**
+     * Draw a border under this item. DEFAULT: FALSE
+     */
+    border?: boolean;
+
+    /**
+     * A description shows when the item is hovered over
+     */
+    description?: string;
 }
 
 export namespace ContextMenuTheme {
