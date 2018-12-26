@@ -313,11 +313,12 @@ export class SyntaxCompilerJob
             return isOverlapping(token, check) && isLessImportant(token, check);
         }
     
-        // Remove overlapping tokens based on importance
+        // Remove overlapping tokens based on importance | ERROR PRESENT
         for (let i = tokens.length - 1; i >= 0; i--)
             for (const check of tokens)
-                if (doNotIncludeToken(tokens[i], check))
-                    tokens.splice(i, 1);
+                if (tokens[i])
+                    if (doNotIncludeToken(tokens[i], check))
+                        tokens.splice(i, 1);
         
         return tokens;
     }
