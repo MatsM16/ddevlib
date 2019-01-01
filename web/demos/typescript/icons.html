@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html data-theme="">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Demos > TS > Icons</title>
+        
+        <link rel="stylesheet" href="/ddevlib/css/settings.css">
+        <link rel="stylesheet" href="/ddevlib/css/main.css">
+        <link rel="stylesheet" href="/ddevlib/css/input.css">
+
+        <style>
+
+            body {
+                padding: 0;
+                margin: 0;
+
+                width: 100vw;
+                height: 100vh;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+
+                --font-size: 24pt;
+            }
+
+            body>div
+            {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: row;
+                margin: 2em;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div>
+            <input type="text" id="icon-inp" placeholder="icon"><dd-icon id="icon" type="SVG"></dd-icon>
+        </div>
+        <div>
+            <div>
+                I have to grab my homework <dd-icon>file-content</dd-icon> and head home <dd-icon>home</dd-icon> from the store <dd-icon>Store</dd-icon><br><br>
+                Our code <dd-icon>code</dd-icon> links the files <dd-icon>file</dd-icon> in our storage <dd-icon>storage</dd-icon> and data in our database <dd-icon>database</dd-icon> so you can download <dd-icon>download</dd-icon> music <dd-icon>music</dd-icon> to your smartphone <dd-icon>smartphone</dd-icon>.
+            </div>
+        </div>
+
+        <!-- START: Important stuff -->
+        <script type="module"> import "/ddevlib/js/dd/dd.js"; </script>
+        <!-- END: Important stuff -->
+
+        <script type="module" src="/web/js/css.js"></script>
+
+        <script>
+            const iconInp = document.getElementById("icon-inp");
+            const icon = document.getElementById("icon");
+
+            iconInp.oninput = evt => icon.value = iconInp.value;
+        </script>
+    </body>
+</html>
