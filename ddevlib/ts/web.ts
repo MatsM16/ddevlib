@@ -108,7 +108,14 @@ export namespace Web {
             if (dataType !== undefined && data !== undefined && data !== null)
                 data = _Helpers.serialize(data, dataType);
 
-            request.send(data);
+            try
+            {
+                request.send(data);
+            }
+            catch
+            {
+                reject({message: `Request failed: [${request.status}] - ${request.statusText}`});
+            }
         });
     }
 

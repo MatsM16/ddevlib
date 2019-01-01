@@ -84,7 +84,12 @@ export var Web;
             };
             if (dataType !== undefined && data !== undefined && data !== null)
                 data = Web._Helpers.serialize(data, dataType);
-            request.send(data);
+            try {
+                request.send(data);
+            }
+            catch (_a) {
+                reject({ message: `Request failed: [${request.status}] - ${request.statusText}` });
+            }
         });
     }
     Web.send = send;
