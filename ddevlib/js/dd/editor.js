@@ -45,7 +45,7 @@ export class HTMLCodeEditorElement extends HTMLElement {
         const ctx = new ContextMenu(this, [
             {
                 text: "Download",
-                func: () => undefined,
+                func: () => this.download(),
                 border: true,
                 description: "Download the code to a local file"
             },
@@ -68,9 +68,9 @@ export class HTMLCodeEditorElement extends HTMLElement {
     }
     copy() {
         const copyElementContent = (element) => {
-            this.inputElement.focus();
+            element.focus();
             const toCopy = document.createRange();
-            toCopy.selectNodeContents(this.inputElement);
+            toCopy.selectNodeContents(element);
             const selection = window.getSelection();
             const old = [];
             for (let i = 0; i < selection.rangeCount; i++)
@@ -83,6 +83,21 @@ export class HTMLCodeEditorElement extends HTMLElement {
                 selection.addRange(range);
         };
         copyElementContent(this.inputElement);
+    }
+    download() {
+        const name = "code." + this.lang.toLowerCase();
+        //
+        // Create "link" to hold the code data blob
+        //
+        let link = document.createElement("a");
+        link.href = URL.createObjectURL(new Blob([this.value], {}));
+        link.download = name;
+        //
+        // "Click" and remove the link
+        //
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     }
     get value() {
         return this.inputElement.innerText;
