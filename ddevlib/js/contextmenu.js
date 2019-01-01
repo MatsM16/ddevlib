@@ -17,6 +17,7 @@ export class ContextMenu {
         //
         // Setup menu events
         //
+        //@ts-ignore
         document.addEventListener("contextmenu", this._onOpenMenu.bind(this));
         document.addEventListener("click", this._onCloseMenu.bind(this));
         //
@@ -109,6 +110,7 @@ export class ContextMenu {
         //
         // Handle special case when user opens context menu on top of open contextmenu
         //
+        //@ts-ignore
         this.menuElement.oncontextmenu = this._onOpenMenu.bind(this);
     }
     _canOpenThisMenu(element) {
