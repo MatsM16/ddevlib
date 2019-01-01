@@ -72,7 +72,12 @@ export namespace Cookies {
             console.warn(`Cookie with name "${name}" does not exist.`);
         
         if (cookie !== null && decode)
-            cookie = atob(cookie);
+        {
+            try
+            { cookie = atob(cookie); }
+            catch
+            { cookie = null; }
+        }
 
         return cookie;
     }

@@ -57,8 +57,14 @@ export var Cookies;
         let cookie = findCookie();
         if (cookie === null)
             console.warn(`Cookie with name "${name}" does not exist.`);
-        if (cookie !== null && decode)
-            cookie = atob(cookie);
+        if (cookie !== null && decode) {
+            try {
+                cookie = atob(cookie);
+            }
+            catch (_a) {
+                cookie = null;
+            }
+        }
         return cookie;
     }
     Cookies.get = get;
