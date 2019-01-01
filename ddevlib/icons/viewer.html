@@ -1,0 +1,347 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Icon Viewer</title>
+
+    <style>
+    ::-webkit-scrollbar
+    {
+        width: 0px;
+    }
+
+    body
+    {
+        width: 100vw;
+        height: 100vh;
+
+        padding: 0;
+        margin: 0;
+
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 100px 1fr;
+
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+        overflow-x: hidden;
+    }
+
+    .collection
+    {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
+        grid-auto-rows: 200px;
+        grid-gap: 1em;
+        padding: 1em;
+        overflow-x: hidden;
+    }
+
+    header
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #type,
+    #search
+    {
+        padding: 1em;
+        margin: 1em;
+        outline: none;
+    }
+
+    .icon
+    {
+        display: block;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+
+        box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.1);
+        padding: 1em;
+
+        color: inherit;
+        text-decoration: none;
+        cursor: pointer;
+        transition: transform 0.1s;
+    }
+
+    .icon:hover
+    {
+        transform: scale(1.03);
+    }
+
+    .icon p
+    {
+        width: 100%;
+        text-align: center;
+    }
+
+    .icon img
+    {
+        width: 100%;
+        height: 100px;
+
+        object-fit: contain;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <select id="type">
+            <option value="png-black">PNG - Black</option>
+            <option value="png-white">PNG - White</option>
+            <option value="svg">SVG</option>
+        </select>
+        <input type="text" id="search" list="search-data" placeholder="Search...">
+        <datalist id="search-data">
+        </datalist>
+    </header>
+    <main class="collection">
+
+    </main>
+    <script>
+        const type = document.getElementById("type");
+        const collection = document.getElementsByClassName("collection")[0];
+        const search = document.getElementById("search");
+        const searchData = document.getElementById("search-data");
+
+        type.onchange = async evt => {
+            let handleIcon = icon => undefined;
+
+            if (type.value === "svg")
+            {
+                handleIcon = icon => {
+                    const fname = icon.getAttribute("name") + ".svg";
+                    const path = "./svg/" + fname;
+                    icon.getElementsByTagName("img")[0].src = path;
+                    icon.href = path;
+                    icon.download = fname;
+
+                    document.body.style.background = "initial";
+                    document.body.style.color = "initial";
+                }
+            }
+            
+            if (type.value === "png-black")
+            {
+                handleIcon = icon => {
+                    const fname = icon.getAttribute("name") + ".png";
+                    const path = "./png/black/" + fname;
+                    icon.getElementsByTagName("img")[0].src = path;
+                    icon.href = path;
+                    icon.download = fname;
+                    
+                    document.body.style.background = "initial";
+                    document.body.style.color = "initial";
+                }
+            }
+            
+            if (type.value === "png-white")
+            {
+                handleIcon = icon => {
+                    const fname = icon.getAttribute("name") + ".png";
+                    const path = "./png/white/" + fname;
+                    icon.getElementsByTagName("img")[0].src = path;
+                    icon.href = path;
+                    icon.download = fname;
+                    
+                    document.body.style.background = "darkgray";
+                    document.body.style.color = "white";
+                }
+            }
+
+            for (const icon of collection.children)
+                handleIcon(icon);
+        }
+
+        search.oninput = async () => {
+            const s = search.value.toLowerCase();
+
+            for (const icon of collection.children)
+            {
+                if (icon.getAttribute("name").toLowerCase().includes(s))
+                    icon.setAttribute("style", "");
+                else
+                    icon.setAttribute("style", "display: none");
+            }
+        }
+
+        function createIcon(name)
+        {
+            const file = `${name}.png`;
+            const path = `./png/black/${file}`;
+
+            const icon = document.createElement("a");
+            icon.classList.add("icon");
+            icon.setAttribute("name", name);
+            icon.download = file;
+            icon.href = path;
+
+            const title = document.createElement("p");
+            title.innerHTML = name;
+
+            const img = document.createElement("img");
+            img.src = path;
+
+            icon.appendChild(title);
+            icon.appendChild(img);
+
+            collection.appendChild(icon);
+            searchData.innerHTML += `<option>${name}</option>`;
+        }
+
+        const icons = [
+
+            "apple",
+
+            "arrow-down",
+            "arrow-down-drop",
+            "arrow-down-keyboard",
+            "arrow-left",
+            "arrow-left-drop",
+            "arrow-left-keyboard",
+            "arrow-right",
+            "arrow-right-drop",
+            "arrow-right-keyboard",
+            "arrow-up",
+            "arrow-up-drop",
+            "arrow-up-keyboard",
+
+            "attachment",
+            "close",
+
+            "cloud",
+            "cloud-done",
+            "cloud-download",
+            "cloud-upload",
+
+            "code",
+            "database",
+            "storage",
+            "download",
+            "server",
+
+            "help",
+            "info",
+            "warning",
+            "error",
+
+            "windows",
+            "linux",
+            "apple",
+
+            "collapse",
+            "expand",
+
+            "computer",
+            "smartphone",
+
+            "keyboard",
+            "mouse",
+
+            "delete",
+            "delete-outline",
+            "delete-undo",
+
+            "copy",
+            "file",
+            "file-add",
+            "file-content",
+            "file-restore",
+
+            "folder",
+            "folder-add",
+            "folder-open",
+            "folder-share",
+
+            "fullscreen",
+            "fullscreen-close",
+
+            "group",
+            "group-outline",
+            "group-add",
+
+            "person",
+            "person-outline",
+            "person-add",
+
+            "image",
+            "video",
+            "music",
+
+            "add",
+            "add-box",
+            "add-circle",
+            "add-circle-outline",
+
+            "remove",
+            "remove-circle",
+            "remove-circle-outline",
+
+            "done",
+            "done-box",
+            "done-circle",
+            "done-circle-outline",
+            "done-negate",
+
+            "play",
+            "play-circle",
+            "play-circle-outline",
+
+            "pause",
+            "pause-circle",
+            "pause-circle-outline",
+
+            "home",
+            "receipt",
+            "refresh",
+            "reload",
+            "search",
+            "security",
+
+            "shopping-cart",
+            "shopping-cart-add",
+            "shopping-cart-remove",
+
+            "star-empty",
+            "star-half",
+            "star-full",
+            
+            "link",
+            "link-off",
+            "mic",
+            "mic-off",
+            "toggle-on",
+            "toggle-off",
+            "thumb-up",
+            "thumb-down",
+
+            "contact-email",
+            "contact-phone",
+            "copyright",
+            "credit-card",
+            "email",
+            "email-outline",
+            "phone",
+            "favorite",
+            "favorite-outline",
+            "lock",
+            "lock-open",
+            "exit",
+            "power",
+
+            "volume",
+            "volume-down",
+            "volume-mute",
+            "volume-speaker",
+        ]
+
+        for (const icon of icons)
+            createIcon(icon);
+    </script>
+</body>
+</html>
