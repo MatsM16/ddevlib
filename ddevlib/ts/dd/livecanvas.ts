@@ -87,6 +87,7 @@ export class HTMLLiveCanvasElement extends HTMLElement
             can.width = element.clientWidth;
             can.height = element.clientHeight;
         }
+        //@ts-ignore
         element.onresize = resize;
         resize()
 
