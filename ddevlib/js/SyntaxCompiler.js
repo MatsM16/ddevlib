@@ -120,6 +120,16 @@ export class SyntaxCompiler {
                 .symbol("number", /(?<=(\W|$))\d+\.?\d*\w*(?=\W|$)/g)
                 .symbol("string", /--[\w-]*(?=\s*[\),])/gm);
         }
+        if (syntax === "MD") {
+            builder
+                .symbol("heading", /#+\s+.*$/gm)
+                .symbol("keyword italic", /_.*?_/gm)
+                .symbol("keyword bold", /\*\*.*?\*\*/gm)
+                .symbol("keyword monospace", /\`.*?\`/gm)
+                .symbol("horizontal", /^[^\S\n]*---\s*$/gm)
+                .symbol("list ul bullet", /^[^\S\n]*\*\s.*$/gm)
+                .symbol("list ul numbered", /^[^\S\n]*\d+\.\s*.*$/gm);
+        }
         return compiler;
     }
     static compile(src, syntax) {

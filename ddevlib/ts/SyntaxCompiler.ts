@@ -161,6 +161,18 @@ export class SyntaxCompiler
                 .symbol("string", /--[\w-]*(?=\s*[\),])/gm)
         }
 
+        if (syntax === "MD")
+        {
+            builder
+                .symbol("heading", /#+\s+.*$/gm)
+                .symbol("keyword italic", /_.*?_/gm)
+                .symbol("keyword bold", /\*\*.*?\*\*/gm)
+                .symbol("keyword monospace", /\`.*?\`/gm)
+                .symbol("horizontal", /^[^\S\n]*---\s*$/gm)
+                .symbol("list ul bullet", /^[^\S\n]*\*\s.*$/gm)
+                .symbol("list ul numbered", /^[^\S\n]*\d+\.\s*.*$/gm)
+        }
+
         return compiler;
     }
 
@@ -409,4 +421,4 @@ export interface Symbol
     composeInner?: (token: Token) => string
 }
 
-export type Syntax = "XML" | "HTML" | "JSON" | "JS" | "CSS" | "TXT";
+export type Syntax = "XML" | "HTML" | "JSON" | "JS" | "CSS" | "TXT" | "MD";
