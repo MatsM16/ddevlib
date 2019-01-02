@@ -10,7 +10,9 @@ export class SyntaxCompiler {
     }
     createSymbolBuilder() { return new SymbolBuilder(this); }
     compile(source) {
-        return new SyntaxCompilerJob(source, this.symbols).compile();
+        const tokens = SyntaxCompiling.parse(source, this.symbols);
+        const compiled = SyntaxCompiling.compose(tokens);
+        return compiled;
     }
     async compileAsync(source) {
         return new Promise((resolve, reject) => {
@@ -23,15 +25,26 @@ export class SyntaxCompiler {
             }
         });
     }
-    static compiler(syntax) {
+    static getCompiler(syntax) {
         syntax = syntax.toUpperCase();
         const compiler = new SyntaxCompiler();
         const builder = compiler.createSymbolBuilder();
+        if (syntax === "HTML") {
+            const css = SyntaxCompiler.getCompiler("CSS").compile;
+            const js = SyntaxCompiler.getCompiler("JS").compile;
+            builder
+                .symbol("css", /(?<=<style[\w\W]*>)(.+)(?=<\/\s*style\s*>)/gs, token => css(token.value))
+                .symbol("css", /(?<=<style[\w\W]*>)(.+)(?=<\/\s*style\s*>)/gs, token => css(token.value))
+                .symbol("js", /(?<=<script[\w\W]*>)(.+)(?=<\/\s*script\s*>)/gs, token => js(token.value));
+        }
         if (syntax === "XML" || syntax === "HTML") {
             builder
                 .symbol("comment", /<!--.*?-->/gs)
-                .symbol("comment", /<!--.*?-->/gs)
-                .symbol("doctype", /<!DOCTYPE\s.+?>/gi)
+                .symbol("comment", /<!--.*?-->/gs);
+            if (syntax === "HTML")
+                builder
+                    .symbol("doctype", /<!DOCTYPE\s.+?>/gi);
+            builder
                 .symbol("tag open", /(?<=<)[-\w]+/g)
                 .symbol("tag close", /(?<=<\/)[-\w]+/g)
                 .symbol("string", /(?<==)"(.|\n)*?(?<!\\)"(?=[^<]*>)/g)
@@ -107,23 +120,25 @@ export class SyntaxCompiler {
                 .symbol("number", /(?<=(\W|$))\d+\.?\d*\w*(?=\W|$)/g)
                 .symbol("string", /--[\w-]*(?=\s*[\),])/gm);
         }
-        return compiler.compile;
+        return compiler;
     }
-    static compilerAsync(language) {
-        return async (source) => new Promise((resolve, reject) => resolve(SyntaxCompiler.compiler(language)));
+    static compile(src, syntax) {
+        return this.getCompiler(syntax).compile(src);
+    }
+    static async compileAsync(src, syntax) {
+        return this.getCompiler(syntax).compileAsync(src);
     }
 }
 export class SymbolBuilder {
     constructor(compiler) {
         this.compiler = compiler;
     }
-    symbol(name, pattern, composeFunction) {
-        const comp = composeFunction ? composeFunction : (token) => `<span class="token ${token.symbol.name}">${SyntaxCompilerJob.escape(token.value)}</span>`;
+    symbol(name, pattern, composeInner) {
         this.compiler.symbols.push({
             name: name,
             pattern: pattern,
             importance: this.compiler.symbols.length,
-            compose: comp
+            composeInner: composeInner
         });
         return this;
     }
@@ -140,122 +155,143 @@ export class SymbolBuilder {
             return this.symbol("keyword", value);
     }
 }
-export class SyntaxCompilerJob {
-    constructor(source, symbols) {
-        this.tokens = [];
-        this.symbols = symbols;
-        this.source = source;
+export var SyntaxCompiling;
+(function (SyntaxCompiling) {
+    function parse(src, symbols) {
+        return Parsing.findTokens(symbols, src);
     }
-    compile() {
-        for (const symbol of this.symbols)
-            this.tokens.push(...SyntaxCompilerJob._findSymbol(this.source, symbol));
-        this._sort();
-        this.tokens = SyntaxCompilerJob._removeOverlappingTokens(this.tokens);
-        this.tokens.push(...SyntaxCompilerJob._findTextTokens(this.source, this.tokens));
-        this._sort();
-        return SyntaxCompilerJob._compose(this.tokens);
-    }
-    _sort() {
-        this.tokens.sort((a, b) => a.index - b.index);
-    }
-    static _findTextTokens(source, tokens) {
-        let lastEnd = 0;
-        let tokenIndex = 0;
-        const textBeforeToken = () => source.substring(lastEnd, tokens[tokenIndex].index);
-        const nextToken = () => {
-            lastEnd = tokens[tokenIndex].index + tokens[tokenIndex].value.length;
-            tokenIndex++;
-        };
-        const tokenExists = () => tokenIndex >= 0 && tokenIndex < tokens.length;
-        const addToken = (value) => leftovers.push({
-            index: lastEnd,
-            value: value,
-            symbol: SyntaxCompilerJob.defaultTextSymbol()
-        });
-        const leftovers = [];
-        while (tokenExists()) {
-            addToken(textBeforeToken());
-            nextToken();
-        }
-        addToken(source.substring(lastEnd));
-        return leftovers;
-    }
-    static _findSymbol(source, symbol) {
-        let lastIndex = 0;
-        let match;
-        const pattern = symbol.pattern;
-        const tokens = [];
-        while ((match = pattern.exec(source)) !== null) {
-            const isRepeating = pattern.lastIndex === match.index || pattern.lastIndex === lastIndex;
-            if (isRepeating)
-                pattern.lastIndex++;
-            else
-                lastIndex = pattern.lastIndex;
-            tokens.push({
-                index: match.index,
-                value: (match[0]),
-                symbol: symbol
-            });
-        }
-        return tokens;
-    }
-    static _removeOverlappingTokens(tokens) {
-        const isOverlapping = (token, check) => {
-            if (check === token)
-                return false;
-            const tokenStart = token.index;
-            const checkStart = check.index;
-            const tokenEnd = token.index + token.value.length;
-            const checkEnd = check.index + check.value.length;
-            const partialEndOverlapp = checkEnd >= tokenStart && checkEnd <= tokenEnd; // |     [   ===]===  |  End after token start, but before token end 
-            const partialStartOverlapp = checkStart >= tokenStart && checkStart <= tokenEnd; // |  ===[===   ]     |  Start after token start, but before token end 
-            const fullInsideOverlap = checkStart >= tokenStart && checkEnd <= tokenEnd; // |     [  === ]     |  Start after token start, but end before token end 
-            const fullOutsideOverlapp = checkStart <= tokenStart && checkEnd >= tokenEnd; // |  ===[===]===     |  Start before token start, but end after token end 
-            if (partialStartOverlapp || partialEndOverlapp || fullInsideOverlap || fullOutsideOverlapp)
-                return true;
-            else
-                return false;
-        };
-        const isLessImportant = (token, check) => {
-            // First symbol has importance 0 (Most important)
-            return token.symbol.importance > check.symbol.importance;
-        };
-        const doNotIncludeToken = (token, check) => {
-            return isOverlapping(token, check) && isLessImportant(token, check);
-        };
-        // Remove overlapping tokens based on importance | ERROR PRESENT
-        for (let i = tokens.length - 1; i >= 0; i--)
-            for (const check of tokens)
-                if (tokens[i])
-                    if (doNotIncludeToken(tokens[i], check))
-                        tokens.splice(i, 1);
-        return tokens;
-    }
-    static _compose(tokens) {
+    SyntaxCompiling.parse = parse;
+    function compose(tokens) {
         let html = "";
-        for (const token of tokens)
-            html += token.symbol.compose(token);
+        for (const token of tokens) {
+            const start = `<span class="token ${token.symbol.name}">`;
+            const end = `</span>`;
+            const text = token.symbol.composeInner ? token.symbol.composeInner(token) : Composing.defaultCompose(token);
+            html += start + text + end;
+        }
         return html;
     }
-    static defaultCompose(token) {
-        return `<span class="token ${token.symbol.name}">${SyntaxCompilerJob.escape(token.value)}</span>`;
-    }
-    static defaultTextSymbol() {
-        return {
-            name: "text",
-            pattern: /THIS_IS_NOT_A_USED_PATTERN/g,
-            importance: 999999,
-            compose: this.defaultCompose
-        };
-    }
-    static escape(html) {
-        return html
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/\n/g, "<br>")
-            .replace(/\s/g, "&nbsp;")
-            .replace(/\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;");
-    }
-}
+    SyntaxCompiling.compose = compose;
+    let Parsing;
+    (function (Parsing) {
+        function findTokens(symbols, src) {
+            let tokens = [];
+            // Find regular tokens
+            for (const symbol of symbols)
+                tokens.push(...findTokensOfSymbol(symbol, src));
+            sort(tokens);
+            tokens = removeOverlappingTokens(tokens);
+            // Find text tokens
+            tokens.push(...findTextTokens(tokens, src));
+            sort(tokens);
+            return tokens;
+        }
+        Parsing.findTokens = findTokens;
+        function findTokensOfSymbol(symbol, src) {
+            let lastIndex = 0;
+            let match;
+            const pattern = symbol.pattern;
+            const tokens = [];
+            while ((match = pattern.exec(src)) !== null) {
+                const isRepeating = pattern.lastIndex === match.index || pattern.lastIndex === lastIndex;
+                if (isRepeating)
+                    pattern.lastIndex++;
+                else
+                    lastIndex = pattern.lastIndex;
+                tokens.push({
+                    index: match.index,
+                    value: (match[0]),
+                    symbol: symbol
+                });
+            }
+            return tokens;
+        }
+        Parsing.findTokensOfSymbol = findTokensOfSymbol;
+        function findTextTokens(tokens, src) {
+            let lastEnd = 0;
+            let tokenIndex = 0;
+            const textBeforeToken = () => src.substring(lastEnd, tokens[tokenIndex].index);
+            const nextToken = () => {
+                lastEnd = tokens[tokenIndex].index + tokens[tokenIndex].value.length;
+                tokenIndex++;
+            };
+            const tokenExists = () => tokenIndex >= 0 && tokenIndex < tokens.length;
+            const addToken = (value) => leftovers.push({
+                index: lastEnd,
+                value: value,
+                symbol: textSymbol()
+            });
+            const leftovers = [];
+            while (tokenExists()) {
+                addToken(textBeforeToken());
+                nextToken();
+            }
+            addToken(src.substring(lastEnd));
+            return leftovers;
+        }
+        Parsing.findTextTokens = findTextTokens;
+        function textSymbol() {
+            return {
+                name: "text",
+                pattern: /THIS_IS_NOT_A_USED_PATTERN/g,
+                importance: 999999
+            };
+        }
+        Parsing.textSymbol = textSymbol;
+        function sort(tokens) {
+            tokens.sort((a, b) => a.index - b.index);
+        }
+        Parsing.sort = sort;
+        function removeOverlappingTokens(tokens) {
+            const isOverlapping = (token, check) => {
+                if (check === token)
+                    return false;
+                const tokenStart = token.index;
+                const checkStart = check.index;
+                const tokenEnd = token.index + token.value.length;
+                const checkEnd = check.index + check.value.length;
+                const partialEndOverlapp = checkEnd >= tokenStart && checkEnd <= tokenEnd; // |     [   ===]===  |  End after token start, but before token end 
+                const partialStartOverlapp = checkStart >= tokenStart && checkStart <= tokenEnd; // |  ===[===   ]     |  Start after token start, but before token end 
+                const fullInsideOverlap = checkStart >= tokenStart && checkEnd <= tokenEnd; // |     [  === ]     |  Start after token start, but end before token end 
+                const fullOutsideOverlapp = checkStart <= tokenStart && checkEnd >= tokenEnd; // |  ===[===]===     |  Start before token start, but end after token end 
+                if (partialStartOverlapp || partialEndOverlapp || fullInsideOverlap || fullOutsideOverlapp)
+                    return true;
+                else
+                    return false;
+            };
+            const isLessImportant = (token, check) => {
+                // First symbol has importance 0 (Most important)
+                return token.symbol.importance > check.symbol.importance;
+            };
+            const doNotIncludeToken = (token, check) => {
+                return isOverlapping(token, check) && isLessImportant(token, check);
+            };
+            // Remove overlapping tokens based on importance | ERROR PRESENT
+            for (let i = tokens.length - 1; i >= 0; i--)
+                for (const check of tokens)
+                    if (tokens[i])
+                        if (doNotIncludeToken(tokens[i], check))
+                            tokens.splice(i, 1);
+            return tokens;
+        }
+        Parsing.removeOverlappingTokens = removeOverlappingTokens;
+    })(Parsing = SyntaxCompiling.Parsing || (SyntaxCompiling.Parsing = {}));
+    let Composing;
+    (function (Composing) {
+        function escape(html) {
+            return html
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/\n/g, "<br>")
+                .replace(/\s/g, "&nbsp;")
+                .replace(/\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;");
+        }
+        Composing.escape = escape;
+        function defaultCompose(token) {
+            return escape(token.value);
+        }
+        Composing.defaultCompose = defaultCompose;
+    })(Composing = SyntaxCompiling.Composing || (SyntaxCompiling.Composing = {}));
+})(SyntaxCompiling || (SyntaxCompiling = {}));
 //# sourceMappingURL=SyntaxCompiler.js.map
