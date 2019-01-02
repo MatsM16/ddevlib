@@ -28,9 +28,7 @@ export class HTMLIconElement extends HTMLElement
     async setIcon(icon: string)
     {
         icon = icon
-            .replace(/\s/g, "-")
-            .replace(/\_/g, "-")
-            .replace(/\./g, "-");
+            .replace(/[\s\_\.\-\,]+/g, "-")
 
         try
         {

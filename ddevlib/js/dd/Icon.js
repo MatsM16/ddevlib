@@ -18,9 +18,7 @@ export class HTMLIconElement extends HTMLElement {
     }
     async setIcon(icon) {
         icon = icon
-            .replace(/\s/g, "-")
-            .replace(/\_/g, "-")
-            .replace(/\./g, "-");
+            .replace(/[\s\_\.\-\,]+/g, "-");
         try {
             const svg = await Web.get(this.iconFolder + icon + ".svg", "TEXT");
             this.innerHTML = svg;
