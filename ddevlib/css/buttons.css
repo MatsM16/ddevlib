@@ -3,9 +3,14 @@ a.btn.animate.icon-fly-in {
   overflow: hidden;
 }
 
-button.animate.icon-fly-in img, button.animate.icon-fly-in span,
+button.animate.icon-fly-in img,
+button.animate.icon-fly-in span,
+button.animate.icon-fly-in .icon,
+button.animate.icon-fly-in .ico,
 a.btn.animate.icon-fly-in img,
-a.btn.animate.icon-fly-in span {
+a.btn.animate.icon-fly-in span,
+a.btn.animate.icon-fly-in .icon,
+a.btn.animate.icon-fly-in .ico {
   position: relative;
   -webkit-transition: top var(--default-transition-time), left var(--default-transition-time);
   transition: top var(--default-transition-time), left var(--default-transition-time);
@@ -16,15 +21,24 @@ a.btn.animate.icon-fly-in span {
   left: calc(-0.5 * var(--button-icon-size) - 0.5 * var(--button-icon-margin));
 }
 
+button.animate.icon-fly-in .icon,
+button.animate.icon-fly-in .ico,
 button.animate.icon-fly-in img,
+a.btn.animate.icon-fly-in .icon,
+a.btn.animate.icon-fly-in .ico,
 a.btn.animate.icon-fly-in img {
   left: -50px;
   top: 50px;
 }
 
-button.animate.icon-fly-in:hover img, button.animate.icon-fly-in:hover span,
+button.animate.icon-fly-in:hover img,
+button.animate.icon-fly-in:hover span,
+button.animate.icon-fly-in:hover .icon,
+button.animate.icon-fly-in:hover .ico,
 a.btn.animate.icon-fly-in:hover img,
-a.btn.animate.icon-fly-in:hover span {
+a.btn.animate.icon-fly-in:hover span,
+a.btn.animate.icon-fly-in:hover .icon,
+a.btn.animate.icon-fly-in:hover .ico {
   left: 0;
   top: 0;
 }
