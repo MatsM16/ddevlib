@@ -61,9 +61,7 @@ export class HTMLCodeEditorElement extends HTMLElement {
         document.execCommand("insertText", false, text);
     }
     compile() {
-        //@ts-ignore
-        const compiler = SyntaxCompiler.compiler(this.language);
-        const html = compiler(this.value);
+        const html = SyntaxCompiler.compile(this.value, this.language);
         this.outputElement.innerHTML = html;
     }
     copy() {
