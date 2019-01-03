@@ -1,5 +1,5 @@
 import { SyntaxCompiler, Syntax } from "../SyntaxCompiler.js";
-import { define } from "./CustomElements.js";
+import { define } from "./Define.js";
 import { Web } from "../Web.js";
 import { ContextMenu } from "../ContextMenu.js";
 

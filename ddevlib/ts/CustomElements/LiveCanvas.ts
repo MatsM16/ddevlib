@@ -1,4 +1,4 @@
-import { define } from "./CustomElements.js";
+import { define } from "./Define.js";
 
 export class HTMLLiveCanvasElement extends HTMLElement
 {

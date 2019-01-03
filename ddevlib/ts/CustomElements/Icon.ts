@@ -1,4 +1,4 @@
-import { define } from "./CustomElements.js";
+import { define } from "./Define.js";
 import { Web } from "../Web.js";
 
 export class HTMLIconElement extends HTMLElement
