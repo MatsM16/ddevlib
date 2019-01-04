@@ -1,0 +1,200 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Icon Viewer</title>
+
+    <style>
+    body
+    {
+        width: 100vw;
+        height: 100vh;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+        overflow-x: hidden;
+    }
+
+    .icon
+    {
+        display: block;
+        width: 300px;
+        box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.1);
+        padding: 1em;
+        margin: 1em;
+    }
+
+    .icon p
+    {
+        width: 100%;
+        text-align: center;
+    }
+
+    .icon img
+    {
+        width: 100%;
+        height: 100px;
+
+        object-fit: contain;
+    }
+
+    .icon select
+    {
+        width: 100%;
+        margin-top: 1em;
+        padding: 1em;
+    }
+    </style>
+</head>
+<body>
+    <script>
+        function createIcon(name)
+        {
+            const icon = document.createElement("div");
+            icon.classList.add("icon");
+
+            const title = document.createElement("p");
+            title.innerHTML = name;
+
+            const img = document.createElement("img");
+            img.src = "./png/black/" + name + ".png";
+
+            const select = document.createElement("select");
+            select.innerHTML = `<option value="png-black">PNG - Black</option><option value="png-white">PNG - White</option><option value="svg">SVG</option>`;
+
+            select.onchange = () => {
+                if (select.value === "png-black")
+                {
+                    img.src = "./png/black/" + name + ".png";
+                    icon.style.backgroundColor = "transparent";
+                }
+                if (select.value === "png-white")
+                {
+                    img.src = "./png/white/" + name + ".png";
+                    icon.style.backgroundColor = "black";
+                }
+                if (select-value === "svg")
+                {
+                    img.src = "./svg/" + name + ".svg";
+                    icon.style.backgroundColor = "transparent";
+                }
+            }
+
+            icon.appendChild(title);
+            icon.appendChild(img);
+            icon.appendChild(select);
+
+            document.body.appendChild(icon);
+        }
+
+        const icons = [
+
+            "apple",
+
+            "arrow-down",
+            "arrow-down-drop",
+            "arrow-down-keyboard",
+            "arrow-left",
+            "arrow-left-drop",
+            "arrow-left-keyboard",
+            "arrow-right",
+            "arrow-right-drop",
+            "arrow-right-keyboard",
+            "arrow-up",
+            "arrow-up-drop",
+            "arrow-up-keyboard",
+
+            "attachment",
+            "close",
+
+            "cloud",
+            "cloud-done",
+            "cloud-download",
+            "cloud-upload",
+
+            "code",
+            "database",
+            "storage",
+            "download",
+
+            "help",
+            "info",
+            "warning",
+            "error",
+
+            "windows",
+            "linux",
+            "apple",
+
+            "collapse",
+            "expand",
+
+            "computer",
+            "smartphone",
+
+            "delete",
+            "delete-outline",
+
+            "file",
+            "file-add",
+            "file-content",
+            "file-restore",
+
+            "folder",
+            "folder-add",
+            "folder-open",
+            "folder-share",
+
+            "fullscreen",
+            "fullscreen-close",
+
+            "group",
+            "group-outline",
+            "group-add",
+
+            "person",
+            "person-outline",
+            "person-add",
+
+            "image",
+            "video",
+            "music",
+
+            "keyboard",
+            "mouse",
+
+            "add",
+            "add-box",
+            "add-circle",
+            "add-circle-outline",
+
+            "remove",
+            "remove-circle",
+            "remove-circle-outline",
+
+            "done",
+            "done-box",
+            "done-circle",
+            "done-circle-outline",
+            "done-negate",
+
+            "play",
+            "play-circle",
+            "play-circle-outline",
+
+            "pause",
+            "pause-circle",
+            "pause-circle-outline",
+        ]
+
+        for (const icon of icons)
+            createIcon(icon);
+    </script>
+</body>
+</html>
