@@ -244,4 +244,4 @@ export var Form;
         _Helper.getFields = getFields;
     })(_Helper = Form._Helper || (Form._Helper = {}));
 })(Form || (Form = {}));
-//# sourceMappingURL=Forms.js.map
+//# sourceMappingURL=forms.js.map

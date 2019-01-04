@@ -1,4 +1,4 @@
-import { define } from "./CustomElements.js";
+import { define } from "./Define.js";
 export class HTMLLiveCanvasElement extends HTMLElement {
     constructor() {
         super();
@@ -124,4 +124,4 @@ export class LiveCanvasPainter {
     }
 }
 define(HTMLLiveCanvasElement, "dd-livecanvas");
-//# sourceMappingURL=livecanvas.js.map
+//# sourceMappingURL=LiveCanvas.js.map

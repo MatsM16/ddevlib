@@ -1,4 +1,4 @@
-import { define } from "./CustomElements.js";
+import { define } from "./Define.js";
 import { Web } from "../Web.js";
 export class HTMLIconElement extends HTMLElement {
     constructor() {
@@ -22,9 +22,6 @@ export class HTMLIconElement extends HTMLElement {
         try {
             const svg = await Web.get(this.iconFolder + icon + ".svg", "TEXT");
             this.innerHTML = svg;
-            const color = getComputedStyle(this).color;
-            for (const svg of this.getElementsByTagName("svg"))
-                svg.style.fill = color;
             this.setAttribute("value", icon);
         }
         catch (_a) {
@@ -48,9 +45,11 @@ dd-icon svg
     width: 100%;
     height: 100%;
 
+    fill: currentColor;
+
     object-fit: contain;
 
     position: relative;
     bottom: -0.2em;
 }`);
-//# sourceMappingURL=icon.js.map
+//# sourceMappingURL=Icon.js.map

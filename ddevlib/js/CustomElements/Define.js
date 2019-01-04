@@ -29,4 +29,4 @@ ${style}
     }
     customElements.define(name, proto);
 }
-//# sourceMappingURL=CustomElements.js.map
+//# sourceMappingURL=Define.js.map

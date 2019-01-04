@@ -34,11 +34,6 @@ export class HTMLIconElement extends HTMLElement
         {
             const svg = await Web.get(this.iconFolder + icon + ".svg", "TEXT") as string;
             this.innerHTML = svg;
-
-            const color = getComputedStyle(this).color;
-            for (const svg of this.getElementsByTagName("svg"))
-                svg.style.fill = color;
-            
             this.setAttribute("value", icon);
         }
         catch
@@ -64,6 +59,8 @@ dd-icon svg
 {
     width: 100%;
     height: 100%;
+
+    fill: currentColor;
 
     object-fit: contain;
 

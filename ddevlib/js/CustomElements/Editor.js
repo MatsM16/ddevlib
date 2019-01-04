@@ -1,5 +1,5 @@
 import { SyntaxCompiler } from "../SyntaxCompiler.js";
-import { define } from "./CustomElements.js";
+import { define } from "./Define.js";
 import { Web } from "../Web.js";
 import { ContextMenu } from "../ContextMenu.js";
 export class HTMLCodeEditorElement extends HTMLElement {
@@ -263,4 +263,4 @@ dd-editor .output .message.info {
 {
     color: var(--success);
 }`);
-//# sourceMappingURL=editor.js.map
+//# sourceMappingURL=Editor.js.map
