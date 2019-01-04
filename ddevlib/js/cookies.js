@@ -109,4 +109,4 @@ export var Cookies;
     }
     Cookies.remove = remove;
 })(Cookies || (Cookies = {}));
-//# sourceMappingURL=cookies.js.map
+//# sourceMappingURL=Cookies.js.map

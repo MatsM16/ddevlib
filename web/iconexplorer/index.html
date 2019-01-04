@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Icon Explorer</title>
+
+    <link rel="stylesheet" href="/ddevlib/css/settings.css">
+    <link rel="stylesheet" href="/ddevlib/css/main.css">
+    <link rel="stylesheet" href="/ddevlib/css/input.css">
+    <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+    <header>
+        <div>
+            <dd-icon>search</dd-icon>
+            <input type="text" class="round" id="search" list="search-suggestions">
+            <datalist id="search-suggestions">
+
+            </datalist>
+        </div>
+        <div>
+            <dd-icon>info</dd-icon>
+            <input type="text" class="round" id="color" list="color-suggestions" spellcheck="false">
+            <datalist id="color-suggestions">
+                <option>Red</option>
+                <option>Green</option>
+                <option>Blue</option>
+                <option>Yellow</option>
+                <option>Pink</option>
+                <option>Purple</option>
+                <option>Orange</option>
+                <option>Lime</option>
+                <option>Deepskyblue</option>
+                <option>Black</option>
+                <option>Gray</option>
+            </datalist>
+        </div>
+    </header>
+    <main id="icon-container">
+        
+    </main>
+    
+    <script type="module" src="/ddevlib/js/Elements.js"></script>
+    <script type="module" src="./main.js"></script>
+</body>
+</html>

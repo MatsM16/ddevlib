@@ -9,7 +9,8 @@ export class HTMLIconElement extends HTMLElement
     {
         super();
 
-        this.setIcon(this.innerHTML);
+        if (this.innerHTML || this.innerHTML.trim().length > 0)
+            this.setIcon(this.innerHTML);
     }
 
     get value(): string
@@ -28,15 +29,17 @@ export class HTMLIconElement extends HTMLElement
     async setIcon(icon: string)
     {
         icon = icon
+            .trim()
             .replace(/[\s\_\.\-\,]+/g, "-")
 
         try
         {
-            const svg = await Web.get(this.iconFolder + icon + ".svg", "TEXT") as string;
+            let svg = await Web.get(this.iconFolder + icon + ".svg", "TEXT") as string;
+
             this.innerHTML = svg;
             this.setAttribute("value", icon);
         }
-        catch
+        catch (e)
         {
             this.innerHTML = "";
         }

@@ -4,7 +4,8 @@ export class HTMLIconElement extends HTMLElement {
     constructor() {
         super();
         this.iconFolder = "/ddevlib/icons/svg/";
-        this.setIcon(this.innerHTML);
+        if (this.innerHTML || this.innerHTML.trim().length > 0)
+            this.setIcon(this.innerHTML);
     }
     get value() {
         const icon = this.getAttribute("value");
@@ -18,13 +19,14 @@ export class HTMLIconElement extends HTMLElement {
     }
     async setIcon(icon) {
         icon = icon
+            .trim()
             .replace(/[\s\_\.\-\,]+/g, "-");
         try {
-            const svg = await Web.get(this.iconFolder + icon + ".svg", "TEXT");
+            let svg = await Web.get(this.iconFolder + icon + ".svg", "TEXT");
             this.innerHTML = svg;
             this.setAttribute("value", icon);
         }
-        catch (_a) {
+        catch (e) {
             this.innerHTML = "";
         }
     }
