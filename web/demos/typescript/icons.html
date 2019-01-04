@@ -40,6 +40,7 @@
 
         <div>
             <input type="text" id="icon-inp" placeholder="icon"><dd-icon id="icon" type="SVG"></dd-icon>
+            <input type="text" id="color" placeholder="color">
         </div>
         <div>
             <div>
@@ -59,6 +60,12 @@
             const icon = document.getElementById("icon");
 
             iconInp.oninput = evt => icon.value = iconInp.value;
+        </script>
+
+        <script>
+            const colorInp = document.getElementById("color");
+
+            colorInp.oninput = evt => document.body.style.color = colorInp.value;
         </script>
     </body>
 </html>
