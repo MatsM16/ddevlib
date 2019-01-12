@@ -193,152 +193,184 @@
             collection.appendChild(icon);
             searchData.innerHTML += `<option>${name}</option>`;
         }
-
-        const icons = [
-
-            "apple",
-
-            "arrow-down",
-            "arrow-down-drop",
-            "arrow-down-keyboard",
-            "arrow-left",
-            "arrow-left-drop",
-            "arrow-left-keyboard",
-            "arrow-right",
-            "arrow-right-drop",
-            "arrow-right-keyboard",
-            "arrow-up",
-            "arrow-up-drop",
-            "arrow-up-keyboard",
-
-            "attachment",
-            "close",
-
-            "cloud",
-            "cloud-done",
-            "cloud-download",
-            "cloud-upload",
-
-            "code",
-            "database",
-            "storage",
-            "download",
-            "server",
-
-            "help",
-            "info",
-            "warning",
-            "error",
-
-            "windows",
-            "linux",
-            "apple",
-
-            "collapse",
-            "expand",
-
-            "computer",
-            "smartphone",
-
-            "keyboard",
-            "mouse",
-
-            "delete",
-            "delete-outline",
-            "delete-undo",
-
-            "copy",
-            "file",
-            "file-add",
-            "file-content",
-            "file-restore",
-
-            "folder",
-            "folder-add",
-            "folder-open",
-            "folder-share",
-
-            "fullscreen",
-            "fullscreen-close",
-
-            "group",
-            "group-outline",
-            "group-add",
-
-            "person",
-            "person-outline",
-            "person-add",
-
-            "image",
-            "video",
-            "music",
-
-            "add",
-            "add-box",
-            "add-circle",
-            "add-circle-outline",
-
-            "remove",
-            "remove-circle",
-            "remove-circle-outline",
-
-            "done",
-            "done-box",
-            "done-circle",
-            "done-circle-outline",
-            "done-negate",
-
-            "play",
-            "play-circle",
-            "play-circle-outline",
-
-            "pause",
-            "pause-circle",
-            "pause-circle-outline",
-
-            "home",
-            "receipt",
-            "refresh",
-            "reload",
-            "search",
-            "security",
-
-            "shopping-cart",
-            "shopping-cart-add",
-            "shopping-cart-remove",
-
-            "star-empty",
-            "star-half",
-            "star-full",
-            
-            "link",
-            "link-off",
-            "mic",
-            "mic-off",
-            "toggle-on",
-            "toggle-off",
-            "thumb-up",
-            "thumb-down",
-
-            "contact-email",
-            "contact-phone",
-            "copyright",
-            "credit-card",
-            "email",
-            "email-outline",
-            "phone",
-            "favorite",
-            "favorite-outline",
-            "lock",
-            "lock-open",
-            "exit",
-            "power",
-
-            "volume",
-            "volume-down",
-            "volume-mute",
-            "volume-speaker",
-        ]
+        
+        const icons = `add-box
+add-circle-outline
+add-circle
+add
+amazon-circle
+amazon
+android-circle
+apple-circle
+apple
+arrow-down-drop
+arrow-down-keyboard
+arrow-down
+arrow-left-drop
+arrow-left-keyboard
+arrow-left
+arrow-right-drop
+arrow-right-keyboard
+arrow-right
+arrow-up-drop
+arrow-up-keyboard
+arrow-up
+attachment
+close
+cloud-done
+cloud-download
+cloud-upload
+cloud
+code
+collapse
+computer
+contact-email
+contact-phone
+copy
+copyright
+credit-card
+database
+delete-outline
+delete-undo
+delete
+device-hub
+done-box-outline
+done-box
+done-circle-outline
+done-circle
+done-negate
+done
+download
+dropbox-circle
+dropbox
+ebay-circle
+ebay
+email-outline
+email
+error
+exit
+expand
+facebook-circle
+facebook
+favorite-outline
+favorite
+file-add
+file-content
+file-restore
+file
+folder-add
+folder-open
+folder-share
+folder
+fullscreen-close
+fullscreen
+github-circle
+github
+gmail-circle
+gmail
+google-plus-circle
+google-plus
+group-add
+group-outline
+group
+help
+home
+image
+info
+instagram-circle
+instagram
+keyboard
+link-off
+link
+linkedin-circle
+linkedin
+linux
+lock-open
+lock
+mastercard-circle
+mastercard
+menu
+messenger-circle
+messenger
+mic-off
+mic
+mouse
+music
+outlook-circle
+outlook
+palette-outline
+palette
+pause-circle-outline
+pause-circle
+pause
+person-add
+person-outline
+person
+phone
+play-circle-outline
+play-circle
+play
+power
+radio-button-checked
+radio-button
+receipt
+reddit-circle
+reddit
+refresh
+reload
+remove-circle-outline
+remove-circle
+remove
+rss-circle
+rss
+search
+security
+server
+settings
+shopping-cart-add
+shopping-cart-remove
+shopping-cart
+skype-circle
+skype
+smartphone
+snapchat-circle
+snapchat
+soundcloud-circle
+soundcloud
+spotify
+stackoverflow-circle
+stackoverflow
+star-empty
+star-full
+star-half
+storage
+store
+tablet
+thumb-down
+thumb-up
+toggle-off
+toggle-on
+tumblr-circle
+tumblr
+twitter-circle
+twitter
+video
+visa-circle
+visa
+volume-down
+volume-mute
+volume-speaker
+volume
+warning
+windows-circle
+windows
+work-off
+work-outline
+work
+youtube-circle
+youtube
+zoom-in
+zoom-out`.split("\n");
 
         for (const icon of icons)
             createIcon(icon);

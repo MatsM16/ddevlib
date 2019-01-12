@@ -149,6 +149,7 @@ star-full
 star-half
 storage
 store
+tablet
 thumb-down
 thumb-up
 toggle-off
