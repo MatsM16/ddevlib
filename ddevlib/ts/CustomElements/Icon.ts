@@ -1,6 +1,8 @@
 import { define } from "./Define.js";
 import { Web } from "../Web.js";
 
+export const loadedIcons: Map<string, string> = new Map<string, string>();
+
 export class HTMLIconElement extends HTMLElement
 {
     readonly iconFolder = "/ddevlib/icons/svg/";
@@ -32,18 +34,24 @@ export class HTMLIconElement extends HTMLElement
             .trim()
             .replace(/[\s\_\.\-\,]+/g, "-")
 
-        try
+        if (loadedIcons.has(icon))
+            this.innerHTML = loadedIcons.get(icon) as string;
+        else
         {
-            let svg = await Web.get(this.iconFolder + icon + ".svg", "TEXT") as string;
+            try
+            {
+                let svg = await Web.get(this.iconFolder + icon + ".svg", "TEXT") as string;
+    
+                this.innerHTML = svg;
+                this.setAttribute("value", icon);
 
-            this.innerHTML = svg;
-            this.setAttribute("value", icon);
+                loadedIcons.set(icon, svg);
+            }
+            catch (e)
+            {
+                this.innerHTML = "";
+            }
         }
-        catch (e)
-        {
-            this.innerHTML = "";
-        }
-
     }
 }
 
