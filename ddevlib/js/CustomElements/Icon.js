@@ -1,5 +1,6 @@
 import { define } from "./Define.js";
 import { Web } from "../Web.js";
+export const loadedIcons = new Map();
 export class HTMLIconElement extends HTMLElement {
     constructor() {
         super();
@@ -21,13 +22,18 @@ export class HTMLIconElement extends HTMLElement {
         icon = icon
             .trim()
             .replace(/[\s\_\.\-\,]+/g, "-");
-        try {
-            let svg = await Web.get(this.iconFolder + icon + ".svg", "TEXT");
-            this.innerHTML = svg;
-            this.setAttribute("value", icon);
-        }
-        catch (e) {
-            this.innerHTML = "";
+        if (loadedIcons.has(icon))
+            this.innerHTML = loadedIcons.get(icon);
+        else {
+            try {
+                let svg = await Web.get(this.iconFolder + icon + ".svg", "TEXT");
+                this.innerHTML = svg;
+                this.setAttribute("value", icon);
+                loadedIcons.set(icon, svg);
+            }
+            catch (e) {
+                this.innerHTML = "";
+            }
         }
     }
 }
