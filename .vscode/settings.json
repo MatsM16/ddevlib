@@ -8,7 +8,7 @@
         {
             "format": "expanded",
             "extensionName": ".css",
-            "savePath": "/ddevlib/css/ddevlib"
+            "savePath": "/src/css/ddev"
         }
     ],
     "liveSassCompile.settings.excludeList": [
