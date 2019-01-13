@@ -1,4 +1,4 @@
-import { ContextMenu } from "/ddevlib/js/contextmenu.js";
+import { ContextMenu } from "/src/js/ddev/contextmenu.js";
 ContextMenu.loadCSS();
 
 const create = () => ContextMenu.create(document.body, [
