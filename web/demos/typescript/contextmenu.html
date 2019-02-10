@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html data-theme="">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Demos > TS > Device Info</title>
+        
+        <!----><link rel="stylesheet" href="/src/css/ddev/settings.css"><!---->
+        <link rel="stylesheet" href="/src/css/ddev/main.css">
+        <link rel="stylesheet" href="/src/css/ddev/tables.css">
+
+        <style>
+
+            body {
+                padding: 0;
+                margin: 0;
+
+                width: 100vw;
+                height: 100vh;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            td:nth-child(2)
+            {
+                font-weight: bold;
+            }
+
+            body>div
+            {
+                width: 500px;
+                height: 500px;
+                border: 1px solid;
+                border-radius: var(--container-radius);
+
+                font-size: 20pt;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            /* --- Context menu --- */
+            div.contextmenu[data-contextmenu]
+            {
+                position: absolute;
+
+                width: 300px;
+                height: auto;
+
+                display: flex;
+                flex-direction: column;
+
+                font-family: var(--font-code, monospace);
+                font-size: calc(var(--font-size, 16pt) * 13 / 16 );
+
+                color: var(--text, #222);
+                background-color: var(--default, #EEE);
+                border: 1px solid;
+                border-radius: var(--container-radius, 5px);
+                overflow: hidden;
+
+                left: 0; top:0;
+
+                animation: dd-contextmenu-poppup var(--default-transition-duration, 0.2s) 1;
+            }
+
+            div.contextmenu[data-contextmenu]>span.contextmenu-item[data-contextmenu-item]
+            {
+                width: 100%;
+                padding: 5px;
+                box-sizing: border-box;
+                color: var(--text, #222);
+                transition: color, background-color;
+                transition-duration: var(--default-transition-duration, 0.2s);
+            }
+
+            div.contextmenu[data-contextmenu]>span.contextmenu-item[data-contextmenu-item].under-border
+            {
+                border-bottom: 1px solid var(--text, #222);
+            }
+
+            div.contextmenu[data-contextmenu]>span.contextmenu-item[data-contextmenu-item]:hover
+            {
+                color: var(--info, lightcoral);
+                background-color: var(--default-alt, lightgray)
+            }
+
+            @keyframes dd-contextmenu-poppup
+            {
+                from
+                {
+                    opacity: 0;
+                    transform: scale(0.5)
+                }
+
+                to
+                {
+                    opacity: 1;
+                    transform: scale(1)
+                }
+            }
+
+        </style>
+    </head>
+    <body class="a">
+        
+        <div class="a b">
+            Right-click me!
+        </div>
+
+        <!-- START: Important stuff -->
+        <script type="module">
+            import { ContextMenu } from "/src/js/ddev/ContextMenu.js";
+            
+            ContextMenu.create(document.body.querySelector("div"), {
+                text: "Item 1",
+                onclick: () => alert("Item 1 was clicked!")
+            }, {
+                text: "Item 2",
+                onclick: () => alert("Item 2 was clicked!"),
+                border_under: true,
+            }, {
+                text: "Other Item 1",
+                onclick: () => alert("Other Item 1 was clicked!")
+            }, {
+                text: "Other Item 2",
+                onclick: () => alert("Other Item 2 was clicked!")
+            })
+
+        </script>
+        <!-- END: Important stuff -->
+
+        <script type="module" src="/web/js/css.js"></script>
+    </body>
+</html>
