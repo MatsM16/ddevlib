@@ -42,6 +42,11 @@ export namespace Web
     {
         Requests.globalHeaders.set(name, value);
     }
+
+    export function get(url: string, responseType?: RequestDataType)
+    {
+        return send("GET", url, responseType);
+    }
 }
 
 //
