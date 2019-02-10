@@ -61,19 +61,19 @@ export class HTMLCodeEditorElement extends HTMLElement
 
         if (this.src) this.setSource(this.src);
 
-        const ctx = new ContextMenu(this, [
+        const ctx = new ContextMenu(
             {
                 text: "Download",
-                func: () => this.download(),
-                border: true,
+                onclick: () => this.download(),
+                border_under: true,
                 description: "Download the code to a local file"
             },
             {
                 text: "Copy",
-                func: () => this.copy(),
+                onclick: () => this.copy(),
                 description: "Copy all the present code"
             }
-        ]);
+        );
     }
 
     insert(text: string)

@@ -42,19 +42,16 @@ export class HTMLCodeEditorElement extends HTMLElement {
         this.readonly = this.hasAttribute("readonly");
         if (this.src)
             this.setSource(this.src);
-        const ctx = new ContextMenu(this, [
-            {
-                text: "Download",
-                func: () => this.download(),
-                border: true,
-                description: "Download the code to a local file"
-            },
-            {
-                text: "Copy",
-                func: () => this.copy(),
-                description: "Copy all the present code"
-            }
-        ]);
+        const ctx = new ContextMenu({
+            text: "Download",
+            onclick: () => this.download(),
+            border_under: true,
+            description: "Download the code to a local file"
+        }, {
+            text: "Copy",
+            onclick: () => this.copy(),
+            description: "Copy all the present code"
+        });
     }
     insert(text) {
         this.inputElement.focus();
