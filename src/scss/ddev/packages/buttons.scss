@@ -1,5 +1,31 @@
 @import './buttons/_animations.scss';
 
+@mixin colorBtn($color)
+{
+    border: 1px solid var(--#{$color});
+    color: var(--#{$color});
+    border-color: var(--#{$color});
+
+    &:hover
+    {
+        background-color: var(--#{$color});
+        color: var(--text-alt);
+    }
+
+    &.filled
+    {
+        border: 0;
+        background-color: var(--#{$color});
+        color: var(--text-alt);
+
+        &:hover
+        {
+            border: 0;
+            background-color: var(--#{$color}-alt);
+        }
+    }
+}
+
 button,
 a.btn {
     display: inline-flex;
@@ -18,13 +44,8 @@ a.btn {
     transition-duration: var(--default-transition-time);
     
     background-color: transparent;
-    color: var(--primary);
-    border: var(--button-border) var(--primary);
-
-    &:hover {
-        background-color: var(--primary);
-        color: var(--text-alt);
-    }
+    
+    @include colorBtn(primary);
     
     /* --- Icon --- */
 
@@ -49,93 +70,13 @@ a.btn {
         cursor: not-allowed;
     }
 
-    &.filled {
-        border: 0;
-        background-color: var(--primary);
-        color: var(--text-alt);
-
-        &:hover {
-            border: 0;
-            background-color: var(--primary-alt);
-            color: var(--text-alt);
-        }
-    }
-
     /* --- Color variants --- */
 
-    &.info {
-        color: var(--info);
-        border-color: var(--info);
+    &.info { @include colorBtn(info) }
 
-        &:hover {
-            background-color: var(--info);
-            color: var(--text-alt);
-        }
+    &.success { @include colorBtn(success) }
 
-        &.filled {
-            background-color: var(--info);
-            color: var(--text-alt);
+    &.warning { @include colorBtn(warning) }
 
-            &:hover {
-                background-color: var(--info-alt);
-            }
-        }
-    }
-
-    &.success {
-        color: var(--success);
-        border-color: var(--success);
-
-        &:hover {
-            background-color: var(--success);
-            color: var(--text-alt);
-        }
-
-        &.filled {
-            background-color: var(--success);
-            color: var(--text-alt);
-
-            &:hover {
-                background-color: var(--success-alt);
-            }
-        }
-    }
-
-    &.warning {
-        color: var(--warning);
-        border-color: var(--warning);
-
-        &:hover {
-            background-color: var(--warning);
-            color: var(--text-alt);
-        }
-
-        &.filled {
-            background-color: var(--warning);
-            color: var(--text-alt);
-
-            &:hover {
-                background-color: var(--warning-alt);
-            }
-        }
-    }
-
-    &.error {
-        color: var(--error);
-        border-color: var(--error);
-
-        &:hover {
-            background-color: var(--error);
-            color: var(--text-alt);
-        }
-
-        &.filled {
-            background-color: var(--error);
-            color: var(--text-alt);
-
-            &:hover {
-                background-color: var(--error-alt);
-            }
-        }
-    }
+    &.error { @include colorBtn(error) }
 }
