@@ -1,0 +1,48 @@
+.loading.bars
+{
+    @mixin loading-bars {
+        background: var(--loading-color);
+        animation: loading-bars var(--loading-animation-time) infinite ease-in-out;
+        width: 15px;
+        height: 40px;
+    }
+
+    color: var(--loading-color);
+    position: relative;
+    transform: translateZ(0);
+    animation-delay: -0.16s;
+    margin: 0 20px;
+
+    @include loading-bars();
+
+    &::before,
+    &::after {
+        position: absolute;
+        top: 0;
+        content: '';
+
+        @include loading-bars();
+    }
+
+    &::before {
+        left: -20px;
+        animation-delay: -0.32s;
+    }
+
+    &::after {
+        left: 20px;
+    }
+
+    @keyframes loading-bars {
+        0%,
+        80%,
+        100% {
+            box-shadow: 0 0;
+            height: 30px;
+        }
+        40% {
+            box-shadow: 0 -15px;
+            height: 40px;
+        }
+    }
+}

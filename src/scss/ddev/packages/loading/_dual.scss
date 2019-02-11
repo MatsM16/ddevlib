@@ -1,0 +1,18 @@
+.loading.dual
+{
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+
+    &::after {
+        content: "";
+        display: block;
+        width: 46px;
+        height: 46px;
+        margin: 1px;
+        border-radius: 50%;
+        border: 5px solid var(--loading-color);
+        border-color: var(--loading-color) transparent var(--loading-color) transparent;
+        animation: loading-spin var(--loading-animation-time) linear infinite;
+    }
+}

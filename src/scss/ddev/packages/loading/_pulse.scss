@@ -1,0 +1,19 @@
+.loading.pulse
+{
+    width: 51px;
+    height: 51px;
+    background-color: var(--loading-color);
+    margin: 0 10px;
+  
+    border-radius: 50%;  
+    animation: loading-pulse var(--loading-animation-time) infinite ease-in-out;
+
+    @keyframes loading-pulse {
+      0% { 
+        transform: scale(0);
+      } 100% {
+        transform: scale(1.0);
+        opacity: 0;
+      }
+    }
+}
