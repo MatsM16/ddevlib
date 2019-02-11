@@ -66,8 +66,9 @@ a.btn {
   -webkit-transition-duration: var(--default-transition-time);
           transition-duration: var(--default-transition-time);
   background-color: transparent;
+  border: 1px solid var(--primary);
   color: var(--primary);
-  border: var(--button-border) var(--primary);
+  border-color: var(--primary);
   /* --- Icon --- */
   /* --- Modifiers --- */
   /* --- Color variants --- */
@@ -77,6 +78,19 @@ button:hover,
 a.btn:hover {
   background-color: var(--primary);
   color: var(--text-alt);
+}
+
+button.filled,
+a.btn.filled {
+  border: 0;
+  background-color: var(--primary);
+  color: var(--text-alt);
+}
+
+button.filled:hover,
+a.btn.filled:hover {
+  border: 0;
+  background-color: var(--primary-alt);
 }
 
 button img,
@@ -101,22 +115,9 @@ a.btn:disabled {
   cursor: not-allowed;
 }
 
-button.filled,
-a.btn.filled {
-  border: 0;
-  background-color: var(--primary);
-  color: var(--text-alt);
-}
-
-button.filled:hover,
-a.btn.filled:hover {
-  border: 0;
-  background-color: var(--primary-alt);
-  color: var(--text-alt);
-}
-
 button.info,
 a.btn.info {
+  border: 1px solid var(--info);
   color: var(--info);
   border-color: var(--info);
 }
@@ -129,17 +130,20 @@ a.btn.info:hover {
 
 button.info.filled,
 a.btn.info.filled {
+  border: 0;
   background-color: var(--info);
   color: var(--text-alt);
 }
 
 button.info.filled:hover,
 a.btn.info.filled:hover {
+  border: 0;
   background-color: var(--info-alt);
 }
 
 button.success,
 a.btn.success {
+  border: 1px solid var(--success);
   color: var(--success);
   border-color: var(--success);
 }
@@ -152,17 +156,20 @@ a.btn.success:hover {
 
 button.success.filled,
 a.btn.success.filled {
+  border: 0;
   background-color: var(--success);
   color: var(--text-alt);
 }
 
 button.success.filled:hover,
 a.btn.success.filled:hover {
+  border: 0;
   background-color: var(--success-alt);
 }
 
 button.warning,
 a.btn.warning {
+  border: 1px solid var(--warning);
   color: var(--warning);
   border-color: var(--warning);
 }
@@ -175,17 +182,20 @@ a.btn.warning:hover {
 
 button.warning.filled,
 a.btn.warning.filled {
+  border: 0;
   background-color: var(--warning);
   color: var(--text-alt);
 }
 
 button.warning.filled:hover,
 a.btn.warning.filled:hover {
+  border: 0;
   background-color: var(--warning-alt);
 }
 
 button.error,
 a.btn.error {
+  border: 1px solid var(--error);
   color: var(--error);
   border-color: var(--error);
 }
@@ -198,12 +208,14 @@ a.btn.error:hover {
 
 button.error.filled,
 a.btn.error.filled {
+  border: 0;
   background-color: var(--error);
   color: var(--text-alt);
 }
 
 button.error.filled:hover,
 a.btn.error.filled:hover {
+  border: 0;
   background-color: var(--error-alt);
 }
 /*# sourceMappingURL=buttons.css.map */
