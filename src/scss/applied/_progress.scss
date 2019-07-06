@@ -1,0 +1,64 @@
+@import "../lib/settings";
+@import "../lib/common";
+@import "../lib/paper";
+
+progress.prog
+{
+    all: unset;
+    display: inline-block;
+    height: calc(0.7 * #{$icon-size});
+    width: 10rem;
+    border-radius: $component-radius-round;
+    position: relative;
+
+    &::-webkit-progress-bar
+    { 
+        background-color: $default-darker;
+        border-radius: $component-radius-round;
+    }
+
+    &[value]
+    {
+        &::-webkit-progress-value
+        { 
+            background-color: currentColor;
+            border-radius: $component-radius-round;
+        }
+    }
+
+    &:not([value])
+    {
+        overflow: hidden;
+        &::before
+        {
+            content: "";
+            display: block;
+            position: absolute;
+            height: 100%;
+            width: 30%;
+            background-color: currentColor;
+            border-radius: $component-radius-round;
+            box-shadow: $component-shadow;
+
+            animation: progress-loading-animation $animation-time infinite ease-in-out;
+        }
+    }
+
+    color: $primary;
+    &.secondary
+    { color: $secondary }
+    &.info
+    { color: $info }
+    &.success
+    { color: $success }
+    &.warning
+    { color: $warning }
+    &.error
+    { color: $error }
+}
+
+@keyframes progress-loading-animation
+{
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(330%); }
+}

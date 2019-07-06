@@ -1,0 +1,369 @@
+<html lang="en" data-theme="lux">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DDevLib > Demos</title>
+
+    <link rel="stylesheet" href="css/std.css">
+    <link rel="stylesheet" href="css/themes.css">
+</head>
+<body>
+    <div class="dialog">
+        Theme: 
+        <input type="radio" name="theme" class="rb-chip" title="Default" data-light="light" data-dark="dark"       checked>
+        <input type="radio" name="theme" class="rb-chip" title="Lux"     data-light="lux"   data-dark="lux-dark"   >
+        <input type="radio" name="theme" class="rb-chip" title="Orica"   data-light="orica" data-dark="orica-dark" >
+        <input type="radio" name="theme" class="rb-chip" title="Azure"   data-light="azure" data-dark="azure-dark" >
+        Dark: 
+        <input type="checkbox" class="cb-switch">
+        <script>
+            (() => {
+                const themeButtons = document.querySelectorAll(".dialog input[type='radio']");
+                const dark         = document.querySelector   (".dialog input[type='checkbox']");
+
+                const updateTheme = () =>
+                {
+                    for (const btn of themeButtons)
+                    {
+                        if (btn.checked)
+                        {
+                            const l = btn.getAttribute("data-light");
+                            const d  = btn.getAttribute("data-dark");
+
+                            document.body.parentElement.setAttribute("data-theme", dark.checked ? d : l);
+                        }
+                    }
+                }
+                updateTheme();
+
+                for (const btn of themeButtons)
+                    btn.onchange = updateTheme;
+                dark.onchange = updateTheme;
+            })();
+        </script>
+        <style>
+            .dialog
+            {
+                position: absolute;
+                top: 0.2rem;
+                right: 2rem;
+            }
+
+            .paper:first-child
+            {
+                margin-top: 1rem;
+            }
+        </style>
+    </div>
+    <main class="view-posts">
+        <section class="demo paper">
+            <h1>Heading...</h1>
+            <h2>Heading...</h2>
+            <h3>Heading...</h3>
+            <h4>Heading...</h4>
+            <h5>Heading...</h5>
+            <h6>Heading...</h6>
+            <br>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque dicta voluptate reiciendis ratione non repellendus voluptatum saepe, sed molestias hic similique error veritatis optio eos magni. Rerum culpa corporis officiis?
+                <br>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut facere quod id, sunt voluptatem sint ea itaque necessitatibus esse? Voluptate reiciendis dolorum, accusantium magni impedit laborum sint repudiandae ea et.
+            </p>
+            <br>
+            <p>
+                <a class="link">Empty link</a>
+                <br>
+                <a href="#" class="link">Link</a>
+            </p>
+            <p>
+                <ol class="ol-striking">
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                    <li>Item 3</li>
+                    <li>Item 4</li>
+                </ol>
+            </p>
+        </section>
+        <section class="demo paper">
+            <h3>Buttons</h3>
+            
+            <table>
+                <tr>
+                    <td>
+                        <button class="btn">Normal</button>
+                    </td>
+                    <td>
+                        <button class="btn-filled">Filled</button>
+                    </td>
+                    <td>
+                        <button class="btn-outlined">Outlined</button>
+                    </td>
+                    <td>
+                        <button class="round btn">Normal</button>
+                    </td>
+                    <td>
+                        <button class="round btn-filled">Filled</button>
+                    </td>
+                    <td>
+                        <button class="round btn-outlined">Outlined</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="secondary btn">Normal</button>
+                    </td>
+                    <td>
+                        <button class="secondary btn-filled">Filled</button>
+                    </td>
+                    <td>
+                        <button class="secondary btn-outlined">Outlined</button>
+                    </td>
+                    <td>
+                        <button class="secondary round btn">Normal</button>
+                    </td>
+                    <td>
+                        <button class="secondary round btn-filled">Filled</button>
+                    </td>
+                    <td>
+                        <button class="secondary round btn-outlined">Outlined</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="info btn">Normal</button>
+                    </td>
+                    <td>
+                        <button class="info btn-filled">Filled</button>
+                    </td>
+                    <td>
+                        <button class="info btn-outlined">Outlined</button>
+                    </td>
+                    <td>
+                        <button class="info round btn">Normal</button>
+                    </td>
+                    <td>
+                        <button class="info round btn-filled">Filled</button>
+                    </td>
+                    <td>
+                        <button class="info round btn-outlined">Outlined</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="success btn">Normal</button>
+                    </td>
+                    <td>
+                        <button class="success btn-filled">Filled</button>
+                    </td>
+                    <td>
+                        <button class="success btn-outlined">Outlined</button>
+                    </td>
+                    <td>
+                        <button class="success round btn">Normal</button>
+                    </td>
+                    <td>
+                        <button class="success round btn-filled">Filled</button>
+                    </td>
+                    <td>
+                        <button class="success round btn-outlined">Outlined</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="warning btn">Normal</button>
+                    </td>
+                    <td>
+                        <button class="warning btn-filled">Filled</button>
+                    </td>
+                    <td>
+                        <button class="warning btn-outlined">Outlined</button>
+                    </td>
+                    <td>
+                        <button class="warning round btn">Normal</button>
+                    </td>
+                    <td>
+                        <button class="warning round btn-filled">Filled</button>
+                    </td>
+                    <td>
+                        <button class="warning round btn-outlined">Outlined</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="error btn">Normal</button>
+                    </td>
+                    <td>
+                        <button class="error btn-filled">Filled</button>
+                    </td>
+                    <td>
+                        <button class="error btn-outlined">Outlined</button>
+                    </td>
+                    <td>
+                        <button class="error round btn">Normal</button>
+                    </td>
+                    <td>
+                        <button class="error round btn-filled">Filled</button>
+                    </td>
+                    <td>
+                        <button class="error round btn-outlined">Outlined</button>
+                    </td>
+                </tr>
+            </table>
+        </section>
+        <section class="demo paper">
+            <h3>Tables</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Header 1</th>
+                        <th>Header 2</th>
+                        <th>Header 3</th>
+                        <th>Header 4</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Data 1</td>
+                        <td>Data 2</td>
+                        <td>Data 3</td>
+                        <td>Data 4</td>
+                    </tr>
+                    <tr>
+                        <td>Data 1</td>
+                        <td>Data 2</td>
+                        <td>Data 3</td>
+                        <td>Data 4</td>
+                    </tr>
+                    <tr>
+                        <td>Data 1</td>
+                        <td>Data 2</td>
+                        <td>Data 3</td>
+                        <td>Data 4</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <table class="table primary selectable">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Header 1</th>
+                        <th>Header 2</th>
+                        <th>Header 3</th>
+                        <th>Header 4</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Header 1</th>
+                        <td>Data 1</td>
+                        <td>Data 2</td>
+                        <td>Data 3</td>
+                        <td>Data 4</td>
+                    </tr>
+                    <tr>
+                        <th>Header 2</th>
+                        <td>Data 1</td>
+                        <td>Data 2</td>
+                        <td>Data 3</td>
+                        <td>Data 4</td>
+                    </tr>
+                    <tr>
+                        <th>Header 3</th>
+                        <td>Data 1</td>
+                        <td>Data 2</td>
+                        <td>Data 3</td>
+                        <td>Data 4</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="demo paper">
+            <h3>Input</h3>
+            <h4>Switch</h4>
+            <input type="checkbox" checked class="cb-switch">
+            <input type="checkbox" class="cb-switch">
+            <h4>Check</h4>
+            <input type="checkbox" checked class="cb">
+            <input type="checkbox" checked class="cb-cross">
+            <input type="checkbox" checked class="cb-remove">
+            <input type="checkbox" checked class="cb-add">
+            <input type="checkbox" checked class="cb-fill">
+            <input type="checkbox" class="cb">
+            <h4>Radios</h4>
+            <input type="radio" name="rg-1" checked class="rb">
+            <input type="radio" name="rg-1" class="rb-fill">
+            <input type="radio" name="rg-1" class="rb">
+            <h4>Chips</h4>
+            <input type="radio" name="rg-2" class="rb-chip" title="07:00" checked>
+            <input type="radio" name="rg-2" class="rb-chip" title="09:00">
+            <input type="radio" name="rg-2" class="rb-chip" title="10:00">
+            <br><br>
+            <input type="checkbox" class="cb-chip" title="Breakfast" checked>
+            <input type="checkbox" class="cb-chip" title="Lunch">
+            <input type="checkbox" class="cb-chip" title="Dinner">
+            <h5>Minimal</h5>
+            <input type="radio" name="rg-3" class="rb-chip-minimal" title="07:00" checked>
+            <input type="radio" name="rg-3" class="rb-chip-minimal" title="09:00">
+            <input type="radio" name="rg-3" class="rb-chip-minimal" title="10:00">
+            <br><br>
+            <input type="checkbox" class="cb-chip-minimal" title="Breakfast" checked>
+            <input type="checkbox" class="cb-chip-minimal" title="Lunch">
+            <input type="checkbox" class="cb-chip-minimal" title="Dinner">
+            <h4>Range</h4>
+            <input type="range" class="range">
+            <h4>Text</h4>
+            <input type="text" class="inp" placeholder="Name">
+            <input type="text" class="inp-underline" placeholder="Name">
+            <input type="text" class="inp-minimal" placeholder="Name">
+            <h4>Select</h4>
+            <select class="inp">
+                <option>Option A</option>
+                <option>Option B</option>
+                <option>Option C</option>
+            </select>
+            <select class="inp-underline">
+                <option>Option A</option>
+                <option>Option B</option>
+                <option>Option C</option>
+            </select>
+            <select class="inp-minimal">
+                <option>Option A</option>
+                <option>Option B</option>
+                <option>Option C</option>
+            </select>
+            <h4>Progress</h4>
+            <progress class="prog"></progress>
+            <br><br>
+            <progress class="prog" value=".5"></progress>
+        </section>
+        <section class="demo paper">
+            <h3>Loading</h3>
+            <div id="animations">
+                <div class="loading-square"         title="loading-square"></div>
+                <div class="loading-bounce"         title="loading-bounce"></div>
+                <div class="loading-moving-squares" title="loading-moving-squares"></div>
+                <div class="loading-pulse"          title="loading-pulse"></div>
+                <div class="loading-moving-bounce"  title="loading-moving-bounce"></div>
+                <div class="loading-circle"         title="loading-circle"></div>
+                <div class="loading-ripple"         title="loading-ripple"></div>
+                <div class="loading-coin"           title="loading-coin"></div>
+                <div class="loading-dual"           title="loading-dual"></div>
+            </div>
+            <style>
+                #animations
+                {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
+                    grid-template-rows: 4rem;
+                    grid-gap: 1rem;
+                }
+            </style>
+        </section>
+    </main>
+    <footer>
+
+    </footer>
+</body>
+</html>

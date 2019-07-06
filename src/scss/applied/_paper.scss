@@ -1,0 +1,9 @@
+@import "../lib/settings";
+@import "../lib/common";
+@import "../lib/paper";
+
+.paper
+{
+    @include paper-container();
+    padding: $container-spacing;
+}

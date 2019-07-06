@@ -1,0 +1,45 @@
+@import "./themes/base";
+@import "./applied/table";
+
+@import "./applied/view";
+@import "./applied/paper";
+@import "./applied/loading";
+
+@import "./applied/headings";
+
+@import "./applied/button";
+@import "./applied/check";
+@import "./applied/range";
+@import "./applied/text";
+@import "./applied/progress";
+@import "./applied/link";
+@import "./applied/lists";
+
+html
+{
+
+}
+
+body
+{
+    margin: 0;
+    font-family: var(--font);
+
+    width: 100%;
+    max-width: 100vw;
+    min-height: 100vh;
+
+    background-color: $background;
+    @include color($text);
+}
+
+*
+{
+    box-sizing: border-box;
+}
+
+.container
+{
+    @include paper-container();
+    padding: $container-spacing;
+}

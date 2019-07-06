@@ -1,0 +1,146 @@
+@import "../lib/settings";
+@import "../lib/common";
+@import "../lib/paper";
+
+select.inp,
+input.inp,
+span.inp
+{
+    &
+    {
+        @include reset();
+        background-color: $default;
+        @include color($text);
+
+        padding: calc(0.7 * #{$component-spacing}) $component-spacing;
+        border-radius: $component-radius;
+        border: 1.5px solid $default-darker;
+
+        transition: 
+            border-color;
+        transition-duration: $transition-time;
+        
+        &.secondary,
+        &.info,
+        &.success,
+        &.warning,
+        &.error,
+        &:focus
+        {
+            border-color: $primary;
+            &.secondary
+            { border-color: $secondary; }
+            &.info
+            { border-color: $info; }
+            &.success
+            { border-color: $success; }
+            &.warning
+            { border-color: $warning; }
+            &.error
+            { border-color: $error; }
+        }
+    
+        &::-webkit-input-placeholder
+        {
+            @include color($text);
+            opacity: $disabled-opacity;
+        }
+    }
+
+    &-underline
+    {
+        @include reset();
+
+        padding: calc(0.7 * #{$component-spacing}) $component-spacing;
+        
+        border: none;
+        border-radius: $component-radius;
+        border-bottom: 1.5px solid $text;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+
+        background-color: $default-dark;
+    
+        transition: 
+            border-color,
+            background-color;
+        transition-duration: $transition-time;
+    
+        &:focus
+        {
+            background-color: $default-darker;
+        }
+    
+        &::-webkit-input-placeholder
+        {
+            @include color($text);
+            opacity: $disabled-opacity;
+        }
+
+        color: $text;
+        border-color: $primary;
+
+        &.secondary
+        { 
+            color: $secondary;
+            border-color: $secondary;
+        }
+        &.info
+        {
+            color: $info;
+            border-color: $info;
+        }
+        &.success
+        {
+            color: $success;
+            border-color: $success;
+        }
+        &.warning
+        {
+            color: $warning;
+            border-color: $warning;
+        }
+        &.error
+        {
+            color: $error;
+            border-color: $error;
+        }
+    }
+
+    &-minimal
+    {
+        @include reset();
+        border: none;
+        
+        padding: calc(0.7 * #{$component-spacing}) $component-spacing;
+        border-radius: $component-radius;
+
+        background-color: $default-dark;
+    
+        transition: 
+            border-color,
+            background-color;
+        transition-duration: $transition-time;
+    
+        &:focus
+        { background-color: $default-darker; }
+
+        color: $text;
+        &.secondary
+        { color: $secondary; }
+        &.info
+        { color: $info; }
+        &.success
+        { color: $success; }
+        &.warning
+        { color: $warning; }
+        &.error
+        { color: $error; }
+    
+        &::-webkit-input-placeholder
+        {
+            @include color($text);
+            opacity: $disabled-opacity;
+        }
+    }
+}

@@ -1,0 +1,39 @@
+ol.ol
+{
+    &-striking
+    {
+        list-style: none;
+        padding: 0;
+        counter-reset: olStriking;
+
+        li
+        {
+            position: relative;
+            padding: calc(0.5 * #{$component-spacing});
+            padding-left: calc(2 * #{$component-spacing});
+        }
+
+        li::before
+        {
+            counter-increment: olStriking;
+            content: counter(olStriking);
+
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            border-radius: 100%;
+
+            color: $default;
+            background: $primary;
+
+            display: flex;
+            width: 1.5rem;
+            height: 1.5rem;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 0.8rem;
+        }
+    }
+}

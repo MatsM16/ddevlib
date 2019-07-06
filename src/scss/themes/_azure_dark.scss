@@ -1,0 +1,30 @@
+[data-theme="azure-dark"]
+{
+    //
+    // Containers and components
+    //
+    --container-radius: 0.1rem;
+    --container-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.7);
+    
+    --component-radius: 0.1rem;
+    --component-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+
+    //
+    // Colors
+    //
+    --background: #1c1f27;
+
+    --text: #c2c8ce;
+
+    --default: #393C48;
+    --default-dark: #363844;
+    --default-darker: #333541;
+
+    --primary: #3A6CDB;
+    --primary-dark: #2b5abe;
+    --primary-darker: #234eac;
+
+    --secondary: #7A41D7;
+    --secondary-dark: #6631bd;
+    --secondary-darker: #5d2aaf;
+}

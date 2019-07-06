@@ -1,0 +1,19 @@
+{
+    "workbench.tree.renderIndentGuides": "none",
+    "scss.lint.idSelector": "warning",
+    "scss.lint.important": "warning",
+    "scss.lint.float": "warning",
+    "liveSassCompile.settings.formats": [
+        {
+          "format": "compressed",
+          "extensionName": ".min.css",
+          "savePath": "/build/css"
+        },
+        {
+            "format": "expanded",
+            "extensionName": ".css",
+            "savePath": "/build/css"
+        }
+    ],
+    "liveSassCompile.settings.generateMap": true,
+}

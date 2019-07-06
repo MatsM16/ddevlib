@@ -1,0 +1,85 @@
+@import "../lib/settings";
+@import "../lib/paper";
+
+table.table
+{
+    border-collapse: collapse;
+    @include paper-component($text, $default);
+    text-align: left;
+    
+    td
+    {
+        border-bottom: 2px solid $default-dark;
+        padding: $component-spacing;
+    }
+    th
+    {
+        border-bottom: 2px solid $default-dark;
+        border-right: 2px solid $default-dark;
+
+        padding: $component-spacing;
+        font-size: $font-size-small;
+        font-weight: bold;
+    }
+    thead th
+    {
+        border-right: 0;
+    }
+
+    :not(thead) tr:last-child
+    {
+        td, th
+        { border-bottom: 0; }
+    }
+    
+
+    &.selectable
+    {
+        tbody tr.selected,
+        tbody tr.active,
+        tbody tr:hover
+        {
+            @include paper-component($text, $default-dark);
+            cursor: pointer;
+        }
+
+        tbody tr:active
+        {
+            @include paper-component($text, $default-darker);
+            th, td
+            {
+                border-color: $default-darker;
+            }
+        }
+    }
+
+    &.primary
+    {
+        th { @include color($primary); }
+    }
+
+    &.secondary
+    {
+        th { @include color($secondary); }
+    }
+
+    &.info
+    {
+        th { @include color($info); }
+    }
+
+    &.success
+    {
+        th { @include color($success); }
+    }
+
+    &.warning
+    {
+        th { @include color($warning); }
+    }
+
+    &.error
+    {
+        th { @include color($error); }
+    }
+}

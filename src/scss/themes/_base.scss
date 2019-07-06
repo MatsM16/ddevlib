@@ -1,0 +1,77 @@
+html,
+[data-theme="light"]
+{
+    //
+    // Fonts
+    // 
+    --font: 'Tahoma', sans-serif;
+    --font-code: 'Consolas', monospace;
+    --font-size: 16pt;
+    --font-size-big: 32pt;
+    --font-size-bigger: 40pt;
+    --font-size-small: 10pt;
+
+    // 
+    // Misc
+    //
+    --diasbled-opacity: 0.65;
+
+    //
+    // Icons
+    // 
+    --icon-size: 1.1rem;
+
+    //
+    // Containers and components
+    //
+    --container-spacing: 2rem;
+    --container-radius: 0.3rem;
+    --container-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+    
+    --component-spacing: 1rem;
+    --component-radius: 0.3rem;
+    --component-radius-round: 100vw;
+    --component-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+
+    //
+    // Timing
+    //
+    --transition-time: 0.15s;
+    --animation-time: 1s;
+
+    //
+    // Colors
+    //
+    --background: #ecf0f1;
+
+    --text: #4f555c;
+    --text-alt: #fff;
+
+    --default: #fff;
+    --default-dark: #e9e9e9;
+    --default-darker: #d6d6d6;
+
+    --primary: #2C3E50;
+    --primary-dark: #1e2b37;
+    --primary-darker: #0c1218;
+
+    --secondary: #18BC9C;
+    --secondary-dark: #0f7864;
+    --secondary-darker: #094e42;
+
+    --info: #3498DB;
+    --info-dark: #2384c6;
+    --info-darker: #1d6da3;
+
+    --success: #18BC9C;
+    --success-dark: #149a80;
+    --success-darker: #107c67;
+
+    --warning: #F39C12;
+    --warning-dark: #d4860b;
+    --warning-darker: #bd7a0f;
+
+    --error: #E74C3C;
+    --error-dark: #e12e1c;
+    --error-darker: #c52718;
+}

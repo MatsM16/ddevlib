@@ -1,0 +1,20 @@
+@mixin color ($c)
+{
+    color: $c;
+    caret-color: currentColor;
+}
+
+@mixin clipPath ($path)
+{
+    -webkit-clip-path: $path;
+    clip-path: $path;
+}
+
+@mixin reset()
+{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    font: inherit;
+}

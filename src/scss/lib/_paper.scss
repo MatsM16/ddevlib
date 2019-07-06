@@ -1,0 +1,20 @@
+@import "./settings";
+@import "./common";
+
+@mixin paper-container ($fg: $text, $bg: $default)
+{
+    border-radius: $container-radius;
+    box-shadow: $container-shadow;
+
+    @include color($fg);
+    background-color: $bg;
+}
+
+@mixin paper-component($fg: $text-alt, $bg: $primary)
+{
+    border-radius: $component-radius;
+    box-shadow: $component-shadow;
+
+    @include color($fg);
+    background-color: $bg;
+}

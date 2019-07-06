@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "module": "esnext",
+    "strict": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "rootDir": "./src/ts",
+    "outDir": "./build/js"
+  }
+}

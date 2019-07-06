@@ -1,0 +1,263 @@
+@import "../lib/settings";
+@import "../lib/paper";
+
+%button-base
+{
+    @include reset();
+    border: none;
+
+    display: inline-flex;
+    position: relative;
+    padding: calc(0.7 * #{$component-spacing}) $component-spacing;
+    border-radius: $component-radius;
+    cursor: pointer;
+    overflow: hidden;
+
+    &.round
+    {
+        border-radius: $component-radius-round;
+    }
+}
+
+.btn
+{
+    &
+    {
+        @extend %button-base;
+
+        background-color: transparent;
+        z-index: 0;
+
+        @include color($primary);
+
+        &.secondary
+        { @include color($secondary) }
+
+        &.info
+        { @include color($info) }
+
+        &.success
+        { @include color($success) }
+
+        &.warning
+        { @include color($warning) }
+
+        &.error
+        { @include color($error) }
+
+        &::before,
+        &::after
+        {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+    
+            background-color: currentColor;
+            z-index: -1;
+
+            left: 50%;
+            top: 50%;
+
+            border-radius: 100vw;
+    
+            opacity: 0;
+            transform: 
+                translateX(-50%) 
+                translateY(-50%) 
+                scale(0);
+    
+            transition:
+                opacity,
+                transform,
+                border-radius;
+            transition-duration: $transition-time;
+        }
+    
+        &:hover::before
+        {
+            opacity: 0.1;
+            border-radius: 0;
+            transform: 
+                translateX(-50%)
+                translateY(-50%)
+                scale(1);
+        }
+        &:active::after
+        {
+            //animation: btn-minimal-circle 0.2s;
+            opacity: 0.2;
+            border-radius: 0;
+            transform: 
+                translateX(-50%)
+                translateY(-50%)
+                scale(1);
+        }
+    }
+
+    &-filled
+    {
+        @extend %button-base;
+
+        transition: 
+            background-color;
+        transition-duration: $transition-time;
+
+        @include paper-component($text-alt, $primary);
+        &:hover
+        { background-color: $primary-dark }
+        &:active
+        { background-color: $primary-darker }
+
+        &.secondary
+        {
+            background-color: $secondary;
+            &:hover
+            { background-color: $secondary-dark }
+            &:active
+            { background-color: $secondary-darker }
+        }
+        &.info
+        {
+            background-color: $info;
+            &:hover
+            { background-color: $info-dark }
+            &:active
+            { background-color: $info-darker }
+        }
+        &.success
+        {
+            background-color: $success;
+            &:hover
+            { background-color: $success-dark }
+            &:active
+            { background-color: $success-darker }
+        }
+        &.warning
+        {
+            background-color: $warning;
+            &:hover
+            { background-color: $warning-dark }
+            &:active
+            { background-color: $warning-darker }
+        }
+        &.error
+        {
+            background-color: $error;
+            &:hover
+            { background-color: $error-dark }
+            &:active
+            { background-color: $error-darker }
+        }
+    }
+
+    &-outlined
+    {
+        @extend %button-base;
+
+        border: 1.5px solid currentColor;
+        background-color: transparent;
+        z-index: 0;
+
+        @include color($primary);
+
+        &.secondary
+        { @include color($secondary) }
+
+        &.info
+        { @include color($info) }
+
+        &.success
+        { @include color($success) }
+
+        &.warning
+        { @include color($warning) }
+
+        &.error
+        { @include color($error) }
+
+        &::before,
+        &::after
+        {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+    
+            background-color: currentColor;
+            z-index: -1;
+
+            left: 50%;
+            top: 50%;
+
+            border-radius: 100vw;
+    
+            opacity: 0;
+            transform: 
+                translateX(-50%) 
+                translateY(-50%) 
+                scale(0);
+    
+            transition:
+                opacity,
+                transform,
+                border-radius;
+            transition-duration: $transition-time;
+        }
+    
+        &:hover::before
+        {
+            opacity: 0.1;
+            border-radius: 0;
+            transform: 
+                translateX(-50%)
+                translateY(-50%)
+                scale(1);
+        }
+        &:active::after
+        {
+            //animation: btn-minimal-circle 0.2s;
+            opacity: 0.2;
+            border-radius: 0;
+            transform: 
+                translateX(-50%)
+                translateY(-50%)
+                scale(1);
+        }
+    }
+}
+
+@keyframes btn-minimal-circle
+{
+    0%
+    {
+        opacity: 0;
+        border-radius: 100vw;
+        transform: 
+            translateX(-50%)
+            translateY(-50%)
+            scale(0)
+    }
+
+    80%
+    {
+        opacity: 0.2;
+        border-radius: 0;
+        transform: 
+            translateX(-50%)
+            translateY(-50%)
+            scale(1)
+    }
+
+    100%
+    {
+        opacity: 0;
+        border-radius: 0;
+        transform: 
+            translateX(-50%)
+            translateY(-50%)
+            scale(1)
+    }
+}

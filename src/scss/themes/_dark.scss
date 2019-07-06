@@ -1,0 +1,43 @@
+[data-theme="dark"]
+{
+    //
+    // Containers and components
+    //
+    --container-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.6);
+    --component-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.2);
+    //
+    // Colors
+    //
+    --background: #222;
+
+    --text: #dddddd;
+    --text-alt: #dddddd;
+
+    --default: #444;
+    --default-dark: #585656;
+    --default-darker: #6d6c6c;
+
+    --primary: #375a7f;
+    --primary-dark: #2b4764;
+    --primary-darker: #1d3146;
+
+    --secondary: #00bc8c;
+    --secondary-dark: #007053;
+    --secondary-darker: #004e39;
+
+    --info: #3498DB;
+    --info-dark: #2384c6;
+    --info-darker: #1d6da3;
+
+    --success: #18BC9C;
+    --success-dark: #149a80;
+    --success-darker: #107c67;
+
+    --warning: #F39C12;
+    --warning-dark: #d4860b;
+    --warning-darker: #bd7a0f;
+
+    --error: #E74C3C;
+    --error-dark: #e12e1c;
+    --error-darker: #c52718;
+}

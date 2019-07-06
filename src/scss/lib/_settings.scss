@@ -1,0 +1,73 @@
+//
+// Fonts
+// 
+$font             : var(--font, 'Tahoma', sans-serif);
+$font-code        : var(--font-code, 'Consolas', monospace);
+$font-size        : var(--font-size, 16pt);
+$font-size-big    : var(--font-size-big, 32pt);
+$font-size-bigger : var(--font-size-bigger, 40pt);
+$font-size-small  : var(--font-size-small, 10pt);
+
+// 
+// Misc
+// 
+$disabled-opacity : var(--disabled-opacity, 0.65);
+
+//
+// Containers and components
+//
+$container-spacing : var(--container-spacing, );
+$container-radius  : var(--container-radius, );
+$container-shadow  : var(--container-shadow, );
+
+$component-spacing      : var(--component-spacing, );
+$component-radius       : var(--component-radius, );
+$component-radius-round : var(--component-radius-round, );
+$component-shadow       : var(--component-shadow, );
+
+// 
+// Icon
+// 
+$icon-size : var(--icon-size, 3rem);
+
+// 
+// Timing
+//
+$transition-time : var(--transition-time, 0.15s);
+$animation-time  : var(--animation-time, 1s);
+
+//
+// Colors
+//
+$background : var(--background, );
+
+$text     : var(--text, );
+$text-alt : var(--text-alt, );
+
+$default          : var(--default, );
+$default-dark     : var(--default-dark, );
+$default-darker   : var(--default-darker, );
+
+$primary          : var(--primary, );
+$primary-dark     : var(--primary-dark, );
+$primary-darker   : var(--primary-darker, );
+
+$secondary        : var(--secondary, );
+$secondary-dark   : var(--secondary-dark, );
+$secondary-darker : var(--secondary-darker, );
+
+$info             : var(--info, );
+$info-dark        : var(--info-dark, );
+$info-darker      : var(--info-darker, );
+
+$success          : var(--success, );
+$success-dark     : var(--success-dark, );
+$success-darker   : var(--success-darker, );
+
+$warning          : var(--warning, );
+$warning-dark     : var(--warning-dark, );
+$warning-darker   : var(--warning-darker, );
+
+$error            : var(--error, );
+$error-dark       : var(--error-dark, );
+$error-darker     : var(--error-darker, );

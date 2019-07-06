@@ -1,0 +1,62 @@
+@import "../lib/settings";
+@import "../lib/common";
+@import "../lib/paper";
+
+@mixin rng-track
+{
+    height: calc(0.5 * #{$icon-size});
+    background-color: $default-darker;
+    border-radius: $component-radius-round;
+}
+
+@mixin rng-thumb
+{
+    all: unset;
+    appearance: none;
+    display: block;
+
+    width: $icon-size;
+    height: $icon-size;
+    border-radius: $component-radius-round;
+    box-shadow: $component-shadow;
+
+    transform: translateY(-25%);
+
+    transition: background-color $transition-time;
+
+    background-color: currentColor;
+}
+
+input.range
+{
+    all: unset;
+    cursor: pointer;
+    height: $icon-size;
+
+    color: $primary;
+
+    &.secondary
+    { color: $secondary }
+    &.info
+    { color: $info }
+    &.success
+    { color: $success }
+    &.warning
+    { color: $warning }
+    &.error
+    { color: $error }
+
+    &::-webkit-slider-runnable-track
+    { @include rng-track(); }
+    &::-moz-range-track
+    { @include rng-track(); }
+    &::-ms-track
+    { @include rng-track(); }
+
+    &::-webkit-slider-thumb
+    {@include rng-thumb(); }
+    &::-moz-range-thumb
+    { @include rng-thumb(); }
+    &::-ms-thumb
+    { @include rng-thumb(); }
+}

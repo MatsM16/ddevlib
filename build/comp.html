@@ -1,0 +1,122 @@
+<html lang="en" data-theme="azure">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DDevLib > Components</title>
+
+    <link rel="stylesheet" href="css/std.css">
+    <link rel="stylesheet" href="css/themes.css">
+
+    <style>
+
+        body
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .tournament
+        {
+            width: calc(100vw - 200px);
+            height: calc(100vh - 200px);
+
+            display: flex;
+            flex-direction: row;
+            grid-gap: var(--container-spacing);
+        }
+        .round
+        {
+            position: relative;
+            width: 100%;
+            margin-left: var(--container-spacing);
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        .round:first-child
+        {
+            margin-left: 0;
+        }
+        .round::before
+        {
+            content: attr(title);
+            position: absolute;
+            top: -75px;
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+        }
+        .match
+        {
+            /*
+            margin-top: var(--container-spacing);
+            padding: var(--component-spacing);
+            background-color: var(--default);
+            border-radius: var(--container-radius);
+            box-shadow: var(--container-shadow);*/
+        }
+        .match:first-child
+        {
+            margin-top: 0;
+        }
+        .team
+        {
+            box-shadow: var(--container-shadow);
+            margin-top: var(--component-spacing);
+        }
+        .team:first-child
+        {
+            margin-top: 0;
+        }
+
+    </style>
+</head>
+<body ontouchstart>
+
+    <div class="tournament">
+        <div class="round" title="Quarter-Finals">
+            <div class="match">
+                <dd-li class="team winner" text="Skjergard" trailtype="txt" trail="3"></dd-li>
+                <dd-li class="team winner" text="Sotra" trailtype="txt" trail="1"></dd-li>
+            </div>
+            <div class="match">
+                <dd-li class="team winner" text="Skjergard" trail="check"></dd-li>
+                <dd-li class="team winner" text="Sotra" trail="close"></dd-li>
+            </div>
+            <div class="match">
+                <dd-li class="team winner" text="Skjergard" trail="check"></dd-li>
+                <dd-li class="team winner" text="Sotra" trail="close"></dd-li>
+            </div>
+            <div class="match">
+                <dd-li class="team winner" text="Skjergard" trail="check"></dd-li>
+                <dd-li class="team winner" text="Sotra" trail="close"></dd-li>
+            </div>
+        </div>
+        <div class="round" title="Semi-Finals">
+            <div class="match">
+                <dd-li class="team winner" text="Skjergard" trail="check"></dd-li>
+                <dd-li class="team winner" text="Sotra" trail="close"></dd-li>
+            </div>
+            <div class="match">
+                <dd-li class="team winner" text="Skjergard" trail="check"></dd-li>
+                <dd-li class="team winner" text="Sotra" trail="close"></dd-li>
+            </div>
+        </div>
+        <div class="round" title="Finals">
+            <div class="match">
+                <dd-li class="team winner" text="Skjergard" trail="check"></dd-li>
+                <dd-li class="team winner" text="Sotra" trail="close"></dd-li>
+            </div>
+        </div>
+        <div class="round" title="Winner">
+            <div class="match">
+                <dd-li class="team winner" text="Skjergard" trail="check"></dd-li>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/components/All.js" type="module"></script>
+</body>
+</html>

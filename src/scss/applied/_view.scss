@@ -1,0 +1,20 @@
+@import "../lib/settings";
+
+.view
+{
+    &-posts
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: calc(1 * #{$container-spacing});
+
+        > *
+        {
+            margin-bottom: calc(1 * #{$container-spacing});
+
+            width: calc(100% - 2 * #{$container-spacing})
+        }
+    }
+}

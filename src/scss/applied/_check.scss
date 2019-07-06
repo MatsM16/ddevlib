@@ -1,0 +1,369 @@
+@import "../lib/settings";
+@import "../lib/common";
+@import "../lib/paper";
+
+::-ms-check
+{
+    display: none;
+}
+
+%cb-base
+{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+
+    display: inline-flex;
+    position: relative;
+
+    justify-content: center;
+    align-items: center;
+
+    width: $icon-size;
+    height: $icon-size;
+    
+    border-radius: $component-radius;
+    border: 2px solid $default-darker;
+    background-color: $default;
+
+    cursor: pointer;
+
+    color: $primary;
+    &.secondary
+    { color: $secondary }
+    &.info
+    { color: $info }
+    &.success
+    { color: $success }
+    &.warning
+    { color: $warning }
+    &.error
+    { color: $error }
+
+    transition: 
+        border,
+        background-color,
+        border-color;
+    transition-duration: $transition-time;
+
+    &::after
+    {
+        content: "";
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: absolute;
+        background-color: $default-darker;
+
+        opacity: 0;
+        transform: scale(0.0);
+
+        transition: 
+            opacity,
+            background-color,
+            transform;
+        transition-duration: $transition-time;
+    }
+
+    &:checked
+    {
+        border-color: currentColor;
+        background-color: currentColor;
+        
+        box-shadow: $component-shadow;
+
+        &::after
+        {
+            opacity: 1;
+            transform: scale(1);
+            background-color: $default;
+        }
+    }
+}
+
+%rb-base
+{
+    @extend %cb-base;
+    border-radius: $component-radius-round;
+}
+
+$f: 100% / 24;
+
+.cb
+{
+    &-switch
+    {
+        all: unset;
+        display: inline-flex;
+        align-items: center;
+        width: calc(2 * #{$icon-size});
+        height: $icon-size;
+
+        position: relative;
+
+        cursor: pointer;
+
+        color: $primary;
+        &.secondary
+        { color: $secondary }
+        &.info
+        { color: $info }
+        &.success
+        { color: $success }
+        &.warning
+        { color: $warning }
+        &.error
+        { color: $error }
+
+        &::after
+        {
+            width: $icon-size;
+            height: $icon-size;
+            
+            @include paper-component(currentColor, $default-dark);
+
+            transition: 
+                transform,
+                background-color;
+            transition-duration: $transition-time;
+        }
+
+        &::before
+        {
+            width: 100%;
+            height: 80%;
+
+            background-color: $default-darker;
+
+            transition: 
+                opacity,
+                background-color;
+            transition-duration: $transition-time;
+        }
+
+        &::before,
+        &::after
+        {
+            content: "";
+            position: absolute;
+            border-radius: 100vw;
+        }
+
+        &:checked::after
+        {
+            transform: translateX($icon-size);
+            background-color: currentColor;
+        }
+        &:checked::before
+        {
+            opacity: 0.5;
+            background-color: currentColor;
+        }
+    }
+
+    &-fill
+    {
+        @extend %cb-base;
+        &::after
+        {
+            width: 0;
+            height: 0;
+        }
+    }
+
+    &-cross
+    {
+        @extend %cb-base;
+        &::after
+        {
+            @include clipPath(polygon(
+                19.00 * $f  6.41 * $f,
+                17.59 * $f  5.00 * $f,
+                12.00 * $f 10.59 * $f, 
+                 6.41 * $f  5.00 * $f,
+                 5.00 * $f  6.41 * $f,
+                10.59 * $f 12.00 * $f,
+                 5.00 * $f 17.59 * $f,
+                 6.41 * $f 19.00 * $f,
+                12.00 * $f 13.41 * $f,
+                17.59 * $f 19.00 * $f,
+                19.00 * $f 17.59 * $f,
+                13.41 * $f 12.00 * $f
+            ));
+        }
+    }
+
+    &-add
+    {
+        @extend %cb-base;
+        &::after
+        {
+            @include clipPath(polygon(
+                19 * $f 13 * $f, 
+                13 * $f 13 * $f, 
+                13 * $f 19 * $f, 
+                11 * $f 19 * $f, 
+                11 * $f 13 * $f, 
+                 5 * $f 13 * $f, 
+                 5 * $f 11 * $f, 
+                11 * $f 11 * $f, 
+                11 * $f  5 * $f, 
+                13 * $f  5 * $f, 
+                13 * $f 11 * $f, 
+                19 * $f 11 * $f, 
+                19 * $f 13 * $f
+            ));
+        }
+    }
+
+    &-remove
+    {
+        @extend %cb-base;
+        &::after
+        {
+            @include clipPath(polygon(
+                19 * $f 13 * $f, 
+                 5 * $f 13 * $f, 
+                 5 * $f 11 * $f, 
+                19 * $f 11 * $f, 
+                19 * $f 13 * $f
+            ));
+        }
+    }
+
+    &
+    {
+        @extend %cb-base;
+        &::after
+        {
+            @include clipPath(polygon(
+                 9.0 * $f 16.2 * $f, 
+                 4.8 * $f 12.0 * $f, 
+                 3.4 * $f 13.4 * $f, 
+                 9.0 * $f 19.0 * $f, 
+                21.0 * $f  7.0 * $f, 
+                19.6 * $f  5.6 * $f, 
+                 9.0 * $f 16.2 * $f
+            ));
+        }
+    }
+}
+
+.rb
+{
+    &-fill
+    {
+        @extend %rb-base;
+        &::after
+        {
+            width: 0;
+            height: 0;
+        }
+
+    }
+
+    &
+    {
+        @extend %rb-base;
+        background-color: $default !important;
+        &::after
+        {
+            width: 60%;
+            height: 60%;
+
+            border-radius: 50%;
+
+            background-color: currentColor !important;
+        }
+    }
+}
+
+.cb-chip-minimal,
+.rb-chip-minimal,
+.cb-chip,
+.rb-chip
+{
+    all: unset;
+
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+
+    display: inline-flex;
+    align-items: center;
+
+    position: relative;
+    border-radius: $component-radius-round;
+
+    cursor: pointer;
+
+    background-color: $default-darker;
+
+    color: $primary;
+    &.secondary
+    { color: $secondary }
+    &.info
+    { color: $info }
+    &.success
+    { color: $success }
+    &.warning
+    { color: $warning }
+    &.error
+    { color: $error }
+
+    &::before
+    {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+
+        border-radius: $component-radius-round;
+        background-color: currentColor;
+
+        transform: scale(0.5);
+        opacity: 0;
+
+        transition: 
+            transform,
+            opacity;
+        transition-duration: $transition-time;
+    }
+
+    &::after
+    {
+        content: attr(title);
+        font-size: 0.9rem;
+
+        position: relative;
+
+        padding: calc(0.7 * #{$component-spacing});
+        
+        border-radius: $component-radius-round;
+
+        @include color(currentColor);
+    }
+
+    &:checked::before
+    {
+        box-shadow: $component-shadow;
+
+        transform: scale(1.0);
+        opacity: 1;
+    }
+
+    &:checked::after
+    {
+        @include color($text-alt);
+    }
+}
+.cb-chip-minimal,
+.rb-chip-minimal
+{
+    background-color: transparent;
+}
