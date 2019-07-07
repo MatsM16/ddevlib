@@ -174,6 +174,6 @@ __decorate([
     Method()
 ], Dialog.prototype, "hide", null);
 Dialog = __decorate([
-    Tag("dd-dialog", ["./src/css/std.css"])
+    Tag("dd-dialog", ["./css/std.css"])
 ], Dialog);
 export { Dialog };
