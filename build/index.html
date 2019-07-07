@@ -29,11 +29,37 @@
         font-size: 1em;
         margin: 0;
     }
+
+    .pages
+    {
+        font-size: 0.675em;
+        display: flex;
+    }
+
+    .pages a
+    {
+        display: block;
+        color: orange;
+        text-decoration: none;
+        padding: 0.5em;
+
+        transition: color 0.1s;
+    }
+
+    .pages a:hover
+    {
+        color: red;
+    }
     </style>
 </head>
 <body>
     <h1>DDevLib</h1>
     <h2>Development Page</h2>
+    <div class="pages">
+        <a href="comp.html">Components</a>
+        <a href="demo.html">Demos</a>
+        <a href="icons.html">Icons</a>
+    </div>
     <script src="js/Guid.js" type="module"></script>
     <script>
         
