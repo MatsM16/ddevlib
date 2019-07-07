@@ -1,7 +1,7 @@
 import { Component, Tag, Prop, Method, On } from "../../Component.js";
 import { html } from "../../Html.js";
 
-@Tag("dd-dialog", ["./src/css/std.css"])
+@Tag("dd-dialog", ["./css/std.css"])
 export class Dialog extends Component
 {
     @Prop()
