@@ -16,4 +16,9 @@
         }
     ],
     "liveSassCompile.settings.generateMap": true,
+    "cSpell.words": [
+        "Interop",
+        "esnext",
+        "orica"
+    ],
 }
