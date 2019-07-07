@@ -1,7 +1,6 @@
 @mixin color ($c)
 {
     color: $c;
-    caret-color: currentColor;
 }
 
 @mixin clipPath ($path)
