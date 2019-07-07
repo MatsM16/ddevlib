@@ -1,4 +1,4 @@
-<html lang="en" data-theme="azure">
+<html lang="en" data-theme="lux-dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,12 +50,30 @@
         }
         .match
         {
-            /*
-            margin-top: var(--container-spacing);
-            padding: var(--component-spacing);
-            background-color: var(--default);
-            border-radius: var(--container-radius);
-            box-shadow: var(--container-shadow);*/
+            position: relative;
+            /*border-radius: var(--container-radius);
+            padding: calc(0.5 * var(--component-spacing));
+            border: 2px solid var(--text);*/
+            margin: calc(1 * var(--component-spacing)) 0;
+        }
+        .match::after
+        {
+            content: "VS";
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%) translateX(50%);
+
+            display: flex;
+            width: 2.5rem;
+            height: 2.5rem;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--secondary);
+            color: var(--text-alt);
+            border-radius: 50%;
+
+            box-shadow: var(--container-shadow);
         }
         .match:first-child
         {
