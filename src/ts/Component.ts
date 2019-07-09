@@ -6,7 +6,7 @@ export type ComponentConstructor= {new (element: Components.CElement, sheets?: P
 export namespace Components
 {
     export type PropertyType = "number" | "string" | "boolean";
-    export type PropertyConnetcion = "two-way" | "one-way";
+    export type PropertyConnection = "two-way" | "one-way";
     export type PropertyName = string | symbol;
 
     export type PropertyInfo = 
@@ -15,7 +15,7 @@ export namespace Components
         attribute: string;
         type: PropertyType;
         readonly: boolean;
-        connection: PropertyConnetcion;
+        connection: PropertyConnection;
         onchange?: (value: any) => void;
     }
 
@@ -422,7 +422,7 @@ export function Tag(tag: string, stylesheets?: string[])
     }
 }
 
-export function Prop(settings?: { attribute?: string; readonly?: boolean; type?: Components.PropertyType; connection?: Components.PropertyConnetcion; onchange?: (value: any) => void })
+export function Prop(settings?: { attribute?: string; readonly?: boolean; type?: Components.PropertyType; connection?: Components.PropertyConnection; onchange?: (value: any) => void })
 {
     return (target: Component, key: Components.PropertyName) =>
     {

@@ -7,7 +7,7 @@ Read more about [TypeScript](https://www.typescriptlang.org/).
 
 #### SCSS
 Styles written in scss are easier to read and maintain (in my opinion).
-Only simple stiyling is applied to common elements. Some themes are available.
+Only simple styling is applied to common elements. Some themes are available.
 Read more about [SCSS and SASS](https://sass-lang.com/).
 
 ## Setup
