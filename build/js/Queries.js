@@ -1,87 +1,54 @@
-import { Guid } from "./Guid.js";
 export var QueryBuilder;
 (function (QueryBuilder) {
-    function buildDelete(promise, cb) {
+    function buildDelete(cb) {
         const request = {
             table: ""
         };
-        const resolve = () => { cb(request); return promise; };
+        const resolve = () => cb(request);
         return (table) => {
             request.table = table;
             return {
                 key: key => { request.key = key; return resolve(); },
                 keys: keys => { request.keys = keys; return resolve(); },
-                where: condition => { request.condition = condition; return resolve(); }
+                where: condition => { request.condition = condition; return resolve(); },
+                all: () => { request.condition = () => true; return resolve(); }
             };
         };
     }
     QueryBuilder.buildDelete = buildDelete;
-    function buildInsert(promise, cb) {
+    function buildInsert(cb) {
         const request = {
             table: "",
-            items: [],
-            keys: []
+            item: undefined,
+            key: ""
         };
-        let _auto;
-        const setItems = (...items) => {
-            request.items.push(...items);
-            cb(request);
-            if (_auto) {
-                if (_auto === "guid")
-                    for (const _ in items)
-                        request.keys.push(Guid.RANDOM.value);
-                else if (_auto === "random")
-                    request.keys.push(...crypto.getRandomValues(new Uint32Array(items.length)));
-            }
-            return promise;
+        const setItem = (item) => {
+            request.item = item;
+            return cb(request);
         };
         const setKey = (key) => {
-            request.keys = [key];
+            request.key = key;
             return {
-                item: (i) => setItems(i)
-            };
-        };
-        const setKeys = (keys) => {
-            request.keys = keys;
-            return {
-                items: (i) => setItems(...i)
-            };
-        };
-        const setAuto = (mode) => {
-            _auto = mode;
-            return {
-                item: (i) => setItems(i),
-                items: (i) => setItems(...i)
-            };
-        };
-        const setKeyField = (field) => {
-            request.keyField = field;
-            return {
-                auto: setAuto,
-                key: setKey,
-                keys: setKeys
+                item: setItem
             };
         };
         return (table) => {
             request.table = table;
             return {
                 key: setKey,
-                keys: setKeys,
-                keyField: setKeyField,
-                auto: setAuto
+                item: setItem,
             };
         };
     }
     QueryBuilder.buildInsert = buildInsert;
-    function buildUpdate(promise, cb) {
+    function buildUpdate(cb) {
         const request = {
             table: "",
-            updator: i => i
+            updater: i => i
         };
         const setSet = (u) => {
-            request.updator = u;
-            cb(request);
-            return promise;
+            request.updater = u;
+            return cb(request);
         };
         const setCondition = (con) => {
             request.condition = con;
@@ -112,7 +79,7 @@ export var QueryBuilder;
         };
     }
     QueryBuilder.buildUpdate = buildUpdate;
-    function buildSelect(promise, cb) {
+    function buildSelect(cb) {
         const request = {
             table: "",
             mode: "all"
@@ -120,8 +87,7 @@ export var QueryBuilder;
         const modeSetter = (mode) => (def) => {
             request.mode = mode;
             request.def = def;
-            cb(request);
-            return promise;
+            return cb(request);
         };
         const setKey = (key) => {
             request.key = key;

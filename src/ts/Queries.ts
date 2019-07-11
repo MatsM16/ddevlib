@@ -1,5 +1,3 @@
-import { Guid } from "./Guid.js";
-
 export namespace Queries
 {
     export type SelectInit = <T>(table: string) => Select.IInit<T>;
@@ -49,10 +47,10 @@ export namespace Queries
             all: () => Promise<T[]>;
 
             single: () => Promise<T>;
-            singleOrDefault: (def: T | null) => Promise<T | null>;
+            singleOrDefault: (def?: T | null) => Promise<T | null>;
 
             first: () => Promise<T>;
-            firstOrDefault: (def: T | null) => Promise<T | null>;
+            firstOrDefault: (def?: T | null) => Promise<T | null>;
 
             key: (key: IDBValidKey) => Promise<T>;
             keys: (keys: IDBValidKey[]) => Promise<T[]>;
@@ -78,6 +76,7 @@ export namespace Queries
     {
         export interface IInit<T>
         {
+            all: () => Promise<void>;
             where: (condition: (item: T) => boolean) => Promise<void>;
             key: (key: IDBValidKey) => Promise<void>;
             keys: (keys: IDBValidKey[]) => Promise<void>;
@@ -86,21 +85,9 @@ export namespace Queries
 
     export namespace Insert
     {
-        export interface IInit<T> extends IKeyGeneration<T>
-        {
-            keyField: (field: string) => IKeyGeneration<T>;
-        }
-
-        export interface IKeyGeneration<T>
+        export interface IInit<T> extends IFinalSingle<T>
         {
             key: (key: IDBValidKey) => IFinalSingle<T>;
-            keys: (keys: IDBValidKey[]) => IFinalMultiple<T>;
-            auto: (mode: "guid" | "random") => IFinalMultiple<T> & IFinalSingle<T>;
-        }
-
-        export interface IFinalMultiple<T>
-        {
-            items: (items: T[]) => Promise<(IDBValidKey | null)[]>;
         }
 
         export interface IFinalSingle<T>
@@ -198,7 +185,7 @@ export namespace QueryRequests
         keys?: IDBValidKey[];
 
         // Update to the item
-        updator: (item: any) => any;
+        updater: (item: any) => any;
     }
 
     export interface IInsert
@@ -206,17 +193,15 @@ export namespace QueryRequests
         // Where to put new values
         table: string;
 
-        // Keys to provide new values
-        // Length must equal items.length
-        keys: IDBValidKey[];
+        // Key to provide new value
+        key: IDBValidKey;
 
         // Set field to key if field exists
         // otherwise, create hidden property with key
         keyField?: string;
 
-        // Items to insert
-        // Length must equal keys.length
-        items: any[];
+        // Item to insert
+        item: any;
     }
 
     export interface IDelete
@@ -242,14 +227,14 @@ export namespace QueryRequests
 
 export namespace QueryBuilder
 {
-    export function buildDelete(promise: Promise<any>, cb: (request: QueryRequests.IDelete) => void): Queries.DeleteInit
+    export function buildDelete(cb: (request: QueryRequests.IDelete) => Promise<any>): Queries.DeleteInit
     {
         const request: QueryRequests.IDelete = 
         {
             table: ""
         }
 
-        const resolve = () => { cb(request); return promise; }
+        const resolve = () => cb(request)
         
         return <T>(table: string) => 
         { 
@@ -258,74 +243,34 @@ export namespace QueryBuilder
             return {
                 key: key => { request.key = key; return resolve() },
                 keys: keys => { request.keys = keys;  return resolve() },
-                where: condition => { request.condition = condition; return resolve() }
+                where: condition => { request.condition = condition; return resolve() },
+                all: () => { request.condition = () => true; return resolve() }
             }
         }
     }
 
-    export function buildInsert(promise: Promise<any>, cb: (request: QueryRequests.IInsert) => void): Queries.InsertInit
+    export function buildInsert(cb: (request: QueryRequests.IInsert) => Promise<any>): Queries.InsertInit
     {
         const request: QueryRequests.IInsert = 
         {
             table: "",
-            items: [],
-            keys: []
+            item: undefined,
+            key: ""
         }
-
-        let _auto: "guid" | "random" | undefined;
         
-        const setItems = (...items: any[]) =>
+        const setItem = (item: any) =>
         {
-            request.items.push(...items);
-            cb(request);
-
-            if (_auto)
-            {
-                if (_auto === "guid")
-                    for (const _ in items)
-                        request.keys.push(Guid.RANDOM.value)
-                
-                else if (_auto === "random")
-                    request.keys.push(...crypto.getRandomValues(new Uint32Array(items.length)))
-            }
-
-            return promise;
+            request.item = item;
+            
+            return cb(request);
         }
 
         const setKey = (key: any) =>
         {
-            request.keys = [key];
-            return {
-                item: (i: any) => setItems(i)
-            }
-        }
-
-        const setKeys = (keys: any[]) =>
-        {
-            request.keys = keys;
-            return {
-                items: (i: any[]) => setItems(...i)
-            }
-        }
-
-        const setAuto = (mode: "guid" | "random") =>
-        {
-            _auto = mode;
+            request.key = key;
 
             return {
-                item: (i: any) => setItems(i),
-                items: (i: any[]) => setItems(...i)
-            }
-        }
-
-        const setKeyField = (field: string | undefined) =>
-        {
-            request.keyField = field;
-
-            return {
-                auto: setAuto,
-                key: setKey,
-                keys: setKeys
+                item: setItem
             }
         }
 
@@ -335,27 +280,24 @@ export namespace QueryBuilder
 
             return {
                 key: setKey,
-                keys: setKeys,
-                keyField: setKeyField,
-                auto: setAuto
+                item: setItem,
             }
         }
     }
 
-    export function buildUpdate(promise: Promise<any>, cb: (request: QueryRequests.IUpdate) => void): Queries.UpdateInit
+    export function buildUpdate(cb: (request: QueryRequests.IUpdate) => Promise<any>): Queries.UpdateInit
     {
         const request: QueryRequests.IUpdate = 
         {
             table: "",
-            updator: i => i
+            updater: i => i
         }
         
         const setSet = (u: any) =>
         {
-            request.updator = u;
+            request.updater = u;
 
-            cb(request);
-            return promise;
+            return cb(request);
         }
 
         const setCondition = (con: any) =>
@@ -398,7 +340,7 @@ export namespace QueryBuilder
         }
     }
 
-    export function buildSelect(promise: Promise<any>, cb: (request: QueryRequests.ISelect) => void): Queries.SelectInit
+    export function buildSelect(cb: (request: QueryRequests.ISelect) => Promise<any>): Queries.SelectInit
     {
         const request: QueryRequests.ISelect = 
         {
@@ -411,8 +353,7 @@ export namespace QueryBuilder
             request.mode = mode;
             request.def = def;
 
-            cb(request);
-            return promise;
+            return cb(request);
         }
 
         const setKey = (key: any) =>
