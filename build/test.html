@@ -1,0 +1,79 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>&lt;/Test&gt;</title>
+
+    <style>
+        
+        body
+        {
+            font-family: 'Courier New', Courier, monospace;
+            color: rgb(50, 205, 58);
+            background-color: rgb(27, 25, 34);
+
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 span
+        {
+            animation-duration: 1.5s;
+            animation-iteration-count: infinite;
+        }
+
+        h1 span:nth-child(1)
+        {
+            animation-name: dot-1;
+        }
+
+        h1 span:nth-child(2)
+        {
+            animation-name: dot-2;
+        }
+
+        h1 span:nth-child(3)
+        {
+            animation-name: dot-3;
+        }
+
+        @keyframes dot-1
+        {
+            0% { opacity: 0; }
+            10% { opacity: 0; }
+            20% { opacity: 1; }
+
+            90% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        @keyframes dot-2
+        {
+            0% { opacity: 0; }
+            30% { opacity: 0; }
+            40% { opacity: 1; }
+
+            90% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        @keyframes dot-3
+        {
+            0% { opacity: 0; }
+            50% { opacity: 0; }
+            60% { opacity: 1; }
+
+            90% { opacity: 1; }
+            100% { opacity: 0; }
+}
+    
+    </style>
+</head>
+<body>
+    <h1>Initiating test<span>.</span><span>.</span><span>.</span></h1>
+    <script src="" type="module"></script>
+</body>
+</html>
