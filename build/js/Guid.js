@@ -1,5 +1,4 @@
-"use strict";
-class Guid {
+export class Guid {
     constructor(dataOrValue) {
         if (dataOrValue === undefined) {
             //

@@ -1,4 +1,4 @@
-class Guid
+export class Guid
 {
     private _data: Uint8Array;
     private _value: string;
