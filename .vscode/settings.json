@@ -21,6 +21,7 @@
         "Skjergard",
         "Sotra",
         "esnext",
-        "orica"
+        "orica",
+        "readwrite"
     ],
 }
