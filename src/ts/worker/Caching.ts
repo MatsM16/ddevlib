@@ -95,7 +95,7 @@ export function route(route: RegExp | RegExp[], strategy: Strategy): Route
         : false;
 }
 
-export function router(fallback?: Strategy, ...routes: Route[]): (request: Request) => Strategy | false
+export function router(fallback?: Strategy, ...routes: Route[]): Strategy
 {
     return request =>
     {
@@ -103,11 +103,12 @@ export function router(fallback?: Strategy, ...routes: Route[]): (request: Reque
 
         for (const route of routes)
             if ((strategy = route(request)) !== false)
-                return strategy;
+                return strategy(request);
+                
+        if (fallback)
+            return fallback(request);
 
-        return fallback
-            ? fallback
-            : false
+        throw new Error("No strategy available for: " + request.url);
     }
 }
 
@@ -123,4 +124,36 @@ export function path(path: string): RegExp
         .replace(/\*/g, ".*")
 
     return new RegExp(path);
+}
+
+export function cache(urls: string[], cache?: string): Promise<void>
+{
+    // Download all the files
+    return Promise.all(urls.map(url => fetch(url).then(response => ({url, response}))))
+    .then(requests =>
+    
+    // Open the cache
+    caches.open(cache || DEFAULT_CACHE)
+    .then(cache =>
+    
+    // Store the files
+    Promise.all(requests.map(({url, response}) => cache.put(url, response))))) as Promise<void>
+}
+
+export function reloadCache(cacheName?: string): Promise<void>
+{
+    return caches.open(cacheName || DEFAULT_CACHE).then(cache =>
+        cache.keys()
+        .then(requests => requests.map(request => fetch(request).then(response => ({request, response}))))
+        .then(requests => Promise.all(requests))
+        .then(requests => requests.map(({request, response}) => cache.put(request, response)))
+        .then(added => Promise.all(added))
+    ) as Promise<void>
+}
+
+export function update(cacheName?: string, urls?: string[])
+{
+    return urls
+        ? cache(urls, cacheName)
+        : reloadCache(cacheName)
 }

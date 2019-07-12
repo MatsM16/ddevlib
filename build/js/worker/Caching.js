@@ -60,10 +60,10 @@ export function router(fallback, ...routes) {
         let strategy = false;
         for (const route of routes)
             if ((strategy = route(request)) !== false)
-                return strategy;
-        return fallback
-            ? fallback
-            : false;
+                return strategy(request);
+        if (fallback)
+            return fallback(request);
+        throw new Error("No strategy available for: " + request.url);
     };
 }
 export function path(path) {
@@ -75,4 +75,26 @@ export function path(path) {
         .replace(/\*\*/g, ".+")
         .replace(/\*/g, ".*");
     return new RegExp(path);
+}
+export function cache(urls, cache) {
+    // Download all the files
+    return Promise.all(urls.map(url => fetch(url).then(response => ({ url, response }))))
+        .then(requests => 
+    // Open the cache
+    caches.open(cache || DEFAULT_CACHE)
+        .then(cache => 
+    // Store the files
+    Promise.all(requests.map(({ url, response }) => cache.put(url, response)))));
+}
+export function reloadCache(cacheName) {
+    return caches.open(cacheName || DEFAULT_CACHE).then(cache => cache.keys()
+        .then(requests => requests.map(request => fetch(request).then(response => ({ request, response }))))
+        .then(requests => Promise.all(requests))
+        .then(requests => requests.map(({ request, response }) => cache.put(request, response)))
+        .then(added => Promise.all(added)));
+}
+export function update(cacheName, urls) {
+    return urls
+        ? cache(urls, cacheName)
+        : reloadCache(cacheName);
 }
