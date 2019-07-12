@@ -20,6 +20,7 @@
         "Interop",
         "Skjergard",
         "Sotra",
+        "ecmascript",
         "esnext",
         "orica",
         "readwrite"
